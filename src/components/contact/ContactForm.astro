@@ -310,20 +310,28 @@ const { content, lang } = Astro.props;
     const data = Object.fromEntries(formData.entries());
 
     try {
-      // TODO: Replace with actual API endpoint
-      // For now, simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      // Call API endpoint
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-      // Simulate success
-      console.log('Form data:', data);
+      const result = await response.json();
 
-      // Show success message
-      successMessage?.classList.remove('hidden');
-      form.reset();
+      if (response.ok && result.success) {
+        // Show success message
+        successMessage?.classList.remove('hidden');
+        form.reset();
 
-      // Scroll to success message
-      successMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-
+        // Scroll to success message
+        successMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        // Show error message
+        throw new Error(result.error || 'Failed to send message');
+      }
     } catch (error) {
       console.error('Form submission error:', error);
       errorMessage?.classList.remove('hidden');
@@ -370,3 +378,4 @@ const { content, lang } = Astro.props;
     });
   });
 </script>
+
