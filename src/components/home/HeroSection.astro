@@ -1,8 +1,10 @@
 ---
 /**
  * Hero Section Component
- * Full viewport hero with title, subtitle, and CTA buttons
+ * Full viewport hero with dynamic background image from R2
  */
+import { getRandomR2Image, getRandomFallbackImage } from '@/utils/r2';
+
 interface Props {
   lang: 'en' | 'es';
   content: {
@@ -17,14 +19,36 @@ interface Props {
 }
 
 const { lang, content } = Astro.props;
+
+// Fetch random image from R2 'tutti/' directory
+const heroImage = await getRandomR2Image('tutti/');
+const backgroundImageUrl = heroImage?.url || getRandomFallbackImage();
+
+// Preload the image for better LCP
+const preloadLink = heroImage ? heroImage.url : null;
 ---
+
+{preloadLink && (
+  <link rel="preload" as="image" href={preloadLink} />
+)}
 
 <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
   <!-- Background Image with overlay -->
   <div class="absolute inset-0 z-0">
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
-    <!-- Placeholder for background image - replace with actual image -->
-    <div class="w-full h-full bg-gradient-to-br from-accent-brown-light to-accent-gold-light dark:from-bg-secondary dark:to-bg-tertiary"></div>
+
+    {heroImage ? (
+      <img
+        src={backgroundImageUrl}
+        alt="Cuarteto Metanoia"
+        class="w-full h-full object-cover"
+        loading="eager"
+        fetchpriority="high"
+      />
+    ) : (
+      <!-- Fallback gradient if no R2 image available -->
+      <div class="w-full h-full bg-gradient-to-br from-accent-brown-light to-accent-gold-light dark:from-bg-secondary dark:to-bg-tertiary"></div>
+    )}
   </div>
 
   <!-- Content -->
@@ -81,10 +105,12 @@ const { lang, content } = Astro.props;
     font-size: clamp(3rem, 8vw, 6rem);
     line-height: 1.1;
     letter-spacing: -0.02em;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   }
 
   .hero-subtitle {
     letter-spacing: 0.02em;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
   /* Stagger delays */
@@ -101,5 +127,16 @@ const { lang, content } = Astro.props;
   .btn-primary:hover,
   .btn-secondary:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+
+  /* Parallax effect on scroll (optional enhancement) */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero {
+      perspective: 1px;
+    }
+
+    .hero > div:first-child {
+      transform: translateZ(-1px) scale(2);
+    }
   }
 </style>
