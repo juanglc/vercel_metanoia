@@ -1,0 +1,143 @@
+---
+/**
+ * Gallery Page - English
+ * Photo and video gallery with tabs and filtering
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import PhotoGrid from '@/components/gallery/PhotoGrid.astro';
+import VideoGrid from '@/components/gallery/VideoGrid.astro';
+import { getContent } from '@/utils/i18n';
+import galleryData from '@/data/gallery.json';
+
+const lang = 'en';
+const content = await getContent(lang, 'gallery');
+
+// Get R2 public URL from env
+const r2PublicUrl = import.meta.env.R2_PUBLIC_URL || 'https://pub-placeholder.r2.dev';
+
+// Map photos with full R2 URLs
+const photos = galleryData.photos.map(photo => ({
+  ...photo,
+  url: `${r2PublicUrl}/${photo.key}`,
+  alt: photo.alt[lang],
+  caption: photo.caption[lang],
+}));
+
+// Map videos with localized content
+const videos = galleryData.videos.map(video => ({
+  ...video,
+  title: video.title[lang],
+  description: video.description[lang],
+}));
+---
+
+<PageLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+  breadcrumbs={[
+    { label: 'Home', href: '/en/' },
+    { label: 'Gallery', href: '/en/gallery' }
+  ]}
+  showTitle={false}
+>
+  <!-- Hero Section -->
+  <section class="mb-16 text-center">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 animate-fade-in-up">
+      {content.hero.title}
+    </h1>
+    <p class="text-xl text-text-secondary animate-fade-in-up stagger-1">
+      {content.hero.subtitle}
+    </p>
+  </section>
+
+  <!-- Tabs Navigation -->
+  <div class="flex justify-center mb-12">
+    <div class="inline-flex bg-bg-secondary rounded-lg p-1" role="tablist">
+      <button
+        role="tab"
+        aria-selected="true"
+        aria-controls="photos-panel"
+        id="photos-tab"
+        class="tab-button active px-6 py-3 rounded-lg font-semibold transition-all"
+        data-tab="photos"
+      >
+        {content.tabs.photos}
+      </button>
+      <button
+        role="tab"
+        aria-selected="false"
+        aria-controls="videos-panel"
+        id="videos-tab"
+        class="tab-button px-6 py-3 rounded-lg font-semibold transition-all"
+        data-tab="videos"
+      >
+        {content.tabs.videos}
+      </button>
+    </div>
+  </div>
+
+  <!-- Photos Panel -->
+  <div
+    id="photos-panel"
+    role="tabpanel"
+    aria-labelledby="photos-tab"
+    class="tab-panel"
+  >
+    <PhotoGrid photos={photos} content={content.photos} lang={lang} />
+  </div>
+
+  <!-- Videos Panel -->
+  <div
+    id="videos-panel"
+    role="tabpanel"
+    aria-labelledby="videos-tab"
+    class="tab-panel hidden"
+  >
+    <VideoGrid videos={videos} content={content.videos} lang={lang} />
+  </div>
+</PageLayout>
+
+<style>
+  .stagger-1 { animation-delay: 100ms; }
+
+  .tab-button {
+    color: var(--text-secondary);
+  }
+
+  .tab-button.active {
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text, white);
+  }
+
+  .tab-button:hover:not(.active) {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+</style>
+
+<script>
+  // Tab switching functionality
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabPanels = document.querySelectorAll('.tab-panel');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.getAttribute('data-tab');
+
+      // Update buttons
+      tabButtons.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+      button.classList.add('active');
+      button.setAttribute('aria-selected', 'true');
+
+      // Update panels
+      tabPanels.forEach(panel => {
+        panel.classList.add('hidden');
+      });
+      document.getElementById(`${targetTab}-panel`)?.classList.remove('hidden');
+    });
+  });
+</script>

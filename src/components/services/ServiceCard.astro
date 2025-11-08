@@ -1,0 +1,110 @@
+---
+/**
+ * Service Card Component
+ * Individual service offering with icon, description, and features
+ */
+interface Service {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  features: string[];
+  idealFor: string;
+}
+
+interface Props {
+  service: Service;
+  index?: number;
+}
+
+const { service, index = 0 } = Astro.props;
+
+// Icon mapping
+const icons = {
+  music: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>`,
+  briefcase: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>`,
+  heart: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>`,
+  mic: `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/>`,
+};
+---
+
+<article
+  class="service-card bg-bg-secondary rounded-lg p-8 shadow-soft hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+  style={`animation-delay: ${index * 100}ms`}
+>
+  <!-- Icon -->
+  <div class="icon-wrapper w-16 h-16 mb-6 rounded-lg bg-color-primary/10 flex items-center justify-center transition-transform duration-300">
+    <svg
+      class="w-8 h-8 text-color-primary"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <Fragment set:html={icons[service.icon] || icons.music} />
+    </svg>
+  </div>
+
+  <!-- Title -->
+  <h3 class="text-2xl font-serif font-bold mb-3">
+    {service.title}
+  </h3>
+
+  <!-- Description -->
+  <p class="text-text-secondary mb-6 leading-relaxed">
+    {service.description}
+  </p>
+
+  <!-- Features List -->
+  <div class="mb-6">
+    <h4 class="text-sm font-bold text-text-primary mb-3 uppercase tracking-wide">
+      {Astro.currentLocale === 'es' ? 'Incluye:' : 'Includes:'}
+    </h4>
+    <ul class="space-y-2">
+      {service.features.map((feature) => (
+        <li class="flex items-start gap-2 text-sm text-text-secondary">
+          <svg
+            class="w-5 h-5 text-color-primary flex-shrink-0 mt-0.5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+          {feature}
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <!-- Ideal For -->
+  <div class="pt-6 border-t border-border-medium">
+    <p class="text-sm text-text-secondary">
+      <span class="font-semibold text-color-primary">
+        {Astro.currentLocale === 'es' ? 'Ideal para:' : 'Ideal for:'}
+      </span>
+      {' '}
+      {service.idealFor}
+    </p>
+  </div>
+</article>
+
+<style>
+  .service-card {
+    transform: translateY(0);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .service-card:hover .icon-wrapper {
+    transform: scale(1.1);
+  }
+</style>

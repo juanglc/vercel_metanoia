@@ -21,11 +21,11 @@ export const LOCALE_NAMES: Record<Locale, string> = {
  */
 export const LOCALE_PATHS: Record<string, { en: string; es: string }> = {
   home: { en: '/', es: '/' },
-  about: { en: '/about', es: '/nosotros' },
-  gallery: { en: '/gallery', es: '/galeria' },
-  concerts: { en: '/concerts', es: '/conciertos' },
-  services: { en: '/services', es: '/servicios' },
-  contact: { en: '/contact', es: '/contacto' },
+  about: { en: '/about', es: '/about' },
+  gallery: { en: '/gallery', es: '/gallery' },
+  concerts: { en: '/concerts', es: '/concerts' },
+  services: { en: '/services', es: '/services' },
+  contact: { en: '/contact', es: '/contact' },
 };
 
 /**

@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": "Contáctanos | Cuarteto Metanoia",
+    "description": "Ponte en contacto con el Cuarteto Metanoia para consultas de reserva, oportunidades de colaboración o preguntas generales. Nos encantaría saber de ti."
+  },
+  "hero": {
+    "title": "Ponte en Contacto",
+    "subtitle": "Nos Encantaría Saber de Ti"
+  },
+  "intro": {
+    "text": "Ya sea que estés interesado en contratarnos para un evento, discutir una colaboración o simplemente quieras saber más sobre nuestro trabajo, estamos aquí para ayudarte. Completa el formulario a continuación y te responderemos lo antes posible."
+  },
+  "form": {
+    "heading": "Envíanos un Mensaje",
+    "fields": {
+      "name": {
+        "label": "Nombre Completo",
+        "placeholder": "Tu nombre",
+        "error": "Por favor ingresa tu nombre"
+      },
+      "email": {
+        "label": "Correo Electrónico",
+        "placeholder": "tu@email.com",
+        "error": "Por favor ingresa un correo electrónico válido"
+      },
+      "phone": {
+        "label": "Número de Teléfono",
+        "placeholder": "+57 300 123 4567",
+        "error": "Por favor ingresa un número de teléfono válido"
+      },
+      "subject": {
+        "label": "Asunto",
+        "placeholder": "Selecciona un asunto",
+        "options": {
+          "booking": "Consulta de Reserva",
+          "collaboration": "Oportunidad de Colaboración",
+          "press": "Prensa y Medios",
+          "general": "Pregunta General",
+          "other": "Otro"
+        },
+        "error": "Por favor selecciona un asunto"
+      },
+      "eventDate": {
+        "label": "Fecha del Evento (si aplica)",
+        "placeholder": "Seleccionar fecha"
+      },
+      "message": {
+        "label": "Mensaje",
+        "placeholder": "Cuéntanos sobre tu evento, proyecto o pregunta...",
+        "error": "Por favor ingresa un mensaje (mínimo 20 caracteres)"
+      }
+    },
+    "submit": "Enviar Mensaje",
+    "sending": "Enviando...",
+    "success": {
+      "title": "¡Mensaje Enviado!",
+      "text": "Gracias por contactarnos. Te responderemos dentro de 24-48 horas."
+    },
+    "error": {
+      "title": "¡Ups! Algo salió mal.",
+      "text": "Por favor intenta de nuevo o contáctanos directamente por correo electrónico."
+    }
+  },
+  "info": {
+    "heading": "Información de Contacto",
+    "email": {
+      "label": "Correo",
+      "value": "info@cuartetometanoia.com"
+    },
+    "phone": {
+      "label": "Teléfono",
+      "value": "+57 300 123 4567"
+    },
+    "location": {
+      "label": "Ubicación",
+      "value": "Bogotá, Colombia"
+    },
+    "social": {
+      "label": "Síguenos",
+      "platforms": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "youtube": "YouTube",
+        "spotify": "Spotify"
+      }
+    }
+  },
+  "responseTime": {
+    "heading": "Tiempo de Respuesta",
+    "text": "Típicamente respondemos consultas dentro de 24-48 horas durante días hábiles. Para solicitudes de reserva urgentes, por favor indícalo en tu mensaje."
+  }
+}

@@ -1,0 +1,372 @@
+---
+/**
+ * Contact Form Component
+ * Form with validation and success/error states
+ */
+interface Props {
+  content: any;
+  lang: 'en' | 'es';
+}
+
+const { content, lang } = Astro.props;
+---
+
+<form id="contact-form" class="contact-form space-y-6">
+  <!-- Name Field -->
+  <div class="form-group">
+    <label for="name" class="form-label">
+      {content.fields.name.label} <span class="text-red-500">*</span>
+    </label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      required
+      class="form-control"
+      placeholder={content.fields.name.placeholder}
+      aria-required="true"
+    />
+    <p class="form-error hidden" data-error="name">
+      {content.fields.name.error}
+    </p>
+  </div>
+
+  <!-- Email Field -->
+  <div class="form-group">
+    <label for="email" class="form-label">
+      {content.fields.email.label} <span class="text-red-500">*</span>
+    </label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      required
+      class="form-control"
+      placeholder={content.fields.email.placeholder}
+      aria-required="true"
+    />
+    <p class="form-error hidden" data-error="email">
+      {content.fields.email.error}
+    </p>
+  </div>
+
+  <!-- Phone Field (Optional) -->
+  <div class="form-group">
+    <label for="phone" class="form-label">
+      {content.fields.phone.label}
+    </label>
+    <input
+      type="tel"
+      id="phone"
+      name="phone"
+      class="form-control"
+      placeholder={content.fields.phone.placeholder}
+    />
+  </div>
+
+  <!-- Subject Field -->
+  <div class="form-group">
+    <label for="subject" class="form-label">
+      {content.fields.subject.label} <span class="text-red-500">*</span>
+    </label>
+    <select
+      id="subject"
+      name="subject"
+      required
+      class="form-control"
+      aria-required="true"
+    >
+      <option value="" disabled selected>
+        {content.fields.subject.placeholder}
+      </option>
+      {Object.entries(content.fields.subject.options).map(([key, value]) => (
+        <option value={key}>{value}</option>
+      ))}
+    </select>
+    <p class="form-error hidden" data-error="subject">
+      {content.fields.subject.error}
+    </p>
+  </div>
+
+  <!-- Event Date Field (Optional) -->
+  <div class="form-group">
+    <label for="eventDate" class="form-label">
+      {content.fields.eventDate.label}
+    </label>
+    <input
+      type="date"
+      id="eventDate"
+      name="eventDate"
+      class="form-control"
+      min={new Date().toISOString().split('T')[0]}
+    />
+  </div>
+
+  <!-- Message Field -->
+  <div class="form-group">
+    <label for="message" class="form-label">
+      {content.fields.message.label} <span class="text-red-500">*</span>
+    </label>
+    <textarea
+      id="message"
+      name="message"
+      required
+      rows="6"
+      class="form-control"
+      placeholder={content.fields.message.placeholder}
+      minlength="20"
+      aria-required="true"
+    ></textarea>
+    <p class="form-error hidden" data-error="message">
+      {content.fields.message.error}
+    </p>
+  </div>
+
+  <!-- Submit Button -->
+  <div>
+    <button
+      type="submit"
+      class="btn-submit w-full px-8 py-4 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+    >
+      <span class="submit-text">{content.submit}</span>
+      <span class="loading-text hidden">{content.sending}</span>
+    </button>
+  </div>
+
+  <!-- Success Message -->
+  <div id="success-message" class="hidden p-6 bg-green-100 dark:bg-green-900/30 border border-green-500 rounded-lg">
+    <h3 class="text-lg font-bold text-green-700 dark:text-green-400 mb-2">
+      {content.success.title}
+    </h3>
+    <p class="text-green-600 dark:text-green-300">
+      {content.success.text}
+    </p>
+  </div>
+
+  <!-- Error Message -->
+  <div id="error-message" class="hidden p-6 bg-red-100 dark:bg-red-900/30 border border-red-500 rounded-lg">
+    <h3 class="text-lg font-bold text-red-700 dark:text-red-400 mb-2">
+      {content.error.title}
+    </h3>
+    <p class="text-red-600 dark:text-red-300">
+      {content.error.text}
+    </p>
+  </div>
+</form>
+
+<style>
+  .form-group {
+    position: relative;
+  }
+
+  .form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+  }
+
+  .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-medium);
+    border-radius: 0.5rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .form-control:focus {
+    border-color: var(--color-primary);
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  .form-control::placeholder {
+    color: var(--text-tertiary);
+    opacity: 0.7;
+  }
+
+  .form-error {
+    margin-top: 0.375rem;
+    font-size: 0.875rem;
+    color: var(--color-error);
+  }
+
+  .form-error.hidden {
+    display: none;
+  }
+
+  textarea.form-control {
+    resize: vertical;
+    min-height: 8rem;
+  }
+
+  select.form-control {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const submitBtn = form?.querySelector('.btn-submit') as HTMLButtonElement;
+  const submitText = submitBtn?.querySelector('.submit-text') as HTMLElement;
+  const loadingText = submitBtn?.querySelector('.loading-text') as HTMLElement;
+  const successMessage = document.getElementById('success-message');
+  const errorMessage = document.getElementById('error-message');
+
+  // Email validation regex
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  // Phone validation regex (international format)
+  const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
+
+  function showError(fieldName: string) {
+    const errorElement = document.querySelector(`[data-error="${fieldName}"]`);
+    if (errorElement) {
+      errorElement.classList.remove('hidden');
+    }
+  }
+
+  function hideError(fieldName: string) {
+    const errorElement = document.querySelector(`[data-error="${fieldName}"]`);
+    if (errorElement) {
+      errorElement.classList.add('hidden');
+    }
+  }
+
+  function hideAllErrors() {
+    const errors = form?.querySelectorAll('.form-error');
+    errors?.forEach(error => error.classList.add('hidden'));
+  }
+
+  function validateForm(): boolean {
+    hideAllErrors();
+    let isValid = true;
+
+    // Name validation
+    const nameInput = form?.querySelector('#name') as HTMLInputElement;
+    if (!nameInput?.value.trim()) {
+      showError('name');
+      isValid = false;
+    }
+
+    // Email validation
+    const emailInput = form?.querySelector('#email') as HTMLInputElement;
+    if (!emailInput?.value.trim() || !emailRegex.test(emailInput.value)) {
+      showError('email');
+      isValid = false;
+    }
+
+    // Phone validation (optional but if filled, must be valid)
+    const phoneInput = form?.querySelector('#phone') as HTMLInputElement;
+    if (phoneInput?.value.trim() && !phoneRegex.test(phoneInput.value)) {
+      showError('phone');
+      isValid = false;
+    }
+
+    // Subject validation
+    const subjectInput = form?.querySelector('#subject') as HTMLSelectElement;
+    if (!subjectInput?.value) {
+      showError('subject');
+      isValid = false;
+    }
+
+    // Message validation
+    const messageInput = form?.querySelector('#message') as HTMLTextAreaElement;
+    if (!messageInput?.value.trim() || messageInput.value.length < 20) {
+      showError('message');
+      isValid = false;
+    }
+
+    return isValid;
+  }
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      return;
+    }
+
+    // Show loading state
+    submitBtn.disabled = true;
+    submitText.classList.add('hidden');
+    loadingText.classList.remove('hidden');
+    successMessage?.classList.add('hidden');
+    errorMessage?.classList.add('hidden');
+
+    // Get form data
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      // TODO: Replace with actual API endpoint
+      // For now, simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      // Simulate success
+      console.log('Form data:', data);
+
+      // Show success message
+      successMessage?.classList.remove('hidden');
+      form.reset();
+
+      // Scroll to success message
+      successMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+    } catch (error) {
+      console.error('Form submission error:', error);
+      errorMessage?.classList.remove('hidden');
+      errorMessage?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } finally {
+      // Reset button state
+      submitBtn.disabled = false;
+      submitText.classList.remove('hidden');
+      loadingText.classList.add('hidden');
+    }
+  });
+
+  // Real-time validation on blur
+  form?.querySelectorAll('.form-control').forEach(input => {
+    input.addEventListener('blur', () => {
+      const fieldName = (input as HTMLInputElement).name;
+
+      if (fieldName === 'email') {
+        const emailInput = input as HTMLInputElement;
+        if (emailInput.value && !emailRegex.test(emailInput.value)) {
+          showError('email');
+        } else {
+          hideError('email');
+        }
+      }
+
+      if (fieldName === 'phone') {
+        const phoneInput = input as HTMLInputElement;
+        if (phoneInput.value && !phoneRegex.test(phoneInput.value)) {
+          showError('phone');
+        } else {
+          hideError('phone');
+        }
+      }
+
+      if (fieldName === 'message') {
+        const messageInput = input as HTMLTextAreaElement;
+        if (messageInput.value && messageInput.value.length < 20) {
+          showError('message');
+        } else {
+          hideError('message');
+        }
+      }
+    });
+  });
+</script>

@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "title": "Contact Us | Cuarteto Metanoia",
+    "description": "Get in touch with Cuarteto Metanoia for booking inquiries, collaboration opportunities, or general questions. We'd love to hear from you."
+  },
+  "hero": {
+    "title": "Get in Touch",
+    "subtitle": "We'd Love to Hear From You"
+  },
+  "intro": {
+    "text": "Whether you're interested in booking us for an event, discussing a collaboration, or simply want to learn more about our work, we're here to help. Fill out the form below and we'll get back to you as soon as possible."
+  },
+  "form": {
+    "heading": "Send Us a Message",
+    "fields": {
+      "name": {
+        "label": "Full Name",
+        "placeholder": "Your name",
+        "error": "Please enter your name"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "your@email.com",
+        "error": "Please enter a valid email address"
+      },
+      "phone": {
+        "label": "Phone Number",
+        "placeholder": "+57 300 123 4567",
+        "error": "Please enter a valid phone number"
+      },
+      "subject": {
+        "label": "Subject",
+        "placeholder": "Select a subject",
+        "options": {
+          "booking": "Booking Inquiry",
+          "collaboration": "Collaboration Opportunity",
+          "press": "Press & Media",
+          "general": "General Question",
+          "other": "Other"
+        },
+        "error": "Please select a subject"
+      },
+      "eventDate": {
+        "label": "Event Date (if applicable)",
+        "placeholder": "Select date"
+      },
+      "message": {
+        "label": "Message",
+        "placeholder": "Tell us about your event, project, or question...",
+        "error": "Please enter a message (minimum 20 characters)"
+      }
+    },
+    "submit": "Send Message",
+    "sending": "Sending...",
+    "success": {
+      "title": "Message Sent!",
+      "text": "Thank you for contacting us. We'll get back to you within 24-48 hours."
+    },
+    "error": {
+      "title": "Oops! Something went wrong.",
+      "text": "Please try again or contact us directly via email."
+    }
+  },
+  "info": {
+    "heading": "Contact Information",
+    "email": {
+      "label": "Email",
+      "value": "info@cuartetometanoia.com"
+    },
+    "phone": {
+      "label": "Phone",
+      "value": "+57 300 123 4567"
+    },
+    "location": {
+      "label": "Location",
+      "value": "Bogotá, Colombia"
+    },
+    "social": {
+      "label": "Follow Us",
+      "platforms": {
+        "instagram": "Instagram",
+        "facebook": "Facebook",
+        "youtube": "YouTube",
+        "spotify": "Spotify"
+      }
+    }
+  },
+  "responseTime": {
+    "heading": "Response Time",
+    "text": "We typically respond to inquiries within 24-48 hours during business days. For urgent booking requests, please indicate this in your message."
+  }
+}

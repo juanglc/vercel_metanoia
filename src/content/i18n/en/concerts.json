@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Concerts | Cuarteto Metanoia",
+    "description": "View upcoming concerts and past performances by Cuarteto Metanoia. Book tickets for our next string quartet concert."
+  },
+  "hero": {
+    "title": "Concerts",
+    "subtitle": "Join Us for Unforgettable Performances"
+  },
+  "filters": {
+    "all": "All Events",
+    "upcoming": "Upcoming",
+    "past": "Past Performances"
+  },
+  "labels": {
+    "date": "Date",
+    "time": "Time",
+    "venue": "Venue",
+    "location": "Location",
+    "program": "Program",
+    "tickets": "Get Tickets",
+    "soldOut": "Sold Out",
+    "free": "Free Admission",
+    "addToCalendar": "Add to Calendar",
+    "moreInfo": "More Information",
+    "duration": "Duration"
+  },
+  "empty": {
+    "upcoming": "No upcoming concerts scheduled at this time. Check back soon or subscribe to our newsletter for updates.",
+    "past": "No past performances to display yet.",
+    "all": "No concerts to display."
+  },
+  "cta": {
+    "heading": "Want to Book Us?",
+    "text": "Interested in having Cuarteto Metanoia perform at your event? Contact us for availability and booking information.",
+    "button": "Contact Us"
+  }
+}

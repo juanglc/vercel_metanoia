@@ -1,0 +1,74 @@
+---
+/**
+ * Contact Page - English
+ * Contact form and information
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import ContactForm from '@/components/contact/ContactForm.astro';
+import ContactInfo from '@/components/contact/ContactInfo.astro';
+import { getContent } from '@/utils/i18n';
+
+const lang = 'en';
+const content = await getContent(lang, 'contact');
+---
+
+<PageLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+  breadcrumbs={[
+    { label: 'Home', href: '/en/' },
+    { label: 'Contact', href: '/en/contact' }
+  ]}
+  showTitle={false}
+>
+  <!-- Hero Section -->
+  <section class="mb-16 text-center">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 animate-fade-in-up">
+      {content.hero.title}
+    </h1>
+    <p class="text-xl text-text-secondary animate-fade-in-up stagger-1">
+      {content.hero.subtitle}
+    </p>
+  </section>
+
+  <!-- Intro Text -->
+  <section class="mb-12 max-w-3xl mx-auto text-center">
+    <p class="text-lg text-text-secondary leading-relaxed animate-fade-in-up stagger-2">
+      {content.intro.text}
+    </p>
+  </section>
+
+  <!-- Two Column Layout: Form + Info -->
+  <section class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
+    <!-- Contact Form (2/3 width) -->
+    <div class="lg:col-span-2">
+      <div class="bg-bg-secondary rounded-lg p-8 shadow-soft">
+        <h2 class="text-2xl font-serif font-bold mb-6">
+          {content.form.heading}
+        </h2>
+        <ContactForm content={content.form} lang={lang} />
+      </div>
+    </div>
+
+    <!-- Contact Info (1/3 width) -->
+    <div class="lg:col-span-1">
+      <ContactInfo content={content.info} />
+
+      <!-- Response Time Card -->
+      <div class="mt-6 bg-bg-secondary rounded-lg p-6 shadow-soft">
+        <h3 class="text-lg font-bold mb-3">
+          {content.responseTime.heading}
+        </h3>
+        <p class="text-sm text-text-secondary leading-relaxed">
+          {content.responseTime.text}
+        </p>
+      </div>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .stagger-1 { animation-delay: 100ms; }
+  .stagger-2 { animation-delay: 200ms; }
+</style>

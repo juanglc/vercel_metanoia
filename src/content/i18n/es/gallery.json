@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Galería | Cuarteto Metanoia",
+    "description": "Explora fotos y videos de las presentaciones, conciertos y ensayos del Cuarteto Metanoia. Imágenes de alta calidad que capturan nuestro recorrido musical."
+  },
+  "hero": {
+    "title": "Galería",
+    "subtitle": "Momentos de Nuestro Recorrido Musical"
+  },
+  "tabs": {
+    "photos": "Fotos",
+    "videos": "Videos"
+  },
+  "photos": {
+    "heading": "Galería de Fotos",
+    "empty": "No hay fotos disponibles en este momento. ¡Vuelve pronto!",
+    "categories": {
+      "all": "Todas las Fotos",
+      "concerts": "Conciertos",
+      "rehearsals": "Ensayos",
+      "press": "Prensa y Promocional"
+    },
+    "loading": "Cargando imágenes..."
+  },
+  "videos": {
+    "heading": "Grabaciones de Video",
+    "empty": "No hay videos disponibles en este momento. ¡Vuelve pronto!",
+    "watch": "Ver Video",
+    "duration": "Duración"
+  },
+  "lightbox": {
+    "close": "Cerrar",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "counter": "{current} de {total}",
+    "downloadAlt": "Descargar imagen"
+  }
+}

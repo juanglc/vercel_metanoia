@@ -1,0 +1,267 @@
+---
+/**
+ * Photo Grid Component
+ * Responsive masonry-style grid of photos with lightbox
+ */
+interface Photo {
+  id: string;
+  url: string;
+  alt: string;
+  caption: string;
+  category: string;
+  date: string;
+}
+
+interface Props {
+  photos: Photo[];
+  content: any;
+  lang: 'en' | 'es';
+}
+
+const { photos, content, lang } = Astro.props;
+
+// Get unique categories
+const categories = ['all', ...new Set(photos.map(p => p.category))];
+---
+
+{photos.length > 0 ? (
+  <div class="photo-grid-container">
+    <!-- Category Filter -->
+    <div class="flex justify-center mb-8">
+      <div class="inline-flex flex-wrap gap-2 bg-bg-secondary rounded-lg p-2">
+        {categories.map((category) => (
+          <button
+            class={`filter-button ${category === 'all' ? 'active' : ''} px-4 py-2 rounded-lg font-medium text-sm transition-all`}
+            data-category={category}
+          >
+            {content.categories[category]}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <!-- Photos Grid -->
+    <div class="photo-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {photos.map((photo, index) => (
+        <article
+          class="photo-card group cursor-pointer animate-fade-in-up"
+          style={`animation-delay: ${index * 50}ms`}
+          data-category={photo.category}
+          data-photo-id={photo.id}
+          data-photo-url={photo.url}
+          data-photo-alt={photo.alt}
+          data-photo-caption={photo.caption}
+        >
+          <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-bg-secondary">
+            <!-- Photo -->
+            <img
+              src={photo.url}
+              alt={photo.alt}
+              loading="lazy"
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+
+            <!-- Overlay on hover -->
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <p class="text-white text-sm font-medium">
+                  {photo.caption}
+                </p>
+              </div>
+            </div>
+
+            <!-- Expand icon -->
+            <div class="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="bg-white/90 dark:bg-black/90 rounded-full p-2">
+                <svg
+                  class="w-5 h-5 text-text-primary"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v6m3-3H7"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Lightbox will be injected here by JavaScript -->
+    <div id="lightbox" class="hidden"></div>
+  </div>
+) : (
+  <div class="text-center py-20">
+    <p class="text-xl text-text-secondary">
+      {content.empty}
+    </p>
+  </div>
+)}
+
+<style>
+  .filter-button {
+    color: var(--text-secondary);
+  }
+
+  .filter-button.active {
+    background: var(--color-primary);
+    color: var(--color-btn-primary-text, white);
+  }
+
+  .filter-button:hover:not(.active) {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+  }
+
+  .photo-card {
+    transition: transform 0.3s ease;
+  }
+
+  .photo-card:hover {
+    transform: translateY(-4px);
+  }
+</style>
+
+<script>
+  // Category filtering
+  const filterButtons = document.querySelectorAll('.filter-button');
+  const photoCards = document.querySelectorAll('.photo-card');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const category = button.getAttribute('data-category');
+
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      button.classList.add('active');
+
+      // Filter photos
+      photoCards.forEach(card => {
+        const cardCategory = card.getAttribute('data-category');
+        if (category === 'all' || cardCategory === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Lightbox functionality
+  photoCards.forEach((card, index) => {
+    card.addEventListener('click', () => {
+      openLightbox(index);
+    });
+  });
+
+  function openLightbox(index: number) {
+    const photos = Array.from(photoCards).map(card => ({
+      url: card.getAttribute('data-photo-url'),
+      alt: card.getAttribute('data-photo-alt'),
+      caption: card.getAttribute('data-photo-caption'),
+    }));
+
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    let currentIndex = index;
+
+    function render() {
+      const photo = photos[currentIndex];
+      lightbox.innerHTML = `
+        <div class="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
+          <!-- Close button -->
+          <button
+            id="lightbox-close"
+            class="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-colors"
+            aria-label="Close lightbox"
+          >
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          </button>
+
+          <!-- Previous button -->
+          ${currentIndex > 0 ? `
+            <button
+              id="lightbox-prev"
+              class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-colors"
+              aria-label="Previous image"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+          ` : ''}
+
+          <!-- Next button -->
+          ${currentIndex < photos.length - 1 ? `
+            <button
+              id="lightbox-next"
+              class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white rounded-full p-3 transition-colors"
+              aria-label="Next image"
+            >
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          ` : ''}
+
+          <!-- Image -->
+          <div class="max-w-7xl max-h-[90vh] flex flex-col items-center">
+            <img
+              src="${photo.url}"
+              alt="${photo.alt}"
+              class="max-w-full max-h-[80vh] object-contain"
+            />
+            <p class="text-white text-center mt-4 text-lg">${photo.caption}</p>
+            <p class="text-white/60 text-center mt-2 text-sm">${currentIndex + 1} / ${photos.length}</p>
+          </div>
+        </div>
+      `;
+
+      lightbox.classList.remove('hidden');
+
+      // Event listeners
+      document.getElementById('lightbox-close')?.addEventListener('click', closeLightbox);
+      document.getElementById('lightbox-prev')?.addEventListener('click', () => {
+        currentIndex--;
+        render();
+      });
+      document.getElementById('lightbox-next')?.addEventListener('click', () => {
+        currentIndex++;
+        render();
+      });
+
+      // Keyboard navigation
+      document.addEventListener('keydown', handleKeyboard);
+    }
+
+    function closeLightbox() {
+      lightbox.classList.add('hidden');
+      lightbox.innerHTML = '';
+      document.removeEventListener('keydown', handleKeyboard);
+    }
+
+    function handleKeyboard(e: KeyboardEvent) {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft' && currentIndex > 0) {
+        currentIndex--;
+        render();
+      }
+      if (e.key === 'ArrowRight' && currentIndex < photos.length - 1) {
+        currentIndex++;
+        render();
+      }
+    }
+
+    render();
+  }
+</script>

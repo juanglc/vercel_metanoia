@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Servicios | Cuarteto Metanoia",
+    "description": "Contrata al Cuarteto Metanoia para conciertos privados, eventos corporativos, bodas y grabaciones. Servicios profesionales de cuarteto de cuerdas en Colombia."
+  },
+  "hero": {
+    "title": "Nuestros Servicios",
+    "subtitle": "Eleva Tu Evento con Música de Cámara de Clase Mundial"
+  },
+  "intro": {
+    "heading": "¿Por Qué Elegir al Cuarteto Metanoia?",
+    "text": "Con años de experiencia presentándonos en prestigiosos escenarios y eventos, aportamos elegancia, profesionalismo y arte excepcional a cada ocasión. Ya sea que estés planeando una reunión íntima o una gran celebración, nuestro repertorio versátil y sonido refinado crean momentos inolvidables."
+  },
+  "services": [
+    {
+      "id": "private-concerts",
+      "icon": "music",
+      "title": "Conciertos Privados",
+      "description": "Presentaciones íntimas para tus eventos exclusivos, con un programa curado adaptado a tus preferencias.",
+      "features": [
+        "Selección de repertorio personalizado",
+        "Consulta previa al concierto",
+        "Configuración de sonido profesional",
+        "Duración: 45-90 minutos",
+        "Perfecto para conciertos en casa y reuniones privadas"
+      ],
+      "idealFor": "Coleccionistas de arte, entusiastas de la música, celebraciones íntimas"
+    },
+    {
+      "id": "corporate-events",
+      "icon": "briefcase",
+      "title": "Eventos Corporativos",
+      "description": "Añade sofisticación a tus funciones corporativas con música clásica en vivo que impresiona a clientes y energiza equipos.",
+      "features": [
+        "Presentación profesional",
+        "Horarios flexibles",
+        "Presentación de fondo o destacada",
+        "Adecuado para conferencias y galas",
+        "Mejora la imagen de marca"
+      ],
+      "idealFor": "Lanzamientos de productos, cenas anuales, eventos de networking"
+    },
+    {
+      "id": "weddings",
+      "icon": "heart",
+      "title": "Bodas y Celebraciones",
+      "description": "Crea momentos mágicos en tu día especial con música en vivo elegante para ceremonias y recepciones.",
+      "features": [
+        "Música de ceremonia (procesional, recesional)",
+        "Entretenimiento de cóctel",
+        "Presentaciones en recepción",
+        "Repertorio popular y clásico",
+        "Coordinación con wedding planners"
+      ],
+      "idealFor": "Bodas, aniversarios, celebraciones de hitos"
+    },
+    {
+      "id": "recordings",
+      "icon": "mic",
+      "title": "Grabación y Producción",
+      "description": "Grabaciones profesionales de estudio para álbumes, bandas sonoras y proyectos comerciales con calidad de sonido excepcional.",
+      "features": [
+        "Grabación en estudio o en locación",
+        "Composiciones o arreglos originales",
+        "Musicalización de cine y medios",
+        "Tiempos de entrega rápidos",
+        "Experiencia con diversos géneros"
+      ],
+      "idealFor": "Artistas, cineastas, agencias de publicidad"
+    }
+  ],
+  "process": {
+    "heading": "Cómo Funciona",
+    "subtitle": "Pasos simples desde la consulta hasta la presentación",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Contáctanos",
+        "description": "Completa nuestro formulario de contacto o envíanos un email con detalles sobre tu evento, fecha y visión."
+      },
+      {
+        "number": "2",
+        "title": "Consulta",
+        "description": "Discutiremos tus necesidades, sugeriremos repertorio y proporcionaremos una cotización personalizada."
+      },
+      {
+        "number": "3",
+        "title": "Reserva",
+        "description": "Una vez confirmado, enviaremos un contrato y coordinaremos toda la logística para tu evento."
+      },
+      {
+        "number": "4",
+        "title": "Presentación",
+        "description": "Llegamos temprano, montamos profesionalmente y ofrecemos una experiencia musical inolvidable."
+      }
+    ]
+  },
+  "testimonials": {
+    "heading": "Lo Que Dicen Nuestros Clientes",
+    "items": [
+      {
+        "quote": "El Cuarteto Metanoia transformó nuestra gala corporativa en una velada elegante y memorable. Su profesionalismo y arte superaron todas las expectativas.",
+        "author": "María González",
+        "role": "Directora de Eventos, Banco de Bogotá",
+        "image": null
+      },
+      {
+        "quote": "El cuarteto hizo que nuestra ceremonia de boda fuera absolutamente mágica. Su selección de música fue perfecta y se adaptaron bellamente a nuestro cronograma.",
+        "author": "Laura y David Martínez",
+        "role": "Clientes de Boda",
+        "image": null
+      },
+      {
+        "quote": "Trabajar con Metanoia en la banda sonora de nuestra película fue un sueño. Dieron vida a nuestra visión con increíble sensibilidad y precisión técnica.",
+        "author": "Carlos Ruiz",
+        "role": "Director de Cine",
+        "image": null
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Preguntas Frecuentes",
+    "items": [
+      {
+        "question": "¿Con cuánta anticipación debo reservar?",
+        "answer": "Recomendamos reservar con al menos 2-3 meses de anticipación, especialmente para bodas y eventos importantes. Sin embargo, a menudo podemos acomodar plazos más cortos dependiendo de nuestra agenda."
+      },
+      {
+        "question": "¿Cuál es su área de presentación?",
+        "answer": "Principalmente servimos a Bogotá y regiones aledañas, pero estamos felices de viajar para eventos en toda Colombia e internacionalmente."
+      },
+      {
+        "question": "¿Pueden tocar música no clásica?",
+        "answer": "¡Absolutamente! Aunque nuestra especialidad es el repertorio clásico, interpretamos arreglos de música popular, bandas sonoras de películas, estándares de jazz y música tradicional colombiana."
+      },
+      {
+        "question": "¿Qué equipo proporcionan?",
+        "answer": "Traemos todos los atriles necesarios y podemos proporcionar amplificación para lugares más grandes. Para eventos al aire libre, recomendamos que proporciones protección contra el clima."
+      },
+      {
+        "question": "¿Ofrecen presentaciones virtuales?",
+        "answer": "Sí, podemos proporcionar presentaciones en vivo transmitidas o pregrabadas de alta calidad para eventos virtuales."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "¿Listo para Reservar?",
+    "text": "Contáctanos hoy para discutir tu evento y recibir una cotización personalizada. Esperamos hacer de tu ocasión algo extraordinario.",
+    "button": "Ponte en Contacto"
+  }
+}

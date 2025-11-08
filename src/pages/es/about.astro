@@ -19,7 +19,7 @@ const content = await getContent(lang, 'about');
   lang={lang}
   breadcrumbs={[
     { label: 'Inicio', href: '/es/' },
-    { label: 'Nosotros', href: '/es/nosotros' }
+    { label: 'Nosotros', href: '/es/about' }
   ]}
 >
   <!-- Story Section -->
@@ -145,7 +145,7 @@ const content = await getContent(lang, 'about');
 
     <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-2">
       <a
-        href="/es/conciertos"
+        href="/es/concerts"
         class="px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105"
       >
         {content.cta.buttons.concerts}

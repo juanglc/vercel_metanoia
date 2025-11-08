@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Conciertos | Cuarteto Metanoia",
+    "description": "Mira los próximos conciertos y presentaciones pasadas del Cuarteto Metanoia. Reserva boletos para nuestro próximo concierto de cuarteto de cuerdas."
+  },
+  "hero": {
+    "title": "Conciertos",
+    "subtitle": "Únete a Nosotros para Presentaciones Inolvidables"
+  },
+  "filters": {
+    "all": "Todos los Eventos",
+    "upcoming": "Próximos",
+    "past": "Presentaciones Pasadas"
+  },
+  "labels": {
+    "date": "Fecha",
+    "time": "Hora",
+    "venue": "Lugar",
+    "location": "Ubicación",
+    "program": "Programa",
+    "tickets": "Conseguir Boletos",
+    "soldOut": "Agotado",
+    "free": "Entrada Libre",
+    "addToCalendar": "Agregar al Calendario",
+    "moreInfo": "Más Información",
+    "duration": "Duración"
+  },
+  "empty": {
+    "upcoming": "No hay conciertos próximos programados en este momento. Vuelve pronto o suscríbete a nuestro boletín para actualizaciones.",
+    "past": "No hay presentaciones pasadas para mostrar aún.",
+    "all": "No hay conciertos para mostrar."
+  },
+  "cta": {
+    "heading": "¿Quieres Contratarnos?",
+    "text": "¿Interesado en que el Cuarteto Metanoia se presente en tu evento? Contáctanos para disponibilidad e información de reserva.",
+    "button": "Contáctanos"
+  }
+}

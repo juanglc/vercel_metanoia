@@ -1,0 +1,38 @@
+{
+  "meta": {
+    "title": "Gallery | Cuarteto Metanoia",
+    "description": "Explore photos and videos from Cuarteto Metanoia's performances, concerts, and rehearsals. High-quality images capturing our musical journey."
+  },
+  "hero": {
+    "title": "Gallery",
+    "subtitle": "Moments from Our Musical Journey"
+  },
+  "tabs": {
+    "photos": "Photos",
+    "videos": "Videos"
+  },
+  "photos": {
+    "heading": "Photo Gallery",
+    "empty": "No photos available at the moment. Check back soon!",
+    "categories": {
+      "all": "All Photos",
+      "concerts": "Concerts",
+      "rehearsals": "Rehearsals",
+      "press": "Press & Promotional"
+    },
+    "loading": "Loading images..."
+  },
+  "videos": {
+    "heading": "Video Recordings",
+    "empty": "No videos available at the moment. Check back soon!",
+    "watch": "Watch Video",
+    "duration": "Duration"
+  },
+  "lightbox": {
+    "close": "Close",
+    "previous": "Previous",
+    "next": "Next",
+    "counter": "{current} of {total}",
+    "downloadAlt": "Download image"
+  }
+}

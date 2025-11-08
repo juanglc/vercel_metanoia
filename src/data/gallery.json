@@ -1,0 +1,90 @@
+{
+  "photos": [
+    {
+      "id": "tutti-1",
+      "key": "tutti/Cuarteto completo.jpg",
+      "category": "press",
+      "date": "2024-11-01",
+      "alt": {
+        "en": "Cuarteto Metanoia - Full Ensemble Portrait",
+        "es": "Cuarteto Metanoia - Retrato del Ensamble Completo"
+      },
+      "caption": {
+        "en": "Official promotional photo - Full quartet",
+        "es": "Foto promocional oficial - Cuarteto completo"
+      }
+    },
+    {
+      "id": "concert-teatro-colon-1",
+      "key": "concerts/teatro-colon-2024.jpg",
+      "category": "concerts",
+      "date": "2024-10-15",
+      "alt": {
+        "en": "Performing at Teatro Colón, Bogotá",
+        "es": "Presentación en el Teatro Colón, Bogotá"
+      },
+      "caption": {
+        "en": "Live performance - Teatro Colón, October 2024",
+        "es": "Presentación en vivo - Teatro Colón, octubre 2024"
+      }
+    },
+    {
+      "id": "rehearsal-1",
+      "key": "rehearsals/ensayo-2024.jpg",
+      "category": "rehearsals",
+      "date": "2024-09-20",
+      "alt": {
+        "en": "Quartet rehearsal session",
+        "es": "Sesión de ensayo del cuarteto"
+      },
+      "caption": {
+        "en": "Preparing new repertoire - September 2024",
+        "es": "Preparando nuevo repertorio - septiembre 2024"
+      }
+    }
+  ],
+  "videos": [
+    {
+      "id": "beethoven-op18-no1",
+      "youtubeId": "dQw4w9WgXcQ",
+      "title": {
+        "en": "Beethoven - String Quartet Op. 18 No. 1",
+        "es": "Beethoven - Cuarteto de Cuerdas Op. 18 No. 1"
+      },
+      "description": {
+        "en": "Live performance at Teatro Colón, Bogotá. October 15, 2024.",
+        "es": "Presentación en vivo en el Teatro Colón, Bogotá. 15 de octubre, 2024."
+      },
+      "date": "2024-10-15",
+      "duration": "28:45"
+    },
+    {
+      "id": "shostakovich-quartet-8",
+      "youtubeId": "abc123xyz789",
+      "title": {
+        "en": "Shostakovich - String Quartet No. 8",
+        "es": "Shostakovich - Cuarteto de Cuerdas No. 8"
+      },
+      "description": {
+        "en": "Recorded at Sala de Conciertos Luis Ángel Arango. September 2024.",
+        "es": "Grabado en la Sala de Conciertos Luis Ángel Arango. Septiembre 2024."
+      },
+      "date": "2024-09-08",
+      "duration": "21:30"
+    },
+    {
+      "id": "mozart-quartet-19",
+      "youtubeId": "def456uvw012",
+      "title": {
+        "en": "Mozart - String Quartet No. 19 'Dissonance'",
+        "es": "Mozart - Cuarteto de Cuerdas No. 19 'Disonancias'"
+      },
+      "description": {
+        "en": "Performance at Festival Internacional de Música de Cartagena. July 2024.",
+        "es": "Presentación en el Festival Internacional de Música de Cartagena. Julio 2024."
+      },
+      "date": "2024-07-22",
+      "duration": "30:12"
+    }
+  ]
+}

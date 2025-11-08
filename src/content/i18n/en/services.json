@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Services | Cuarteto Metanoia",
+    "description": "Hire Cuarteto Metanoia for private concerts, corporate events, weddings, and recordings. Professional string quartet services in Colombia."
+  },
+  "hero": {
+    "title": "Our Services",
+    "subtitle": "Elevate Your Event with World-Class Chamber Music"
+  },
+  "intro": {
+    "heading": "Why Choose Cuarteto Metanoia?",
+    "text": "With years of experience performing at prestigious venues and events, we bring elegance, professionalism, and exceptional artistry to every occasion. Whether you're planning an intimate gathering or a large celebration, our versatile repertoire and refined sound create unforgettable moments."
+  },
+  "services": [
+    {
+      "id": "private-concerts",
+      "icon": "music",
+      "title": "Private Concerts",
+      "description": "Intimate performances for your exclusive events, featuring a curated program tailored to your preferences.",
+      "features": [
+        "Custom repertoire selection",
+        "Pre-concert consultation",
+        "Professional sound setup",
+        "Duration: 45-90 minutes",
+        "Perfect for house concerts and private gatherings"
+      ],
+      "idealFor": "Art collectors, music enthusiasts, intimate celebrations"
+    },
+    {
+      "id": "corporate-events",
+      "icon": "briefcase",
+      "title": "Corporate Events",
+      "description": "Add sophistication to your corporate functions with live classical music that impresses clients and energizes teams.",
+      "features": [
+        "Professional presentation",
+        "Flexible scheduling",
+        "Background or featured performance",
+        "Suitable for conferences and galas",
+        "Enhances brand image"
+      ],
+      "idealFor": "Product launches, annual dinners, networking events"
+    },
+    {
+      "id": "weddings",
+      "icon": "heart",
+      "title": "Weddings & Celebrations",
+      "description": "Create magical moments on your special day with elegant live music for ceremonies and receptions.",
+      "features": [
+        "Ceremony music (processional, recessional)",
+        "Cocktail hour entertainment",
+        "Reception performances",
+        "Popular and classical repertoire",
+        "Coordination with wedding planners"
+      ],
+      "idealFor": "Weddings, anniversaries, milestone celebrations"
+    },
+    {
+      "id": "recordings",
+      "icon": "mic",
+      "title": "Recording & Production",
+      "description": "Professional studio recordings for albums, soundtracks, and commercial projects with exceptional sound quality.",
+      "features": [
+        "Studio or on-location recording",
+        "Original compositions or arrangements",
+        "Film and media scoring",
+        "Fast turnaround times",
+        "Experienced with diverse genres"
+      ],
+      "idealFor": "Artists, filmmakers, advertising agencies"
+    }
+  ],
+  "process": {
+    "heading": "How It Works",
+    "subtitle": "Simple steps from inquiry to performance",
+    "steps": [
+      {
+        "number": "1",
+        "title": "Contact Us",
+        "description": "Fill out our contact form or email us with details about your event, date, and vision."
+      },
+      {
+        "number": "2",
+        "title": "Consultation",
+        "description": "We'll discuss your needs, suggest repertoire, and provide a customized quote."
+      },
+      {
+        "number": "3",
+        "title": "Booking",
+        "description": "Once confirmed, we'll send a contract and coordinate all logistics for your event."
+      },
+      {
+        "number": "4",
+        "title": "Performance",
+        "description": "We arrive early, set up professionally, and deliver an unforgettable musical experience."
+      }
+    ]
+  },
+  "testimonials": {
+    "heading": "What Our Clients Say",
+    "items": [
+      {
+        "quote": "Cuarteto Metanoia transformed our corporate gala into an elegant, memorable evening. Their professionalism and artistry exceeded all expectations.",
+        "author": "María González",
+        "role": "Event Director, Banco de Bogotá",
+        "image": null
+      },
+      {
+        "quote": "The quartet made our wedding ceremony absolutely magical. Their selection of music was perfect, and they adapted beautifully to our timeline.",
+        "author": "Laura & David Martínez",
+        "role": "Wedding Clients",
+        "image": null
+      },
+      {
+        "quote": "Working with Metanoia on our film score was a dream. They brought our vision to life with incredible sensitivity and technical precision.",
+        "author": "Carlos Ruiz",
+        "role": "Film Director",
+        "image": null
+      }
+    ]
+  },
+  "faq": {
+    "heading": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "How far in advance should I book?",
+        "answer": "We recommend booking at least 2-3 months in advance, especially for weddings and major events. However, we can often accommodate shorter timelines depending on our schedule."
+      },
+      {
+        "question": "What is your performance area?",
+        "answer": "We primarily serve Bogotá and surrounding regions, but we're happy to travel for events throughout Colombia and internationally."
+      },
+      {
+        "question": "Can you play non-classical music?",
+        "answer": "Absolutely! While our specialty is classical repertoire, we perform arrangements of popular music, film scores, jazz standards, and traditional Colombian music."
+      },
+      {
+        "question": "What equipment do you provide?",
+        "answer": "We bring all necessary music stands and can provide amplification for larger venues. For outdoor events, we recommend you provide weather protection."
+      },
+      {
+        "question": "Do you offer virtual performances?",
+        "answer": "Yes, we can provide high-quality live-streamed or pre-recorded performances for virtual events."
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Ready to Book?",
+    "text": "Contact us today to discuss your event and receive a personalized quote. We look forward to making your occasion extraordinary.",
+    "button": "Get in Touch"
+  }
+}

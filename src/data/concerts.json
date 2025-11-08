@@ -1,0 +1,173 @@
+{
+  "concerts": [
+    {
+      "id": "concert-2025-12-15",
+      "date": "2025-12-15",
+      "time": "19:30",
+      "venue": {
+        "en": "Teatro Colón",
+        "es": "Teatro Colón"
+      },
+      "city": "Bogotá",
+      "country": {
+        "en": "Colombia",
+        "es": "Colombia"
+      },
+      "address": "Calle 10 #5-32, La Candelaria",
+      "program": [
+        {
+          "composer": "Ludwig van Beethoven",
+          "work": {
+            "en": "String Quartet No. 14 in C-sharp minor, Op. 131",
+            "es": "Cuarteto de Cuerdas No. 14 en Do sostenido menor, Op. 131"
+          }
+        },
+        {
+          "composer": "Dmitri Shostakovich",
+          "work": {
+            "en": "String Quartet No. 8 in C minor, Op. 110",
+            "es": "Cuarteto de Cuerdas No. 8 en Do menor, Op. 110"
+          }
+        }
+      ],
+      "description": {
+        "en": "An evening of intense emotion featuring Beethoven's profound late quartet and Shostakovich's autobiographical masterpiece.",
+        "es": "Una noche de intensa emoción con el profundo cuarteto tardío de Beethoven y la obra maestra autobiográfica de Shostakovich."
+      },
+      "duration": "120",
+      "ticketsUrl": "https://example.com/tickets/2025-12-15",
+      "price": {
+        "amount": 50000,
+        "currency": "COP",
+        "free": false
+      },
+      "status": "available",
+      "image": "concerts/teatro-colon-2025.jpg"
+    },
+    {
+      "id": "concert-2026-01-20",
+      "date": "2026-01-20",
+      "time": "20:00",
+      "venue": {
+        "en": "Sala de Conciertos Luis Ángel Arango",
+        "es": "Sala de Conciertos Luis Ángel Arango"
+      },
+      "city": "Bogotá",
+      "country": {
+        "en": "Colombia",
+        "es": "Colombia"
+      },
+      "address": "Calle 11 #4-14",
+      "program": [
+        {
+          "composer": "Joseph Haydn",
+          "work": {
+            "en": "String Quartet Op. 76 No. 3 'Emperor'",
+            "es": "Cuarteto de Cuerdas Op. 76 No. 3 'Emperador'"
+          }
+        },
+        {
+          "composer": "Béla Bartók",
+          "work": {
+            "en": "String Quartet No. 4",
+            "es": "Cuarteto de Cuerdas No. 4"
+          }
+        }
+      ],
+      "description": {
+        "en": "From Classical elegance to modern innovation: Haydn's beloved 'Emperor' quartet paired with Bartók's groundbreaking Fourth Quartet.",
+        "es": "De la elegancia clásica a la innovación moderna: el querido cuarteto 'Emperador' de Haydn junto con el revolucionario Cuarto Cuarteto de Bartók."
+      },
+      "duration": "90",
+      "ticketsUrl": null,
+      "price": {
+        "amount": 0,
+        "currency": "COP",
+        "free": true
+      },
+      "status": "available",
+      "image": "concerts/sala-arango-2026.jpg"
+    },
+    {
+      "id": "concert-2024-10-15",
+      "date": "2024-10-15",
+      "time": "19:30",
+      "venue": {
+        "en": "Teatro Colón",
+        "es": "Teatro Colón"
+      },
+      "city": "Bogotá",
+      "country": {
+        "en": "Colombia",
+        "es": "Colombia"
+      },
+      "address": "Calle 10 #5-32, La Candelaria",
+      "program": [
+        {
+          "composer": "Wolfgang Amadeus Mozart",
+          "work": {
+            "en": "String Quartet No. 19 in C major, K. 465 'Dissonance'",
+            "es": "Cuarteto de Cuerdas No. 19 en Do mayor, K. 465 'Disonancias'"
+          }
+        },
+        {
+          "composer": "Antonín Dvořák",
+          "work": {
+            "en": "String Quartet No. 12 in F major, Op. 96 'American'",
+            "es": "Cuarteto de Cuerdas No. 12 en Fa mayor, Op. 96 'Americano'"
+          }
+        }
+      ],
+      "description": {
+        "en": "A celebration of classical repertoire featuring Mozart's harmonically adventurous 'Dissonance' and Dvořák's beloved 'American' quartet.",
+        "es": "Una celebración del repertorio clásico con las audaces 'Disonancias' de Mozart y el querido cuarteto 'Americano' de Dvořák."
+      },
+      "duration": "105",
+      "ticketsUrl": null,
+      "price": {
+        "amount": 40000,
+        "currency": "COP",
+        "free": false
+      },
+      "status": "past",
+      "image": "concerts/teatro-colon-2024-oct.jpg"
+    },
+    {
+      "id": "concert-2024-09-08",
+      "date": "2024-09-08",
+      "time": "18:00",
+      "venue": {
+        "en": "Festival Internacional de Música de Cartagena",
+        "es": "Festival Internacional de Música de Cartagena"
+      },
+      "city": "Cartagena",
+      "country": {
+        "en": "Colombia",
+        "es": "Colombia"
+      },
+      "address": "Centro Histórico",
+      "program": [
+        {
+          "composer": "Franz Schubert",
+          "work": {
+            "en": "String Quartet No. 14 in D minor, D. 810 'Death and the Maiden'",
+            "es": "Cuarteto de Cuerdas No. 14 en Re menor, D. 810 'La Muerte y la Doncella'"
+          }
+        }
+      ],
+      "description": {
+        "en": "Schubert's dramatic and deeply moving 'Death and the Maiden' quartet performed at Colombia's premier international music festival.",
+        "es": "El dramático y profundamente conmovedor cuarteto 'La Muerte y la Doncella' de Schubert interpretado en el principal festival internacional de música de Colombia."
+      },
+      "duration": "45",
+      "ticketsUrl": null,
+      "price": {
+        "amount": 0,
+        "currency": "COP",
+        "free": true
+      },
+      "status": "past",
+      "image": "concerts/cartagena-2024.jpg"
+    }
+  ]
+}

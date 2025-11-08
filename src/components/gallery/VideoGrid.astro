@@ -1,0 +1,192 @@
+---
+/**
+ * Video Grid Component
+ * Grid of YouTube video embeds with lazy loading
+ */
+interface Video {
+  id: string;
+  youtubeId: string;
+  title: string;
+  description: string;
+  date: string;
+  duration: string;
+}
+
+interface Props {
+  videos: Video[];
+  content: any;
+  lang: 'en' | 'es';
+}
+
+const { videos, content, lang } = Astro.props;
+---
+
+{videos.length > 0 ? (
+  <div class="video-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+    {videos.map((video, index) => (
+      <article
+        class="video-card bg-bg-secondary rounded-lg overflow-hidden shadow-soft hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+        style={`animation-delay: ${index * 100}ms`}
+      >
+        <!-- Video Embed Container -->
+        <div class="video-container relative aspect-video bg-black">
+          <div
+            class="youtube-player"
+            data-id={video.youtubeId}
+            data-title={video.title}
+          >
+            <!-- Thumbnail with play button -->
+            <img
+              src={`https://i.ytimg.com/vi/${video.youtubeId}/maxresdefault.jpg`}
+              alt={video.title}
+              class="absolute inset-0 w-full h-full object-cover cursor-pointer transition-opacity duration-300 hover:opacity-80"
+              loading="lazy"
+            />
+
+            <!-- Play button overlay -->
+            <button
+              class="play-button absolute inset-0 flex items-center justify-center group"
+              aria-label={`${content.watch}: ${video.title}`}
+            >
+              <div class="bg-red-600 rounded-full p-4 group-hover:bg-red-700 transition-all group-hover:scale-110">
+                <svg
+                  class="w-12 h-12 text-white"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path d="M8 5v14l11-7z"/>
+                </svg>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Info -->
+        <div class="p-6">
+          <h3 class="text-xl font-bold mb-2">
+            {video.title}
+          </h3>
+
+          <p class="text-text-secondary text-sm mb-4">
+            {video.description}
+          </p>
+
+          <div class="flex items-center justify-between text-sm text-text-secondary">
+            <span>
+              {new Date(video.date).toLocaleDateString(
+                lang === 'en' ? 'en-US' : 'es-CO',
+                { year: 'numeric', month: 'long', day: 'numeric' }
+              )}
+            </span>
+            {video.duration && (
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                {video.duration}
+              </span>
+            )}
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+) : (
+  <div class="text-center py-20">
+    <p class="text-xl text-text-secondary">
+      {content.empty}
+    </p>
+  </div>
+)}
+
+<style>
+  .video-container {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .youtube-player {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .play-button {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  /* Hide thumbnail after iframe loads */
+  .youtube-player.playing img,
+  .youtube-player.playing .play-button {
+    display: none;
+  }
+</style>
+
+<script>
+  // YouTube iframe API lazy loading
+  class YouTubePlayer {
+    constructor(element: HTMLElement) {
+      this.element = element;
+      this.videoId = element.dataset.id || '';
+      this.title = element.dataset.title || 'YouTube video';
+      this.isLoaded = false;
+
+      this.init();
+    }
+
+    element: HTMLElement;
+    videoId: string;
+    title: string;
+    isLoaded: boolean;
+
+    init() {
+      const playButton = this.element.querySelector('.play-button');
+      if (playButton) {
+        playButton.addEventListener('click', () => this.loadVideo());
+      }
+    }
+
+    loadVideo() {
+      if (this.isLoaded) return;
+
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${this.videoId}?autoplay=1&rel=0`);
+      iframe.setAttribute('frameborder', '0');
+      iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      iframe.setAttribute('allowfullscreen', '');
+      iframe.setAttribute('title', this.title);
+      iframe.style.position = 'absolute';
+      iframe.style.top = '0';
+      iframe.style.left = '0';
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+
+      this.element.appendChild(iframe);
+      this.element.classList.add('playing');
+      this.isLoaded = true;
+    }
+  }
+
+  // Initialize all YouTube players
+  document.addEventListener('DOMContentLoaded', () => {
+    const players = document.querySelectorAll('.youtube-player');
+    players.forEach((player) => {
+      new YouTubePlayer(player as HTMLElement);
+    });
+  });
+
+  // Handle dynamic content (if using view transitions)
+  document.addEventListener('astro:page-load', () => {
+    const players = document.querySelectorAll('.youtube-player');
+    players.forEach((player) => {
+      if (!(player as any).youtubePlayerInitialized) {
+        new YouTubePlayer(player as HTMLElement);
+        (player as any).youtubePlayerInitialized = true;
+      }
+    });
+  });
+</script>
