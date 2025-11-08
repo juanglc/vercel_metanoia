@@ -1,0 +1,65 @@
+---
+/**
+ * Press Quotes Component
+ * Displays press reviews and testimonials in an elegant layout
+ */
+interface Props {
+  quotes: Array<{
+    text: string;
+    source: string;
+    author: string;
+  }>;
+  lang: 'en' | 'es';
+}
+
+const { quotes, lang } = Astro.props;
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+  {quotes.map((quote, index) => (
+    <blockquote
+      class="press-quote bg-bg-secondary p-6 rounded-lg shadow-soft relative animate-fade-in-up"
+      style={`animation-delay: ${index * 100}ms`}
+    >
+      <!-- Quote Mark Icon -->
+      <div class="absolute -top-4 -left-4 w-12 h-12 bg-color-primary/10 rounded-full flex items-center justify-center">
+        <svg
+          class="w-6 h-6 text-color-primary"
+          fill="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+        </svg>
+      </div>
+
+      <!-- Quote Text -->
+      <p class="text-text-secondary italic mb-6 leading-relaxed pt-4">
+        "{quote.text}"
+      </p>
+
+      <!-- Attribution -->
+      <footer class="border-t border-divider pt-4">
+        <cite class="not-italic">
+          <p class="font-semibold text-text-primary">
+            {quote.author}
+          </p>
+          <p class="text-sm text-text-secondary">
+            {quote.source}
+          </p>
+        </cite>
+      </footer>
+    </blockquote>
+  ))}
+</div>
+
+<style>
+  .press-quote {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .press-quote:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+</style>

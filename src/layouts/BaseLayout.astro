@@ -1,0 +1,117 @@
+---
+/**
+ * BaseLayout - Layout principal del sitio
+ * Incluye: HTML structure, SEO, theme script, header, footer
+ */
+import '@/styles/global.css';
+import { themeInitScript } from '@/utils/theme';
+import SEO from '@/components/common/SEO.astro';
+import Header from '@/components/common/Header.astro';
+import Footer from '@/components/common/Footer.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang?: 'en' | 'es';
+  image?: string;
+  noIndex?: boolean;
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  image,
+  noIndex = false,
+  canonical,
+} = Astro.props;
+
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://cuartetometanoia.com';
+const currentPath = Astro.url.pathname;
+const canonicalURL = canonical || new URL(currentPath, siteUrl).toString();
+---
+
+<!DOCTYPE html>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Theme color (changes with dark/light mode) -->
+    <meta name="theme-color" content="#ffffff" />
+
+    <!-- SEO Component -->
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonicalURL}
+      image={image}
+      lang={lang}
+      noIndex={noIndex}
+    />
+
+    <!-- Theme initialization script (prevent FOUC) -->
+    <script is:inline set:html={themeInitScript} />
+
+    <!-- Skip to main content link -->
+    <a href="#main-content" class="skip-to-main">
+      {lang === 'en' ? 'Skip to main content' : 'Saltar al contenido principal'}
+    </a>
+  </head>
+
+  <body class="bg-bg-primary text-text-primary transition-colors duration-300">
+    <!-- Header -->
+    <Header lang={lang} currentPath={currentPath} />
+
+    <!-- Main Content -->
+    <main id="main-content" class="min-h-screen">
+      <slot />
+    </main>
+
+    <!-- Footer -->
+    <Footer lang={lang} />
+
+    <!-- Scripts -->
+    <slot name="scripts" />
+  </body>
+</html>
+
+<style is:global>
+  /* Ensure smooth scroll behavior */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Skip to main content link styles */
+  .skip-to-main {
+    position: absolute;
+    top: -100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+    border-radius: var(--radius-lg);
+    z-index: var(--z-tooltip);
+    transition: top var(--transition-fast);
+    text-decoration: none;
+  }
+
+  .skip-to-main:focus {
+    top: var(--space-4);
+  }
+</style>

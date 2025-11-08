@@ -1,0 +1,97 @@
+---
+/**
+ * PageLayout - Layout para páginas de contenido
+ * Incluye container, breadcrumbs, y estructura típica de página
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang?: 'en' | 'es';
+  image?: string;
+  noIndex?: boolean;
+  breadcrumbs?: Array<{ label: string; href: string }>;
+  showTitle?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  image,
+  noIndex = false,
+  breadcrumbs,
+  showTitle = true,
+} = Astro.props;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  lang={lang}
+  image={image}
+  noIndex={noIndex}
+>
+  <div class="page-layout">
+    <!-- Breadcrumbs (optional) -->
+    {breadcrumbs && breadcrumbs.length > 0 && (
+      <nav aria-label={lang === 'en' ? 'Breadcrumb' : 'Ruta de navegación'} class="breadcrumbs">
+        <div class="container py-4">
+          <ol class="flex items-center gap-2 text-sm text-text-secondary">
+            {breadcrumbs.map((crumb, index) => (
+              <li class="flex items-center gap-2">
+                {index > 0 && (
+                  <span aria-hidden="true" class="text-border-medium">/</span>
+                )}
+                {index === breadcrumbs.length - 1 ? (
+                  <span class="text-text-primary font-medium" aria-current="page">
+                    {crumb.label}
+                  </span>
+                ) : (
+                  <a
+                    href={crumb.href}
+                    class="hover:text-text-primary transition-colors"
+                  >
+                    {crumb.label}
+                  </a>
+                )}
+              </li>
+            ))}
+          </ol>
+        </div>
+      </nav>
+    )}
+
+    <!-- Page Header -->
+    {showTitle && (
+      <header class="page-header py-16 md:py-24">
+        <div class="container">
+          <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-center mb-6 animate-fade-in-up">
+            {title}
+          </h1>
+          <p class="text-lg md:text-xl text-text-secondary text-center max-w-3xl mx-auto animate-fade-in-up stagger-1">
+            {description}
+          </p>
+        </div>
+      </header>
+    )}
+
+    <!-- Page Content -->
+    <div class="page-content pb-24">
+      <div class="container">
+        <slot />
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .page-layout {
+    min-height: calc(100vh - 200px); /* Adjust based on header/footer height */
+  }
+
+  .breadcrumbs {
+    border-bottom: 1px solid var(--divider);
+  }
+</style>

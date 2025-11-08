@@ -1,0 +1,105 @@
+---
+/**
+ * Hero Section Component
+ * Full viewport hero with title, subtitle, and CTA buttons
+ */
+interface Props {
+  lang: 'en' | 'es';
+  content: {
+    title: string;
+    subtitle: string;
+    description: string;
+    cta: {
+      primary: string;
+      secondary: string;
+    };
+  };
+}
+
+const { lang, content } = Astro.props;
+---
+
+<section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
+  <!-- Background Image with overlay -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
+    <!-- Placeholder for background image - replace with actual image -->
+    <div class="w-full h-full bg-gradient-to-br from-accent-brown-light to-accent-gold-light dark:from-bg-secondary dark:to-bg-tertiary"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="container relative z-20 text-center text-white py-20">
+    <h1 class="hero-title font-serif font-bold mb-6 animate-fade-in">
+      {content.title}
+    </h1>
+
+    <p class="hero-subtitle text-2xl md:text-3xl font-light mb-6 animate-fade-in-up stagger-1">
+      {content.subtitle}
+    </p>
+
+    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 opacity-90 animate-fade-in-up stagger-2">
+      {content.description}
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-3">
+      <a
+        href={lang === 'en' ? '/en/gallery' : '/es/galeria'}
+        class="btn-primary px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105 inline-block"
+      >
+        {content.cta.primary}
+      </a>
+      <a
+        href={lang === 'en' ? '/en/concerts' : '/es/conciertos'}
+        class="btn-secondary px-8 py-4 bg-transparent border-2 border-white font-semibold rounded-lg hover:bg-white hover:text-color-primary transition-all inline-block"
+      >
+        {content.cta.secondary}
+      </a>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+      <svg
+        class="w-6 h-6 text-white opacity-75"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 14l-7 7m0 0l-7-7m7 7V3"
+        />
+      </svg>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-subtitle {
+    letter-spacing: 0.02em;
+  }
+
+  /* Stagger delays */
+  .stagger-1 { animation-delay: 200ms; }
+  .stagger-2 { animation-delay: 400ms; }
+  .stagger-3 { animation-delay: 600ms; }
+
+  /* Button hover effects */
+  .btn-primary,
+  .btn-secondary {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  }
+</style>

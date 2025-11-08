@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "title": "About Us | Cuarteto Metanoia",
+    "description": "Learn about Cuarteto Metanoia, our history, mission, and the talented musicians who bring our performances to life."
+  },
+  "hero": {
+    "title": "About Cuarteto Metanoia",
+    "subtitle": "Dedicated to Excellence in Chamber Music"
+  },
+  "story": {
+    "heading": "Our Story",
+    "paragraphs": [
+      "Cuarteto Metanoia was founded in 2020 by four passionate musicians who shared a vision: to create a string quartet that would bring the highest level of artistry to chamber music performance in Colombia and beyond.",
+      "The name 'Metanoia' comes from the Greek word meaning 'transformation' or 'change of heart.' This reflects our belief that music has the power to transform both performers and listeners, creating profound connections through shared artistic experiences.",
+      "Since our founding, we have performed at prestigious venues across Colombia, collaborated with renowned international artists, and built a reputation for musical excellence and innovative programming that respects tradition while embracing contemporary voices."
+    ]
+  },
+  "mission": {
+    "heading": "Our Mission",
+    "text": "To inspire audiences through exceptional performances of classical and contemporary chamber music, while fostering a deeper appreciation for the string quartet tradition.",
+    "values": [
+      {
+        "title": "Artistic Excellence",
+        "description": "We are committed to the highest standards of musical interpretation and technical precision."
+      },
+      {
+        "title": "Innovation & Tradition",
+        "description": "We honor the great works of the past while championing new voices in chamber music."
+      },
+      {
+        "title": "Community Engagement",
+        "description": "We believe in making classical music accessible and relevant to diverse audiences."
+      },
+      {
+        "title": "Collaboration",
+        "description": "We seek opportunities to work with other artists and organizations to expand our musical horizons."
+      }
+    ]
+  },
+  "members": {
+    "heading": "Meet Our Musicians",
+    "subtitle": "Four Exceptional Artists, One Unified Voice",
+    "list": [
+      {
+        "name": "Laura Martínez",
+        "instrument": "First Violin",
+        "bio": "Laura holds a Master's degree from the Juilliard School and has performed as a soloist with major orchestras across the Americas. Her passionate and nuanced playing brings depth to every performance.",
+        "education": ["Juilliard School (MM)", "Conservatorio Nacional (BM)"],
+        "achievements": [
+          "Winner, International Violin Competition of Indianapolis",
+          "Former Concertmaster, Orquesta Filarmónica de Bogotá"
+        ],
+        "image": "/images/members/laura-martinez.jpg"
+      },
+      {
+        "name": "Diego Ramírez",
+        "instrument": "Second Violin",
+        "bio": "Diego's versatile musicianship and collaborative spirit make him an essential voice in the quartet. He studied at the Royal Academy of Music in London and has extensive experience in both classical and contemporary repertoire.",
+        "education": ["Royal Academy of Music (MM)", "Universidad Nacional (BM)"],
+        "achievements": [
+          "Prizewinner, ARD International Music Competition",
+          "Former member, Lucerne Festival Orchestra"
+        ],
+        "image": "/images/members/diego-ramirez.jpg"
+      },
+      {
+        "name": "Camila Torres",
+        "instrument": "Viola",
+        "bio": "Camila's rich, warm tone and profound musical insight anchor the quartet's sound. A graduate of the Curtis Institute, she has performed chamber music with some of the world's leading musicians.",
+        "education": ["Curtis Institute of Music (MM)", "Conservatorio Javeriano (BM)"],
+        "achievements": [
+          "Winner, Primrose International Viola Competition",
+          "Faculty, Festival Internacional de Música de Cartagena"
+        ],
+        "image": "/images/members/camila-torres.jpg"
+      },
+      {
+        "name": "Santiago Vargas",
+        "instrument": "Cello",
+        "bio": "Santiago's powerful yet sensitive playing provides the foundation for the quartet's interpretations. He studied with legendary cellists in Europe and brings a wealth of experience from both solo and chamber music performances.",
+        "education": ["Hochschule für Musik Hanns Eisler (MM)", "Conservatorio Nacional (BM)"],
+        "achievements": [
+          "Finalist, International Tchaikovsky Competition",
+          "Principal Cello, Colombian National Symphony Orchestra"
+        ],
+        "image": "/images/members/santiago-vargas.jpg"
+      }
+    ]
+  },
+  "achievements": {
+    "heading": "Awards & Recognition",
+    "subtitle": "Celebrating Our Musical Journey",
+    "timeline": [
+      {
+        "year": "2024",
+        "title": "Latin American Chamber Music Award",
+        "description": "Recognized as Outstanding Ensemble of the Year by the Latin American Chamber Music Society."
+      },
+      {
+        "year": "2023",
+        "title": "Bogotá International Music Festival",
+        "description": "Featured ensemble, praised for 'extraordinary artistic maturity and compelling interpretations.'"
+      },
+      {
+        "year": "2022",
+        "title": "Colombia Cultural Excellence Prize",
+        "description": "Awarded by the Ministry of Culture for contributions to classical music in Colombia."
+      },
+      {
+        "year": "2021",
+        "title": "Emerging Artist Award",
+        "description": "Recognized by the International Chamber Music Foundation as a promising young ensemble."
+      }
+    ]
+  },
+  "collaborations": {
+    "heading": "Collaborations & Partnerships",
+    "text": "We are proud to work with outstanding organizations and artists who share our passion for chamber music.",
+    "partners": [
+      "Teatro Colón de Bogotá",
+      "Festival Internacional de Música de Cartagena",
+      "Universidad Nacional de Colombia",
+      "Fundación Nacional Batuta",
+      "Colombian National Symphony Orchestra"
+    ]
+  },
+  "press": {
+    "heading": "Press & Media",
+    "quotes": [
+      {
+        "text": "Cuarteto Metanoia delivers performances of remarkable depth and technical brilliance. This is chamber music at its finest.",
+        "source": "El Tiempo",
+        "author": "Carlos Rodríguez, Music Critic"
+      },
+      {
+        "text": "A quartet that combines youthful energy with mature artistry. Their interpretation of the Beethoven late quartets was nothing short of revelatory.",
+        "source": "BBC Music Magazine",
+        "author": "International Review"
+      },
+      {
+        "text": "Cuarteto Metanoia is redefining chamber music in Latin America, bringing fresh perspectives to beloved classics while championing new works.",
+        "source": "Revista Diners",
+        "author": "Cultural Section"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Experience Our Music",
+    "text": "Join us at an upcoming concert or book us for your special event.",
+    "buttons": {
+      "concerts": "View Concert Schedule",
+      "contact": "Get in Touch"
+    }
+  }
+}

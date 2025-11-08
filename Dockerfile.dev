@@ -1,0 +1,28 @@
+FROM node:20-alpine
+
+# Instalar dependencias del sistema para Sharp
+RUN apk add --no-cache \
+    build-base \
+    g++ \
+    cairo-dev \
+    jpeg-dev \
+    pango-dev \
+    giflib-dev \
+    python3
+
+WORKDIR /app
+
+# Copiar archivos de dependencias
+COPY package.json package-lock.json ./
+
+# Instalar dependencias
+RUN npm ci
+
+# Copiar código fuente
+COPY . .
+
+# Exponer puerto de desarrollo
+EXPOSE 4321
+
+# Comando de desarrollo con hot reload
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]

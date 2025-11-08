@@ -1,0 +1,51 @@
+{
+  "name": "cuarteto-metanoia",
+  "version": "1.0.0",
+  "description": "Sitio web oficial del Cuarteto Metanoia - Música de cámara de excelencia",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "format": "prettier --write .",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx,.astro",
+    "optimize-images": "node scripts/optimize-images.js",
+    "upload-to-r2": "node scripts/upload-to-r2.js"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.1.6",
+    "@astrojs/tailwind": "^5.1.0",
+    "@aws-sdk/client-s3": "^3.645.0",
+    "astro": "^4.15.9",
+    "tailwindcss": "^3.4.10"
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.9",
+    "@tailwindcss/typography": "^0.5.15",
+    "@types/node": "^22.5.5",
+    "@typescript-eslint/eslint-plugin": "^8.6.0",
+    "@typescript-eslint/parser": "^8.6.0",
+    "eslint": "^9.10.0",
+    "eslint-plugin-astro": "^1.2.4",
+    "prettier": "^3.3.3",
+    "prettier-plugin-astro": "^0.14.1",
+    "sharp": "^0.33.5",
+    "typescript": "^5.6.2"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
+  "keywords": [
+    "cuarteto",
+    "musica-clasica",
+    "chamber-music",
+    "string-quartet",
+    "astro",
+    "tailwindcss"
+  ],
+  "author": "Cuarteto Metanoia",
+  "license": "MIT"
+}

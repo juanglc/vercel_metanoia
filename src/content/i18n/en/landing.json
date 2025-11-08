@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Cuarteto Metanoia | Excellence in Chamber Music",
+    "description": "Cuarteto Metanoia is a string quartet dedicated to bringing classical and contemporary chamber music to life with passion and precision."
+  },
+  "hero": {
+    "title": "Cuarteto Metanoia",
+    "subtitle": "Excellence in Chamber Music",
+    "description": "Experience the beauty and emotion of classical music performed by one of Colombia's finest string quartets.",
+    "cta": {
+      "primary": "Explore Our Repertoire",
+      "secondary": "Upcoming Concerts"
+    }
+  },
+  "about": {
+    "heading": "About Us",
+    "subheading": "Passion for Chamber Music",
+    "text": "Founded in 2020, Cuarteto Metanoia is a string quartet dedicated to excellence in chamber music performance. We bring together four passionate musicians committed to sharing the beauty of classical and contemporary repertoire with audiences across Colombia and beyond.",
+    "highlights": [
+      {
+        "icon": "music",
+        "title": "20+ Years Combined Experience",
+        "description": "Our musicians bring decades of classical training and performance expertise."
+      },
+      {
+        "icon": "award",
+        "title": "Award-Winning Performances",
+        "description": "Recipients of multiple chamber music competition honors."
+      },
+      {
+        "icon": "globe",
+        "title": "International Repertoire",
+        "description": "From Haydn to contemporary composers, we perform a diverse range of works."
+      }
+    ],
+    "cta": "Meet Our Musicians"
+  },
+  "concerts": {
+    "heading": "Upcoming Concerts",
+    "subheading": "Join Us for an Unforgettable Performance",
+    "empty": "No upcoming concerts scheduled at this time. Check back soon!",
+    "cta": "View All Concerts",
+    "labels": {
+      "date": "Date",
+      "venue": "Venue",
+      "location": "Location",
+      "program": "Program",
+      "tickets": "Get Tickets"
+    }
+  },
+  "services": {
+    "heading": "Our Services",
+    "subheading": "Bring World-Class Chamber Music to Your Event",
+    "items": [
+      {
+        "icon": "concert",
+        "title": "Private Concerts",
+        "description": "Intimate performances tailored to your venue and audience.",
+        "features": [
+          "Custom repertoire selection",
+          "Professional sound setup",
+          "Flexible scheduling"
+        ]
+      },
+      {
+        "icon": "building",
+        "title": "Corporate Events",
+        "description": "Elevate your corporate gatherings with live classical music.",
+        "features": [
+          "Background music",
+          "Featured performances",
+          "Brand alignment"
+        ]
+      },
+      {
+        "icon": "heart",
+        "title": "Weddings & Celebrations",
+        "description": "Create unforgettable moments with elegant string quartet music.",
+        "features": [
+          "Ceremony and reception",
+          "Special song requests",
+          "Seamless coordination"
+        ]
+      },
+      {
+        "icon": "studio",
+        "title": "Recording & Production",
+        "description": "Professional recording services for albums, films, and media.",
+        "features": [
+          "Studio sessions",
+          "Remote recording",
+          "Post-production support"
+        ]
+      }
+    ],
+    "cta": "Book Us for Your Event"
+  },
+  "gallery": {
+    "heading": "Gallery",
+    "subheading": "Moments from Our Performances",
+    "tabs": {
+      "photos": "Photos",
+      "videos": "Videos"
+    },
+    "cta": "View Full Gallery"
+  },
+  "testimonials": {
+    "heading": "What People Say",
+    "subheading": "Reviews from Our Audiences",
+    "items": [
+      {
+        "quote": "Cuarteto Metanoia delivered an absolutely stunning performance at our wedding. The music was beautiful and perfectly executed.",
+        "author": "Maria González",
+        "role": "Wedding Client",
+        "rating": 5
+      },
+      {
+        "quote": "Their interpretation of Beethoven's late quartets was both powerful and deeply moving. A truly world-class ensemble.",
+        "author": "Carlos Rodríguez",
+        "role": "Music Critic, El Tiempo",
+        "rating": 5
+      },
+      {
+        "quote": "Professional, talented, and a pleasure to work with. They made our corporate event truly special.",
+        "author": "Ana Martínez",
+        "role": "Event Coordinator",
+        "rating": 5
+      }
+    ]
+  },
+  "newsletter": {
+    "heading": "Stay Connected",
+    "subheading": "Subscribe to Our Newsletter",
+    "description": "Get updates on upcoming concerts, new recordings, and exclusive behind-the-scenes content.",
+    "form": {
+      "emailPlaceholder": "Enter your email",
+      "submitButton": "Subscribe",
+      "successMessage": "Thank you for subscribing!",
+      "errorMessage": "Something went wrong. Please try again."
+    },
+    "privacy": "We respect your privacy. Unsubscribe anytime."
+  },
+  "cta": {
+    "heading": "Ready to Experience Cuarteto Metanoia?",
+    "subheading": "Book us for your next event or join us at an upcoming concert",
+    "buttons": {
+      "primary": "Contact Us",
+      "secondary": "View Concert Schedule"
+    }
+  }
+}

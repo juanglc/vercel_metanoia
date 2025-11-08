@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "title": "Nosotros | Cuarteto Metanoia",
+    "description": "Conoce al Cuarteto Metanoia, nuestra historia, misión y los talentosos músicos que dan vida a nuestras presentaciones."
+  },
+  "hero": {
+    "title": "Sobre el Cuarteto Metanoia",
+    "subtitle": "Dedicados a la Excelencia en Música de Cámara"
+  },
+  "story": {
+    "heading": "Nuestra Historia",
+    "paragraphs": [
+      "El Cuarteto Metanoia fue fundado en 2020 por cuatro músicos apasionados que compartían una visión: crear un cuarteto de cuerdas que llevara el más alto nivel de arte a la interpretación de música de cámara en Colombia y más allá.",
+      "El nombre 'Metanoia' proviene de la palabra griega que significa 'transformación' o 'cambio de corazón.' Esto refleja nuestra creencia de que la música tiene el poder de transformar tanto a intérpretes como a oyentes, creando conexiones profundas a través de experiencias artísticas compartidas.",
+      "Desde nuestra fundación, hemos interpretado en prestigiosos escenarios en toda Colombia, colaborado con reconocidos artistas internacionales y construido una reputación de excelencia musical y programación innovadora que respeta la tradición mientras abraza voces contemporáneas."
+    ]
+  },
+  "mission": {
+    "heading": "Nuestra Misión",
+    "text": "Inspirar a las audiencias a través de presentaciones excepcionales de música clásica y contemporánea de cámara, mientras fomentamos una apreciación más profunda por la tradición del cuarteto de cuerdas.",
+    "values": [
+      {
+        "title": "Excelencia Artística",
+        "description": "Estamos comprometidos con los más altos estándares de interpretación musical y precisión técnica."
+      },
+      {
+        "title": "Innovación y Tradición",
+        "description": "Honramos las grandes obras del pasado mientras defendemos nuevas voces en la música de cámara."
+      },
+      {
+        "title": "Compromiso Comunitario",
+        "description": "Creemos en hacer la música clásica accesible y relevante para audiencias diversas."
+      },
+      {
+        "title": "Colaboración",
+        "description": "Buscamos oportunidades para trabajar con otros artistas y organizaciones para expandir nuestros horizontes musicales."
+      }
+    ]
+  },
+  "members": {
+    "heading": "Conoce a Nuestros Músicos",
+    "subtitle": "Cuatro Artistas Excepcionales, Una Voz Unificada",
+    "list": [
+      {
+        "name": "Laura Martínez",
+        "instrument": "Primer Violín",
+        "bio": "Laura tiene una Maestría de la Juilliard School y ha interpretado como solista con las principales orquestas de las Américas. Su interpretación apasionada y matizada aporta profundidad a cada presentación.",
+        "education": ["Juilliard School (MM)", "Conservatorio Nacional (BM)"],
+        "achievements": [
+          "Ganadora, Competencia Internacional de Violín de Indianápolis",
+          "Ex Concertino, Orquesta Filarmónica de Bogotá"
+        ],
+        "image": "/images/members/laura-martinez.jpg"
+      },
+      {
+        "name": "Diego Ramírez",
+        "instrument": "Segundo Violín",
+        "bio": "La versatilidad musical y el espíritu colaborativo de Diego lo convierten en una voz esencial en el cuarteto. Estudió en la Royal Academy of Music de Londres y tiene amplia experiencia en repertorio clásico y contemporáneo.",
+        "education": ["Royal Academy of Music (MM)", "Universidad Nacional (BM)"],
+        "achievements": [
+          "Ganador de premio, Competencia Internacional de Música ARD",
+          "Ex miembro, Orquesta del Festival de Lucerna"
+        ],
+        "image": "/images/members/diego-ramirez.jpg"
+      },
+      {
+        "name": "Camila Torres",
+        "instrument": "Viola",
+        "bio": "El tono rico y cálido de Camila y su profundo conocimiento musical anclan el sonido del cuarteto. Graduada del Curtis Institute, ha interpretado música de cámara con algunos de los músicos más destacados del mundo.",
+        "education": ["Curtis Institute of Music (MM)", "Conservatorio Javeriano (BM)"],
+        "achievements": [
+          "Ganadora, Competencia Internacional de Viola Primrose",
+          "Facultad, Festival Internacional de Música de Cartagena"
+        ],
+        "image": "/images/members/camila-torres.jpg"
+      },
+      {
+        "name": "Santiago Vargas",
+        "instrument": "Cello",
+        "bio": "La interpretación poderosa pero sensible de Santiago proporciona la base para las interpretaciones del cuarteto. Estudió con violonchelistas legendarios en Europa y aporta una gran experiencia de presentaciones solistas y de música de cámara.",
+        "education": ["Hochschule für Musik Hanns Eisler (MM)", "Conservatorio Nacional (BM)"],
+        "achievements": [
+          "Finalista, Competencia Internacional Tchaikovsky",
+          "Violonchelo Principal, Orquesta Sinfónica Nacional de Colombia"
+        ],
+        "image": "/images/members/santiago-vargas.jpg"
+      }
+    ]
+  },
+  "achievements": {
+    "heading": "Premios y Reconocimientos",
+    "subtitle": "Celebrando Nuestro Recorrido Musical",
+    "timeline": [
+      {
+        "year": "2024",
+        "title": "Premio Latinoamericano de Música de Cámara",
+        "description": "Reconocido como Ensamble Destacado del Año por la Sociedad Latinoamericana de Música de Cámara."
+      },
+      {
+        "year": "2023",
+        "title": "Festival Internacional de Música de Bogotá",
+        "description": "Ensamble destacado, elogiado por 'extraordinaria madurez artística e interpretaciones convincentes.'"
+      },
+      {
+        "year": "2022",
+        "title": "Premio a la Excelencia Cultural de Colombia",
+        "description": "Otorgado por el Ministerio de Cultura por contribuciones a la música clásica en Colombia."
+      },
+      {
+        "year": "2021",
+        "title": "Premio a Artista Emergente",
+        "description": "Reconocido por la Fundación Internacional de Música de Cámara como un joven ensamble prometedor."
+      }
+    ]
+  },
+  "collaborations": {
+    "heading": "Colaboraciones y Alianzas",
+    "text": "Estamos orgullosos de trabajar con destacadas organizaciones y artistas que comparten nuestra pasión por la música de cámara.",
+    "partners": [
+      "Teatro Colón de Bogotá",
+      "Festival Internacional de Música de Cartagena",
+      "Universidad Nacional de Colombia",
+      "Fundación Nacional Batuta",
+      "Orquesta Sinfónica Nacional de Colombia"
+    ]
+  },
+  "press": {
+    "heading": "Prensa y Medios",
+    "quotes": [
+      {
+        "text": "El Cuarteto Metanoia ofrece presentaciones de notable profundidad y brillantez técnica. Esta es música de cámara en su máxima expresión.",
+        "source": "El Tiempo",
+        "author": "Carlos Rodríguez, Crítico Musical"
+      },
+      {
+        "text": "Un cuarteto que combina energía juvenil con arte maduro. Su interpretación de los últimos cuartetos de Beethoven no fue nada menos que reveladora.",
+        "source": "BBC Music Magazine",
+        "author": "Reseña Internacional"
+      },
+      {
+        "text": "El Cuarteto Metanoia está redefiniendo la música de cámara en América Latina, aportando perspectivas frescas a clásicos queridos mientras defiende nuevas obras.",
+        "source": "Revista Diners",
+        "author": "Sección Cultural"
+      }
+    ]
+  },
+  "cta": {
+    "heading": "Experimenta Nuestra Música",
+    "text": "Únete a nosotros en un próximo concierto o contrátanos para tu evento especial.",
+    "buttons": {
+      "concerts": "Ver Calendario de Conciertos",
+      "contact": "Ponte en Contacto"
+    }
+  }
+}

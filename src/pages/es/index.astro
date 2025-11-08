@@ -1,0 +1,97 @@
+---
+/**
+ * Landing Page - Spanish
+ */
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '@/components/home/HeroSection.astro';
+import AboutPreview from '@/components/home/AboutPreview.astro';
+import FeaturedConcerts from '@/components/home/FeaturedConcerts.astro';
+import ServicesHighlight from '@/components/home/ServicesHighlight.astro';
+import { getContent } from '@/utils/i18n';
+
+const lang = 'es';
+const content = await getContent(lang, 'landing');
+---
+
+<BaseLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+>
+  <!-- Hero Section -->
+  <HeroSection lang={lang} content={content.hero} />
+
+  <!-- About Preview -->
+  <AboutPreview lang={lang} content={content.about} />
+
+  <!-- Featured Concerts -->
+  <FeaturedConcerts lang={lang} content={content.concerts} />
+
+  <!-- Services Highlight -->
+  <ServicesHighlight lang={lang} content={content.services} />
+
+  <!-- Newsletter CTA Section -->
+  <section class="section bg-bg-secondary">
+    <div class="container max-w-4xl text-center">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 animate-fade-in-up">
+        {content.newsletter.heading}
+      </h2>
+      <p class="text-lg text-text-secondary mb-8 animate-fade-in-up stagger-1">
+        {content.newsletter.description}
+      </p>
+
+      <form class="max-w-md mx-auto flex gap-3 animate-fade-in-up stagger-2">
+        <input
+          type="email"
+          placeholder={content.newsletter.form.emailPlaceholder}
+          class="flex-1 px-4 py-3 rounded-lg border border-border-medium focus:border-color-primary focus:outline-none transition-colors"
+          required
+        />
+        <button
+          type="submit"
+          class="px-6 py-3 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-colors"
+        >
+          {content.newsletter.form.submitButton}
+        </button>
+      </form>
+
+      <p class="text-sm text-text-secondary mt-4 animate-fade-in-up stagger-3">
+        {content.newsletter.privacy}
+      </p>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="section bg-gradient-to-br from-color-primary to-color-secondary text-white">
+    <div class="container max-w-4xl text-center">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 animate-fade-in-up">
+        {content.cta.heading}
+      </h2>
+      <p class="text-lg mb-8 opacity-90 animate-fade-in-up stagger-1">
+        {content.cta.subheading}
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-2">
+        <a
+          href="/es/contacto"
+          class="px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105"
+        >
+          {content.cta.buttons.primary}
+        </a>
+        <a
+          href="/es/conciertos"
+          class="px-8 py-4 bg-transparent border-2 border-white font-semibold rounded-lg hover:bg-white hover:text-color-primary transition-all"
+        >
+          {content.cta.buttons.secondary}
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Stagger animation delays */
+  .stagger-1 { animation-delay: 100ms; }
+  .stagger-2 { animation-delay: 200ms; }
+  .stagger-3 { animation-delay: 300ms; }
+</style>

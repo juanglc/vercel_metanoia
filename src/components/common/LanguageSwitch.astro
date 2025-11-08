@@ -1,0 +1,82 @@
+---
+/**
+ * LanguageSwitch Component - Toggle between English and Spanish
+ */
+export interface Props {
+  lang: 'en' | 'es';
+  currentPath: string;
+}
+
+const { lang, currentPath } = Astro.props;
+
+// Calculate alternate language URL
+const alternateLang = lang === 'en' ? 'es' : 'en';
+const alternateUrl = currentPath.replace(`/${lang}/`, `/${alternateLang}/`);
+
+const labels = {
+  en: {
+    toggle: 'Switch to Spanish',
+    current: 'English',
+    alternate: 'Español',
+  },
+  es: {
+    toggle: 'Cambiar a inglés',
+    current: 'Español',
+    alternate: 'English',
+  },
+};
+
+const label = labels[lang];
+---
+
+<div class="language-switch">
+  <a
+    href={alternateUrl}
+    class="lang-link"
+    aria-label={label.toggle}
+    title={label.toggle}
+  >
+    <span class="font-medium">{lang.toUpperCase()}</span>
+    <svg
+      class="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129"
+      />
+    </svg>
+  </a>
+</div>
+
+<style>
+  .lang-link {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-lg);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    font-size: var(--font-size-sm);
+    transition: all var(--transition-base);
+  }
+
+  .lang-link:hover,
+  .lang-link:focus {
+    background: var(--bg-tertiary);
+    border-color: var(--color-primary);
+    transform: translateY(-1px);
+  }
+
+  .lang-link:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+  }
+</style>

@@ -1,0 +1,130 @@
+---
+/**
+ * Services Highlight Component
+ * Brief overview of services offered
+ */
+interface Props {
+  lang: 'en' | 'es';
+  content: {
+    heading: string;
+    subheading: string;
+    items: Array<{
+      icon: string;
+      title: string;
+      description: string;
+      features: string[];
+    }>;
+    cta: string;
+  };
+}
+
+const { lang, content } = Astro.props;
+---
+
+<section class="section bg-bg-primary">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 animate-fade-in-up">
+        {content.heading}
+      </h2>
+      <p class="text-xl text-text-secondary animate-fade-in-up stagger-1">
+        {content.subheading}
+      </p>
+    </div>
+
+    <!-- Services Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-12">
+      {content.items.map((service, index) => (
+        <div
+          class="service-card p-6 rounded-lg bg-bg-secondary hover:shadow-lg transition-all duration-300 animate-fade-in-up"
+          style={`animation-delay: ${(index + 2) * 100}ms`}
+        >
+          <!-- Icon -->
+          <div class="w-14 h-14 mb-4 rounded-lg bg-color-primary/10 flex items-center justify-center">
+            <svg
+              class="w-7 h-7 text-color-primary"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+              />
+            </svg>
+          </div>
+
+          <h3 class="text-xl font-bold mb-3">
+            {service.title}
+          </h3>
+
+          <p class="text-text-secondary mb-4">
+            {service.description}
+          </p>
+
+          <ul class="space-y-2">
+            {service.features.map((feature) => (
+              <li class="flex items-start gap-2 text-sm text-text-secondary">
+                <svg
+                  class="w-5 h-5 text-color-primary flex-shrink-0 mt-0.5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M5 13l4 4L19 7"
+                  />
+                </svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <!-- CTA Button -->
+    <div class="text-center">
+      <a
+        href={lang === 'en' ? '/en/services' : '/es/servicios'}
+        class="inline-flex items-center gap-2 px-8 py-4 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-all hover:scale-105"
+      >
+        {content.cta}
+        <svg
+          class="w-5 h-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M17 8l4 4m0 0l-4 4m4-4H3"
+          />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .stagger-1 { animation-delay: 100ms; }
+
+  .service-card {
+    transform: translateY(0);
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+</style>

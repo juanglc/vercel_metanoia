@@ -1,0 +1,209 @@
+/**
+ * CSS Variables para Dark/Light Mode
+ * Sistema de diseño de Cuarteto Metanoia
+ */
+
+/* ============================================
+   LIGHT MODE (Default)
+   ============================================ */
+:root {
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f7f4;
+  --bg-tertiary: #f5f1eb;
+  --bg-accent: #fff8dc;
+
+  /* Text Colors */
+  --text-primary: #1a1a1a;
+  --text-secondary: #4a4a4a;
+  --text-tertiary: #6b6b6b;
+  --text-muted: #999999;
+
+  /* Brand Colors */
+  --color-primary: #8b4513;      /* Marrón cálido */
+  --color-primary-hover: #70370f;
+  --color-primary-active: #5c2d0c;
+  --color-secondary: #d4af37;     /* Dorado */
+  --color-secondary-hover: #b8960f;
+  --color-secondary-active: #967a0b;
+
+  /* Accent Colors */
+  --accent-brown-light: #d4c4b0;
+  --accent-cream: #fff8dc;
+  --accent-gold-light: #f9e79f;
+
+  /* Border & Dividers */
+  --border-light: rgba(139, 69, 19, 0.1);
+  --border-medium: rgba(139, 69, 19, 0.2);
+  --border-strong: rgba(139, 69, 19, 0.3);
+  --divider: rgba(139, 69, 19, 0.15);
+
+  /* Status Colors */
+  --color-success: #22c55e;
+  --color-error: #ef4444;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-soft: 0 2px 15px -3px rgba(139, 69, 19, 0.07), 0 10px 20px -2px rgba(139, 69, 19, 0.04);
+  --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.3);
+
+  /* Overlay */
+  --overlay-light: rgba(0, 0, 0, 0.3);
+  --overlay-medium: rgba(0, 0, 0, 0.5);
+  --overlay-strong: rgba(0, 0, 0, 0.7);
+
+  /* Z-Index Scale */
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-theme: 300ms ease-in-out;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+[data-theme='dark'] {
+  /* Background Colors */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --bg-accent: #4a3c06;
+
+  /* Text Colors */
+  --text-primary: #f5f5f5;
+  --text-secondary: #cccccc;
+  --text-tertiary: #b3b3b3;
+  --text-muted: #808080;
+
+  /* Brand Colors (invertidos) */
+  --color-primary: #d4af37;      /* Dorado */
+  --color-primary-hover: #f4d03f;
+  --color-primary-active: #fcf0c3;
+  --color-secondary: #8b4513;     /* Marrón */
+  --color-secondary-hover: #b8a28a;
+  --color-secondary-active: #d4c4b0;
+
+  /* Accent Colors */
+  --accent-brown-light: #5c2d0c;
+  --accent-cream: #4a3c06;
+  --accent-gold-light: #6b5709;
+
+  /* Border & Dividers */
+  --border-light: rgba(212, 175, 55, 0.1);
+  --border-medium: rgba(212, 175, 55, 0.2);
+  --border-strong: rgba(212, 175, 55, 0.3);
+  --divider: rgba(212, 175, 55, 0.15);
+
+  /* Status Colors (ajustados para dark) */
+  --color-success: #10b981;
+  --color-error: #f87171;
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+
+  /* Shadows (más sutiles en dark) */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 2px 15px -3px rgba(212, 175, 55, 0.1), 0 10px 20px -2px rgba(212, 175, 55, 0.05);
+  --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.4);
+
+  /* Overlay */
+  --overlay-light: rgba(0, 0, 0, 0.5);
+  --overlay-medium: rgba(0, 0, 0, 0.7);
+  --overlay-strong: rgba(0, 0, 0, 0.85);
+}
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+:root {
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
+
+/* ============================================
+   CONTAINER WIDTHS
+   ============================================ */
+:root {
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-padding: 1.5rem;
+}
+
+/* ============================================
+   SPACING SCALE
+   ============================================ */
+:root {
+  --space-0: 0;
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+}
+
+/* ============================================
+   BORDER RADIUS SCALE
+   ============================================ */
+:root {
+  --radius-none: 0;
+  --radius-sm: 0.375rem;   /* 6px */
+  --radius-base: 0.5rem;   /* 8px */
+  --radius-md: 0.625rem;   /* 10px */
+  --radius-lg: 0.75rem;    /* 12px */
+  --radius-xl: 1rem;       /* 16px */
+  --radius-2xl: 1.5rem;    /* 24px */
+  --radius-3xl: 2rem;      /* 32px */
+  --radius-full: 9999px;
+}
+
+/* ============================================
+   PREFERS REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+    --transition-theme: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,91 @@
+---
+/**
+ * SEO Component - Meta tags, Open Graph, Twitter Cards, Schema.org
+ */
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  image?: string;
+  lang?: 'en' | 'es';
+  noIndex?: boolean;
+  type?: 'website' | 'article' | 'profile';
+}
+
+const {
+  title,
+  description,
+  canonical,
+  image,
+  lang = 'en',
+  noIndex = false,
+  type = 'website',
+} = Astro.props;
+
+const siteName = 'Cuarteto Metanoia';
+const siteUrl = import.meta.env.PUBLIC_SITE_URL || 'https://cuartetometanoia.com';
+const defaultImage = `${siteUrl}/og-image.png`;
+const ogImage = image ? `${siteUrl}${image}` : defaultImage;
+
+// Construct full title
+const fullTitle = title === siteName ? siteName : `${title} | ${siteName}`;
+
+// Alternate language URLs for hreflang
+const alternateLang = lang === 'en' ? 'es' : 'en';
+const alternateUrl = canonical.replace(`/${lang}/`, `/${alternateLang}/`);
+
+// Schema.org structured data for MusicGroup
+const musicGroupSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'MusicGroup',
+  name: 'Cuarteto Metanoia',
+  genre: 'Classical Music',
+  url: siteUrl,
+  description: lang === 'en'
+    ? 'String quartet specializing in classical and contemporary chamber music'
+    : 'Cuarteto de cuerdas especializado en música clásica y contemporánea de cámara',
+  image: ogImage,
+  sameAs: [
+    'https://www.instagram.com/cuartetometanoia',
+    'https://www.youtube.com/@cuartetometanoia',
+    'https://open.spotify.com/artist/cuartetometanoia',
+  ],
+};
+---
+
+<!-- Primary Meta Tags -->
+<title>{fullTitle}</title>
+<meta name="title" content={fullTitle} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<!-- Robots -->
+{noIndex && <meta name="robots" content="noindex, nofollow" />}
+
+<!-- Language alternates -->
+<link rel="alternate" hreflang={lang} href={canonical} />
+<link rel="alternate" hreflang={alternateLang} href={alternateUrl} />
+<link rel="alternate" hreflang="x-default" href={canonical} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:locale" content={lang === 'en' ? 'en_US' : 'es_CO'} />
+<meta property="og:locale:alternate" content={lang === 'en' ? 'es_CO' : 'en_US'} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:creator" content="@cuartetometanoia" />
+
+<!-- Schema.org structured data -->
+<script type="application/ld+json" set:html={JSON.stringify(musicGroupSchema)} />

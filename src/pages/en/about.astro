@@ -1,0 +1,166 @@
+---
+/**
+ * About Page - English
+ * Complete page with story, mission, members, achievements, and press
+ */
+import PageLayout from '@/layouts/PageLayout.astro';
+import MemberCard from '@/components/about/MemberCard.astro';
+import Timeline from '@/components/about/Timeline.astro';
+import PressQuotes from '@/components/about/PressQuotes.astro';
+import { getContent } from '@/utils/i18n';
+
+const lang = 'en';
+const content = await getContent(lang, 'about');
+---
+
+<PageLayout
+  title={content.meta.title}
+  description={content.meta.description}
+  lang={lang}
+  breadcrumbs={[
+    { label: 'Home', href: '/en/' },
+    { label: 'About Us', href: '/en/about' }
+  ]}
+>
+  <!-- Story Section -->
+  <section class="mb-20">
+    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-8 text-center animate-fade-in-up">
+      {content.story.heading}
+    </h2>
+
+    <div class="max-w-4xl mx-auto space-y-6">
+      {content.story.paragraphs.map((paragraph: string, index: number) => (
+        <p
+          class="text-lg text-text-secondary leading-relaxed animate-fade-in-up"
+          style={`animation-delay: ${(index + 1) * 100}ms`}
+        >
+          {paragraph}
+        </p>
+      ))}
+    </div>
+  </section>
+
+  <!-- Mission & Values Section -->
+  <section class="mb-20 bg-bg-secondary -mx-4 md:-mx-8 lg:-mx-12 px-4 md:px-8 lg:px-12 py-16">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-center animate-fade-in-up">
+        {content.mission.heading}
+      </h2>
+
+      <p class="text-xl text-center text-text-secondary max-w-3xl mx-auto mb-12 animate-fade-in-up stagger-1">
+        {content.mission.text}
+      </p>
+
+      <!-- Values Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {content.mission.values.map((value: any, index: number) => (
+          <div
+            class="bg-bg-primary p-6 rounded-lg shadow-soft animate-fade-in-up"
+            style={`animation-delay: ${(index + 2) * 100}ms`}
+          >
+            <h3 class="text-xl font-bold mb-3 text-color-primary">
+              {value.title}
+            </h3>
+            <p class="text-text-secondary">
+              {value.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Members Section -->
+  <section class="mb-20">
+    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-center animate-fade-in-up">
+      {content.members.heading}
+    </h2>
+    <p class="text-xl text-center text-text-secondary mb-12 animate-fade-in-up stagger-1">
+      {content.members.subtitle}
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+      {content.members.list.map((member: any, index: number) => (
+        <MemberCard
+          member={member}
+          lang={lang}
+          delay={index * 150}
+        />
+      ))}
+    </div>
+  </section>
+
+  <!-- Achievements Timeline -->
+  <section class="mb-20 bg-bg-secondary -mx-4 md:-mx-8 lg:-mx-12 px-4 md:px-8 lg:px-12 py-16">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 text-center animate-fade-in-up">
+        {content.achievements.heading}
+      </h2>
+      <p class="text-xl text-center text-text-secondary mb-12 animate-fade-in-up stagger-1">
+        {content.achievements.subtitle}
+      </p>
+
+      <Timeline items={content.achievements.timeline} lang={lang} />
+    </div>
+  </section>
+
+  <!-- Collaborations -->
+  <section class="mb-20">
+    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6 text-center animate-fade-in-up">
+      {content.collaborations.heading}
+    </h2>
+    <p class="text-lg text-center text-text-secondary mb-10 max-w-3xl mx-auto animate-fade-in-up stagger-1">
+      {content.collaborations.text}
+    </p>
+
+    <div class="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+      {content.collaborations.partners.map((partner: string, index: number) => (
+        <div
+          class="px-6 py-3 bg-bg-secondary rounded-lg text-center font-medium animate-fade-in-up"
+          style={`animation-delay: ${(index + 2) * 50}ms`}
+        >
+          {partner}
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Press Quotes -->
+  <section class="mb-20">
+    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-12 text-center animate-fade-in-up">
+      {content.press.heading}
+    </h2>
+
+    <PressQuotes quotes={content.press.quotes} lang={lang} />
+  </section>
+
+  <!-- CTA Section -->
+  <section class="text-center bg-gradient-to-br from-color-primary to-color-secondary text-white -mx-4 md:-mx-8 lg:-mx-12 px-4 md:px-8 lg:px-12 py-16 rounded-lg">
+    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 animate-fade-in-up">
+      {content.cta.heading}
+    </h2>
+    <p class="text-lg mb-8 opacity-90 max-w-2xl mx-auto animate-fade-in-up stagger-1">
+      {content.cta.text}
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-2">
+      <a
+        href="/en/concerts"
+        class="px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105"
+      >
+        {content.cta.buttons.concerts}
+      </a>
+      <a
+        href="/en/contact"
+        class="px-8 py-4 bg-transparent border-2 border-white font-semibold rounded-lg hover:bg-white hover:text-color-primary transition-all"
+      >
+        {content.cta.buttons.contact}
+      </a>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  .stagger-1 { animation-delay: 100ms; }
+  .stagger-2 { animation-delay: 200ms; }
+</style>

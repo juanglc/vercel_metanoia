@@ -1,0 +1,147 @@
+---
+/**
+ * ThemeToggle Component - Switch between dark and light themes
+ */
+export interface Props {
+  lang: 'en' | 'es';
+}
+
+const { lang } = Astro.props;
+
+const labels = {
+  en: {
+    toggle: 'Toggle theme',
+    light: 'Switch to light mode',
+    dark: 'Switch to dark mode',
+  },
+  es: {
+    toggle: 'Cambiar tema',
+    light: 'Cambiar a modo claro',
+    dark: 'Cambiar a modo oscuro',
+  },
+};
+
+const label = labels[lang];
+---
+
+<button
+  id="theme-toggle"
+  class="theme-toggle"
+  aria-label={label.toggle}
+  title={label.toggle}
+  type="button"
+>
+  <!-- Sun icon (light mode) -->
+  <svg
+    class="sun-icon"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="10" cy="10" r="4" />
+    <path d="M10 1v2M10 17v2M3.93 3.93l1.41 1.41M14.66 14.66l1.41 1.41M1 10h2M17 10h2M3.93 16.07l1.41-1.41M14.66 5.34l1.41-1.41" />
+  </svg>
+
+  <!-- Moon icon (dark mode) -->
+  <svg
+    class="moon-icon hidden"
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    aria-hidden="true"
+  >
+    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" />
+  </svg>
+
+  <span class="sr-only" id="theme-label">{label.toggle}</span>
+</button>
+
+<style>
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-lg);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    transition: all var(--transition-base);
+  }
+
+  .theme-toggle:hover {
+    background: var(--bg-tertiary);
+    transform: scale(1.05);
+  }
+
+  .theme-toggle:focus-visible {
+    outline: var(--focus-outline);
+    outline-offset: 2px;
+  }
+
+  .theme-toggle:active {
+    transform: scale(0.95);
+  }
+
+  /* Icon animation */
+  .sun-icon,
+  .moon-icon {
+    transition: transform var(--transition-base);
+  }
+
+  .theme-toggle:hover .sun-icon,
+  .theme-toggle:hover .moon-icon {
+    transform: rotate(15deg);
+  }
+</style>
+
+<script>
+  import { toggleTheme, getCurrentTheme } from '@/utils/theme';
+
+  const button = document.getElementById('theme-toggle');
+  const sunIcon = button?.querySelector('.sun-icon');
+  const moonIcon = button?.querySelector('.moon-icon');
+  const themeLabel = document.getElementById('theme-label');
+
+  // Update icons based on current theme
+  function updateIcons(theme: 'light' | 'dark') {
+    if (theme === 'dark') {
+      sunIcon?.classList.add('hidden');
+      moonIcon?.classList.remove('hidden');
+      themeLabel && (themeLabel.textContent = button?.getAttribute('data-label-light') || 'Switch to light mode');
+    } else {
+      sunIcon?.classList.remove('hidden');
+      moonIcon?.classList.add('hidden');
+      themeLabel && (themeLabel.textContent = button?.getAttribute('data-label-dark') || 'Switch to dark mode');
+    }
+  }
+
+  // Initialize on load
+  updateIcons(getCurrentTheme());
+
+  // Toggle theme on click
+  button?.addEventListener('click', () => {
+    const newTheme = toggleTheme();
+    updateIcons(newTheme);
+  });
+
+  // Listen to system theme changes
+  if (typeof window !== 'undefined') {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      const savedTheme = localStorage.getItem('cuarteto-metanoia-theme');
+      if (!savedTheme) {
+        const systemTheme = e.matches ? 'dark' : 'light';
+        updateIcons(systemTheme);
+      }
+    });
+  }
+</script>

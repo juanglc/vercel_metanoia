@@ -1,0 +1,151 @@
+{
+  "meta": {
+    "title": "Cuarteto Metanoia | Excelencia en Música de Cámara",
+    "description": "Cuarteto Metanoia es un cuarteto de cuerdas dedicado a dar vida a la música clásica y contemporánea de cámara con pasión y precisión."
+  },
+  "hero": {
+    "title": "Cuarteto Metanoia",
+    "subtitle": "Excelencia en Música de Cámara",
+    "description": "Experimenta la belleza y emoción de la música clásica interpretada por uno de los mejores cuartetos de cuerdas de Colombia.",
+    "cta": {
+      "primary": "Explora Nuestro Repertorio",
+      "secondary": "Próximos Conciertos"
+    }
+  },
+  "about": {
+    "heading": "Nosotros",
+    "subheading": "Pasión por la Música de Cámara",
+    "text": "Fundado en 2020, el Cuarteto Metanoia es un cuarteto de cuerdas dedicado a la excelencia en la interpretación de música de cámara. Reunimos a cuatro músicos apasionados comprometidos con compartir la belleza del repertorio clásico y contemporáneo con audiencias en Colombia y más allá.",
+    "highlights": [
+      {
+        "icon": "music",
+        "title": "Más de 20 Años de Experiencia Combinada",
+        "description": "Nuestros músicos aportan décadas de formación y experiencia en interpretación clásica."
+      },
+      {
+        "icon": "award",
+        "title": "Interpretaciones Galardonadas",
+        "description": "Ganadores de múltiples honores en competencias de música de cámara."
+      },
+      {
+        "icon": "globe",
+        "title": "Repertorio Internacional",
+        "description": "Desde Haydn hasta compositores contemporáneos, interpretamos una amplia gama de obras."
+      }
+    ],
+    "cta": "Conoce a Nuestros Músicos"
+  },
+  "concerts": {
+    "heading": "Próximos Conciertos",
+    "subheading": "Únete a Nosotros para una Presentación Inolvidable",
+    "empty": "No hay conciertos programados en este momento. ¡Vuelve pronto!",
+    "cta": "Ver Todos los Conciertos",
+    "labels": {
+      "date": "Fecha",
+      "venue": "Lugar",
+      "location": "Ubicación",
+      "program": "Programa",
+      "tickets": "Conseguir Boletos"
+    }
+  },
+  "services": {
+    "heading": "Nuestros Servicios",
+    "subheading": "Lleva Música de Cámara de Clase Mundial a Tu Evento",
+    "items": [
+      {
+        "icon": "concert",
+        "title": "Conciertos Privados",
+        "description": "Presentaciones íntimas adaptadas a tu venue y audiencia.",
+        "features": [
+          "Selección de repertorio personalizado",
+          "Configuración de sonido profesional",
+          "Horarios flexibles"
+        ]
+      },
+      {
+        "icon": "building",
+        "title": "Eventos Corporativos",
+        "description": "Eleva tus reuniones corporativas con música clásica en vivo.",
+        "features": [
+          "Música de fondo",
+          "Presentaciones destacadas",
+          "Alineación con tu marca"
+        ]
+      },
+      {
+        "icon": "heart",
+        "title": "Bodas y Celebraciones",
+        "description": "Crea momentos inolvidables con elegante música de cuarteto de cuerdas.",
+        "features": [
+          "Ceremonia y recepción",
+          "Solicitudes de canciones especiales",
+          "Coordinación perfecta"
+        ]
+      },
+      {
+        "icon": "studio",
+        "title": "Grabación y Producción",
+        "description": "Servicios profesionales de grabación para álbumes, películas y medios.",
+        "features": [
+          "Sesiones de estudio",
+          "Grabación remota",
+          "Soporte de postproducción"
+        ]
+      }
+    ],
+    "cta": "Contrátanos para Tu Evento"
+  },
+  "gallery": {
+    "heading": "Galería",
+    "subheading": "Momentos de Nuestras Presentaciones",
+    "tabs": {
+      "photos": "Fotos",
+      "videos": "Videos"
+    },
+    "cta": "Ver Galería Completa"
+  },
+  "testimonials": {
+    "heading": "Lo Que Dicen de Nosotros",
+    "subheading": "Reseñas de Nuestras Audiencias",
+    "items": [
+      {
+        "quote": "Cuarteto Metanoia ofreció una presentación absolutamente impresionante en nuestra boda. La música fue hermosa y perfectamente ejecutada.",
+        "author": "María González",
+        "role": "Cliente de Boda",
+        "rating": 5
+      },
+      {
+        "quote": "Su interpretación de los últimos cuartetos de Beethoven fue poderosa y profundamente conmovedora. Un ensamble verdaderamente de clase mundial.",
+        "author": "Carlos Rodríguez",
+        "role": "Crítico Musical, El Tiempo",
+        "rating": 5
+      },
+      {
+        "quote": "Profesionales, talentosos y un placer trabajar con ellos. Hicieron que nuestro evento corporativo fuera realmente especial.",
+        "author": "Ana Martínez",
+        "role": "Coordinadora de Eventos",
+        "rating": 5
+      }
+    ]
+  },
+  "newsletter": {
+    "heading": "Mantente Conectado",
+    "subheading": "Suscríbete a Nuestro Boletín",
+    "description": "Recibe actualizaciones sobre próximos conciertos, nuevas grabaciones y contenido exclusivo detrás de escena.",
+    "form": {
+      "emailPlaceholder": "Ingresa tu correo electrónico",
+      "submitButton": "Suscribirse",
+      "successMessage": "¡Gracias por suscribirte!",
+      "errorMessage": "Algo salió mal. Por favor intenta de nuevo."
+    },
+    "privacy": "Respetamos tu privacidad. Cancela suscripción en cualquier momento."
+  },
+  "cta": {
+    "heading": "¿Listo para Experimentar el Cuarteto Metanoia?",
+    "subheading": "Contrátanos para tu próximo evento o únete a nosotros en un próximo concierto",
+    "buttons": {
+      "primary": "Contáctanos",
+      "secondary": "Ver Calendario de Conciertos"
+    }
+  }
+}

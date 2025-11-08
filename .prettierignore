@@ -1,0 +1,38 @@
+# Build output
+dist/
+.astro/
+build/
+.output/
+
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Cache
+.cache/
+.parcel-cache/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Miscellaneous
+.DS_Store
+*.pem
+*.lock
+
+# Generated files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Markdown files (opcional, si no quieres formatear README)
+# *.md

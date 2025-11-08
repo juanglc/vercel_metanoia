@@ -1,0 +1,86 @@
+---
+/**
+ * Timeline Component
+ * Displays chronological achievements with year markers
+ */
+interface Props {
+  items: Array<{
+    year: string;
+    title: string;
+    description: string;
+  }>;
+  lang: 'en' | 'es';
+}
+
+const { items, lang } = Astro.props;
+---
+
+<div class="timeline relative">
+  <!-- Vertical line -->
+  <div class="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-border-medium transform md:-translate-x-1/2"></div>
+
+  <div class="space-y-12">
+    {items.map((item, index) => (
+      <div
+        class={`timeline-item relative flex items-start gap-8 ${
+          index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+        } animate-fade-in-up`}
+        style={`animation-delay: ${index * 150}ms`}
+      >
+        <!-- Year Badge -->
+        <div class="timeline-year flex-shrink-0 relative z-10">
+          <div class="w-16 h-16 md:w-20 md:h-20 rounded-full bg-color-primary text-white flex items-center justify-center font-bold text-lg md:text-xl shadow-lg">
+            {item.year}
+          </div>
+        </div>
+
+        <!-- Content Card -->
+        <div class={`timeline-content flex-1 bg-bg-primary p-6 rounded-lg shadow-soft ${
+          index % 2 === 0 ? 'md:text-right' : 'md:text-left'
+        }`}>
+          <h3 class="text-xl font-bold mb-2 text-color-primary">
+            {item.title}
+          </h3>
+          <p class="text-text-secondary leading-relaxed">
+            {item.description}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .timeline-item {
+    opacity: 0;
+  }
+
+  .timeline-year {
+    transition: transform 0.3s ease;
+  }
+
+  .timeline-item:hover .timeline-year {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 768px) {
+    .timeline {
+      padding-left: 2rem;
+    }
+
+    .timeline-year {
+      position: absolute;
+      left: -2rem;
+    }
+
+    .timeline-content {
+      margin-left: 4rem;
+    }
+  }
+
+  @media (min-width: 769px) {
+    .timeline-item:nth-child(even) .timeline-year {
+      order: 2;
+    }
+  }
+</style>
