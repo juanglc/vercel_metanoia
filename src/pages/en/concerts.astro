@@ -215,12 +215,19 @@ pastConcerts.sort((a, b) => b.date.localeCompare(a.date));
 
   .filter-button.active {
     background: var(--color-primary);
-    color: var(--color-btn-primary-text);
+    color: white; /* ✅ Directo y simple */
   }
 
   .filter-button:hover:not(.active) {
     background: var(--bg-tertiary);
     color: var(--text-primary);
+  }
+
+  /* Badge en botón activo */
+  .filter-button.active span {
+    background: rgba(255, 255, 255, 0.25) !important;
+    color: white !important;
+    border: 1px solid rgba(255, 255, 255, 0.3);
   }
 </style>
 

@@ -17,7 +17,7 @@
   --color-brown-200: oklch(85% 0.04 60);
   --color-brown-300: oklch(75% 0.06 60);
   --color-brown-400: oklch(65% 0.08 60);
-  --color-brown-500: oklch(50% 0.10 60);  /* #8b4513 */
+  --color-brown-500: oklch(50% 0.10 60);  /* #8b4513 - Primary consistente */
   --color-brown-600: oklch(40% 0.10 60);
   --color-brown-700: oklch(30% 0.09 60);
   --color-brown-800: oklch(20% 0.07 60);
@@ -37,7 +37,7 @@
 
   /* ===== BRAND COLORS (mapped from OKLCH) ===== */
 
-  /* Primary (Brown) */
+  /* Primary (Brown) - CONSISTENTE EN AMBOS TEMAS */
   --color-primary: var(--color-brown-500);
   --color-primary-rgb: 139, 69, 19;
   --color-primary-hover: var(--color-brown-600);
@@ -192,29 +192,37 @@
   --text-tertiary: #b3b3b3;
   --text-muted: #808080;
 
-  /* ===== BRAND COLORS (inverted) ===== */
+  /* ===== BRAND COLORS ===== */
 
-  /* Primary (Gold in dark mode) */
-  --color-primary: var(--color-gold-500);
-  --color-primary-hover: var(--color-gold-400);
-  --color-primary-active: var(--color-gold-300);
+  /*
+   * Primary se mantiene igual (brown-500)
+   * Pero ajustamos hover/active para que contrasten bien en dark mode
+   */
+  --color-primary: var(--color-brown-500);
+  --color-primary-rgb: 139, 69, 19;
+  /* Hover más claro para contraste en dark */
+  --color-primary-hover: var(--color-brown-400);
+  --color-primary-active: var(--color-brown-300);
 
-  /* Secondary (Brown in dark mode) */
-  --color-secondary: var(--color-brown-500);
-  --color-secondary-hover: var(--color-brown-400);
-  --color-secondary-active: var(--color-brown-300);
+  /*
+   * Secondary cambia a dorado claro para contraste
+   */
+  --color-secondary: var(--color-gold-400);
+  --color-secondary-hover: var(--color-gold-300);
+  --color-secondary-active: var(--color-gold-200);
 
-  /* Accent Colors */
-  --accent-brown-light: var(--color-brown-800);
-  --accent-cream: #4a3c06;
-  --accent-gold-light: var(--color-gold-800);
+  /* Accent Colors ajustados para dark mode */
+  --accent-brown-light: var(--color-brown-300);
+  --accent-cream: #6b5a2a;
+  --accent-gold-light: var(--color-gold-300);
 
   /* ===== BORDER & DIVIDERS ===== */
 
-  --border-light: rgba(212, 175, 55, 0.1);
-  --border-medium: rgba(212, 175, 55, 0.2);
-  --border-strong: rgba(212, 175, 55, 0.3);
-  --divider: rgba(212, 175, 55, 0.15);
+  /* Dorado suave para bordes en dark mode */
+  --border-light: rgba(212, 175, 55, 0.15);
+  --border-medium: rgba(212, 175, 55, 0.25);
+  --border-strong: rgba(212, 175, 55, 0.35);
+  --divider: rgba(212, 175, 55, 0.2);
 
   /* ===== STATUS COLORS (adjusted for dark) ===== */
 
@@ -229,8 +237,8 @@
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
   --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-  --shadow-soft: 0 2px 15px -3px rgba(212, 175, 55, 0.1), 0 10px 20px -2px rgba(212, 175, 55, 0.05);
-  --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.4);
+  --shadow-soft: 0 2px 15px -3px rgba(212, 175, 55, 0.15), 0 10px 20px -2px rgba(212, 175, 55, 0.08);
+  --shadow-glow: 0 0 25px rgba(212, 175, 55, 0.5);
 
   /* ===== OVERLAY ===== */
 
