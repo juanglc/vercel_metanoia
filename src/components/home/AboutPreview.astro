@@ -26,49 +26,52 @@ const { lang, content } = Astro.props;
   <div class="container">
 
     <!-- Header Section con animaciones -->
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-bold mb-4 animate-on-scroll">{content.heading}</h2>
-      <p class="text-xl text-secondary max-w-2xl mx-auto mb-6 animate-on-scroll delay-100">{content.subheading}</p>
-      <p class="text-lg text-tertiary max-w-3xl mx-auto animate-on-scroll delay-200">{content.text}</p>
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 animate-on-scroll">
+        {content.heading}
+      </h2>
+      <p class="text-xl text-text-secondary animate-on-scroll delay-100">
+        {content.subheading}
+      </p>
     </div>
 
     <!-- Highlights Grid con Glassmorphism + Animaciones -->
-    <div class="grid-3-cols">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
       {content.highlights.map((highlight, index) => (
-        <div class={`card card-glass card-with-subgrid p-8 rounded-xl animate-on-scroll delay-${(index + 3) * 100}`}>
+        <div class={`card-glass p-8 rounded-xl animate-on-scroll delay-${(index + 2) * 100}`}>
 
-          <!-- Icon -->
-          <div class="card-icon">
+          <!-- Icon - Alineado a la izquierda -->
+          <div class="w-12 h-12 bg-color-primary/10 flex items-center justify-center mb-4 text-color-primary">
             {highlight.icon === 'music' && (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
               </svg>
             )}
 
             {highlight.icon === 'award' && (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
               </svg>
             )}
 
             {highlight.icon === 'globe' && (
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
             )}
           </div>
 
-          <!-- Title -->
-          <h3 class="text-2xl font-semibold mb-3">{highlight.title}</h3>
+          <!-- Title - Alineado a la izquierda -->
+          <h3 class="text-xl font-bold mb-2">{highlight.title}</h3>
 
-          <!-- Description -->
-          <p class="text-secondary leading-relaxed">{highlight.description}</p>
+          <!-- Description - Alineado a la izquierda -->
+          <p class="text-text-secondary leading-relaxed">{highlight.description}</p>
         </div>
       ))}
     </div>
 
     <!-- CTA Button con animación -->
-    <div class="text-center mt-12 animate-on-scroll delay-600">
+    <div class="text-center animate-on-scroll delay-600">
       <a
         href={lang === 'en' ? '/en/about' : '/es/about'}
         class="btn btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-xl"
