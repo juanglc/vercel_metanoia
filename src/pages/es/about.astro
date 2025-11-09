@@ -3,12 +3,13 @@
  * About Page - Spanish
  * Complete page with story, mission, members, achievements, and press
  */
+export const prerender = true;
 import PageLayout from '@/layouts/PageLayout.astro';
 import MemberCard from '@/components/about/MemberCard.astro';
 import Timeline from '@/components/about/Timeline.astro';
 import PressQuotes from '@/components/about/PressQuotes.astro';
 import { getContent } from '@/utils/i18n';
-
+import aboutData from '@/content/i18n/en/about.json';
 const lang = 'es';
 const content = await getContent(lang, 'about');
 ---
@@ -142,20 +143,20 @@ const content = await getContent(lang, 'about');
     <p class="text-lg mb-8 opacity-90 max-w-2xl mx-auto animate-fade-in-up stagger-1">
       {content.cta.text}
     </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-2">
-      <a
-        href="/es/concerts"
-        class="px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105"
-      >
-        {content.cta.buttons.concerts}
-      </a>
-      <a
-        href="/es/contact"
-        class="px-8 py-4 bg-transparent border-2 border-white font-semibold rounded-lg hover:bg-white hover:text-color-primary transition-all"
-      >
-        {content.cta.buttons.contact}
-      </a>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/en/concerts"
+            class="btn btn-primary btn-lg"
+          >
+            {content.cta.buttons.concerts}
+          </a>
+          <a
+            href="/en/contact"
+            class="btn btn-secondary btn-lg"
+          >
+            {content.cta.buttons.contact}
+          </a>
+        </div>
     </div>
   </section>
 </PageLayout>

@@ -2,6 +2,7 @@
 /**
  * Landing Page - Spanish
  */
+export const prerender = true;
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import HeroSection from '@/components/home/HeroSection.astro';
 import AboutPreview from '@/components/home/AboutPreview.astro';
@@ -10,7 +11,7 @@ import ServicesHighlight from '@/components/home/ServicesHighlight.astro';
 import { getContent } from '@/utils/i18n';
 
 const lang = 'es';
-const content = await getContent(lang, 'landing');
+const content = await getContent(lang, 'home');
 ---
 
 <BaseLayout
@@ -30,64 +31,36 @@ const content = await getContent(lang, 'landing');
   <!-- Services Highlight -->
   <ServicesHighlight lang={lang} content={content.services} />
 
-  <!-- Newsletter CTA Section -->
-  <section class="section bg-bg-secondary">
-    <div class="container max-w-4xl text-center">
-      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 animate-fade-in-up">
-        {content.newsletter.heading}
-      </h2>
-      <p class="text-lg text-text-secondary mb-8 animate-fade-in-up stagger-1">
-        {content.newsletter.description}
-      </p>
+  <!-- Final CTA con glassmorphism y animaciones -->
+  <section class="section-tight animate-on-scroll delay-600">
+    <div class="container max-w-4xl">
+      <div class="card-glass p-12 rounded-xl text-center">
+        <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
+          {content.cta.heading}
+        </h2>
+        <p class="text-lg mb-8 text-text-secondary">
+          {content.cta.subheading}
+        </p>
 
-      <form class="max-w-md mx-auto flex gap-3 animate-fade-in-up stagger-2">
-        <input
-          type="email"
-          placeholder={content.newsletter.form.emailPlaceholder}
-          class="flex-1 px-4 py-3 rounded-lg border border-border-medium focus:border-color-primary focus:outline-none transition-colors"
-          required
-        />
-        <button
-          type="submit"
-          class="px-6 py-3 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-colors"
-        >
-          {content.newsletter.form.submitButton}
-        </button>
-      </form>
-
-      <p class="text-sm text-text-secondary mt-4 animate-fade-in-up stagger-3">
-        {content.newsletter.privacy}
-      </p>
-    </div>
-  </section>
-
-  <!-- Final CTA -->
-  <section class="section bg-gradient-to-br from-color-primary to-color-secondary text-white">
-    <div class="container max-w-4xl text-center">
-      <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 animate-fade-in-up">
-        {content.cta.heading}
-      </h2>
-      <p class="text-lg mb-8 opacity-90 animate-fade-in-up stagger-1">
-        {content.cta.subheading}
-      </p>
-
-      <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-2">
-        <a
-          href="/es/contact"
-          class="px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105"
-        >
-          {content.cta.buttons.primary}
-        </a>
-        <a
-          href="/es/concerts"
-          class="px-8 py-4 bg-transparent border-2 border-white font-semibold rounded-lg hover:bg-white hover:text-color-primary transition-all"
-        >
-          {content.cta.buttons.secondary}
-        </a>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="/es/contact"
+            class="btn btn-primary px-8 py-4 text-lg"
+          >
+            {content.cta.buttons.primary}
+          </a>
+          <a
+            href="/es/concerts"
+            class="btn btn-secondary px-8 py-4 text-lg"
+          >
+            {content.cta.buttons.secondary}
+          </a>
+        </div>
       </div>
     </div>
   </section>
 </BaseLayout>
+
 
 <style>
   /* Stagger animation delays */

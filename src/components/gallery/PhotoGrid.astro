@@ -3,6 +3,7 @@
  * Photo Grid Component
  * Responsive masonry-style grid of photos with lightbox
  */
+import { Image } from 'astro:assets';
 interface Photo {
   id: string;
   url: string;
@@ -19,44 +20,29 @@ interface Props {
 }
 
 const { photos, content, lang } = Astro.props;
-
-// Get unique categories
-const categories = ['all', ...new Set(photos.map(p => p.category))];
 ---
+
 
 {photos.length > 0 ? (
   <div class="photo-grid-container">
-    <!-- Category Filter -->
-    <div class="flex justify-center mb-8">
-      <div class="inline-flex flex-wrap gap-2 bg-bg-secondary rounded-lg p-2">
-        {categories.map((category) => (
-          <button
-            class={`filter-button ${category === 'all' ? 'active' : ''} px-4 py-2 rounded-lg font-medium text-sm transition-all`}
-            data-category={category}
-          >
-            {content.categories[category]}
-          </button>
-        ))}
-      </div>
-    </div>
-
     <!-- Photos Grid -->
     <div class="photo-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
       {photos.map((photo, index) => (
         <article
           class="photo-card group cursor-pointer animate-fade-in-up"
           style={`animation-delay: ${index * 50}ms`}
-          data-category={photo.category}
           data-photo-id={photo.id}
           data-photo-url={photo.url}
           data-photo-alt={photo.alt}
           data-photo-caption={photo.caption}
         >
           <div class="relative aspect-[4/3] overflow-hidden rounded-lg bg-bg-secondary">
-            <!-- Photo -->
-            <img
+            <!-- Photo - Usando Image component -->
+            <Image
               src={photo.url}
               alt={photo.alt}
+              width={800}
+              height={600}
               loading="lazy"
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
@@ -106,20 +92,6 @@ const categories = ['all', ...new Set(photos.map(p => p.category))];
 )}
 
 <style>
-  .filter-button {
-    color: var(--text-secondary);
-  }
-
-  .filter-button.active {
-    background: var(--color-primary);
-    color: var(--color-btn-primary-text, white);
-  }
-
-  .filter-button:hover:not(.active) {
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-  }
-
   .photo-card {
     transition: transform 0.3s ease;
   }
@@ -130,31 +102,9 @@ const categories = ['all', ...new Set(photos.map(p => p.category))];
 </style>
 
 <script>
-  // Category filtering
-  const filterButtons = document.querySelectorAll('.filter-button');
+  // Lightbox functionality
   const photoCards = document.querySelectorAll('.photo-card');
 
-  filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const category = button.getAttribute('data-category');
-
-      // Update active button
-      filterButtons.forEach(btn => btn.classList.remove('active'));
-      button.classList.add('active');
-
-      // Filter photos
-      photoCards.forEach(card => {
-        const cardCategory = card.getAttribute('data-category');
-        if (category === 'all' || cardCategory === category) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
-
-  // Lightbox functionality
   photoCards.forEach((card, index) => {
     card.addEventListener('click', () => {
       openLightbox(index);
@@ -162,6 +112,7 @@ const categories = ['all', ...new Set(photos.map(p => p.category))];
   });
 
   function openLightbox(index: number) {
+    const photoCards = document.querySelectorAll('.photo-card');
     const photos = Array.from(photoCards).map(card => ({
       url: card.getAttribute('data-photo-url'),
       alt: card.getAttribute('data-photo-alt'),
@@ -245,6 +196,7 @@ const categories = ['all', ...new Set(photos.map(p => p.category))];
     }
 
     function closeLightbox() {
+      if (!lightbox) return;
       lightbox.classList.add('hidden');
       lightbox.innerHTML = '';
       document.removeEventListener('keydown', handleKeyboard);

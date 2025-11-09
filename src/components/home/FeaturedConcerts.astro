@@ -1,175 +1,115 @@
 ---
 /**
  * Featured Concerts Component
- * Shows upcoming 3 concerts
+ * Displays upcoming concerts from JSON data
  */
+
+import concertsData from '@/data/concerts.json';
+
 interface Props {
   lang: 'en' | 'es';
   content: {
     heading: string;
     subheading: string;
-    empty: string;
     cta: string;
-    labels: {
-      date: string;
-      venue: string;
-      location: string;
-      tickets: string;
-    };
+    empty: string;
   };
 }
 
 const { lang, content } = Astro.props;
 
-// Mock data - replace with actual data from src/data/concerts.json
-const upcomingConcerts = [
-  {
-    id: '1',
-    date: '2025-12-15',
-    time: '19:30',
-    venue: 'Teatro Colón',
-    city: 'Bogotá',
-    country: 'Colombia',
-    program: ['Beethoven - String Quartet No. 14', 'Shostakovich - String Quartet No. 8'],
-    ticketsUrl: 'https://example.com/tickets',
-  },
-  {
-    id: '2',
-    date: '2026-01-20',
-    time: '20:00',
-    venue: 'Sala de Conciertos Luis Ángel Arango',
-    city: 'Bogotá',
-    country: 'Colombia',
-    program: ['Haydn - String Quartet Op. 76 No. 3', 'Bartók - String Quartet No. 4'],
-    ticketsUrl: 'https://example.com/tickets',
-  },
-  {
-    id: '3',
-    date: '2026-02-10',
-    time: '19:00',
-    venue: 'Teatro Mayor Julio Mario Santo Domingo',
-    city: 'Bogotá',
-    country: 'Colombia',
-    program: ['Mozart - String Quartet No. 19', 'Dvořák - String Quartet No. 12'],
-    ticketsUrl: 'https://example.com/tickets',
-  },
-];
+// Get upcoming concerts directly from JSON
+const today = new Date().toISOString().split('T')[0];
+const upcomingConcerts = concertsData.concerts
+  .filter(concert => concert.date >= today && concert.status !== 'past')
+  .sort((a, b) => a.date.localeCompare(b.date))
+  .slice(0, 3); // Mostrar solo 3 conciertos
 
-// Format date
-import { formatDate } from '@/utils/i18n';
+// Format date for display
+const formatDate = (dateStr: string) => {
+  const date = new Date(dateStr);
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  const locale = lang === 'en' ? 'en-US' : 'es-ES';
+  return date.toLocaleDateString(locale, options);
+};
+
+// Transform concerts to simple format
+const displayConcerts = upcomingConcerts.map(concert => ({
+  date: formatDate(concert.date),
+  venue: concert.venue[lang],
+  city: concert.city,
+  country: concert.country[lang],
+  program: concert.program.map(
+    piece => `${piece.composer}: ${piece.work[lang]}`
+  ),
+}));
 ---
 
-<section class="section bg-bg-secondary">
+<section class="featured-concerts section-tight">
   <div class="container">
-    <!-- Section Header -->
+
+    <!-- Header con animaciones -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 animate-fade-in-up">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 animate-on-scroll">
         {content.heading}
       </h2>
-      <p class="text-xl text-text-secondary animate-fade-in-up stagger-1">
+      <p class="text-xl text-text-secondary animate-on-scroll delay-100">
         {content.subheading}
       </p>
     </div>
 
-    {upcomingConcerts.length > 0 ? (
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mb-12">
-        {upcomingConcerts.map((concert, index) => (
-          <article
-            class="concert-card bg-bg-primary rounded-lg overflow-hidden shadow-soft hover:shadow-lg transition-all duration-300 animate-fade-in-up"
-            style={`animation-delay: ${(index + 2) * 100}ms`}
-          >
-            <!-- Concert Image Placeholder -->
-            <div class="aspect-video bg-gradient-to-br from-accent-brown-light to-accent-gold-light"></div>
+    <!-- Concerts Grid con animaciones -->
+    {displayConcerts.length > 0 ? (
+      <>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          {displayConcerts.map((concert, index) => (
+            <div class={`concert-card card-glass p-6 rounded-xl animate-on-scroll delay-${(index + 2) * 100}`}>
+              <div class="text-sm font-semibold text-color-primary mb-2">
+                {concert.date}
+              </div>
 
-            <div class="p-6">
-              <!-- Date -->
-              <time
-                datetime={concert.date}
-                class="block text-sm font-semibold text-color-primary mb-2"
-              >
-                {formatDate(concert.date, lang, {
-                  weekday: 'long',
-                  year: 'numeric',
-                  month: 'long',
-                  day: 'numeric'
-                })}
-              </time>
+              <h3 class="text-xl font-bold mb-2">{concert.venue}</h3>
 
-              <!-- Venue -->
-              <h3 class="text-xl font-bold mb-2">
-                {concert.venue}
-              </h3>
-
-              <!-- Location -->
               <p class="text-text-secondary mb-4">
                 {concert.city}, {concert.country}
               </p>
 
-              <!-- Program -->
-              <div class="mb-6">
-                <p class="text-sm font-semibold text-text-secondary mb-2">
+              <div class="border-t border-divider pt-4">
+                <p class="text-sm font-semibold mb-2">
                   {lang === 'en' ? 'Program:' : 'Programa:'}
                 </p>
-                <ul class="text-sm space-y-1">
+                <ul class="space-y-1">
                   {concert.program.map((work) => (
-                    <li class="text-text-secondary">{work}</li>
+                    <li class="text-sm text-text-secondary">{work}</li>
                   ))}
                 </ul>
               </div>
-
-              <!-- Tickets Button -->
-              <a
-                href={concert.ticketsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="block w-full text-center px-6 py-3 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-colors"
-              >
-                {content.labels.tickets}
-              </a>
             </div>
-          </article>
-        ))}
-      </div>
+          ))}
+        </div>
+
+        <!-- CTA con animación -->
+        <div class="text-center animate-on-scroll delay-600">
+          <a
+            href={lang === 'en' ? '/en/concerts' : '/es/concerts'}
+            class="btn btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-xl"
+          >
+            {content.cta}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </a>
+        </div>
+      </>
     ) : (
-      <p class="text-center text-text-secondary text-lg mb-12">
-        {content.empty}
-      </p>
+      <div class="text-center py-16 animate-on-scroll">
+        <p class="text-xl text-text-secondary">{content.empty}</p>
+      </div>
     )}
 
-    <!-- View All CTA -->
-    <div class="text-center">
-      <a
-        href={lang === 'en' ? '/en/concerts' : '/es/concerts'}
-        class="inline-flex items-center gap-2 px-8 py-4 bg-transparent border-2 border-color-primary text-color-primary font-semibold rounded-lg hover:bg-color-primary hover:text-white transition-all"
-      >
-        {content.cta}
-        <svg
-          class="w-5 h-5"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 8l4 4m0 0l-4 4m4-4H3"
-          />
-        </svg>
-      </a>
-    </div>
   </div>
 </section>
-
-<style>
-  .stagger-1 { animation-delay: 100ms; }
-
-  .concert-card {
-    transform: translateY(0);
-  }
-
-  .concert-card:hover {
-    transform: translateY(-4px);
-  }
-</style>

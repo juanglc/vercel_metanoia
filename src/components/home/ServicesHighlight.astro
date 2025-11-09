@@ -21,25 +21,24 @@ interface Props {
 const { lang, content } = Astro.props;
 ---
 
-<section class="section bg-bg-primary">
+<section class="services-highlight section-normal bg-bg-primary">
   <div class="container">
-    <!-- Section Header -->
+
+    <!-- Section Header con animaciones -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 animate-fade-in-up">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-serif font-bold mb-4 animate-on-scroll">
         {content.heading}
       </h2>
-      <p class="text-xl text-text-secondary animate-fade-in-up stagger-1">
+      <p class="text-xl text-text-secondary animate-on-scroll delay-100">
         {content.subheading}
       </p>
     </div>
 
-    <!-- Services Grid -->
+    <!-- Services Grid con Glassmorphism + Animaciones -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-12">
       {content.items.map((service, index) => (
-        <div
-          class="service-card p-6 rounded-lg bg-bg-secondary hover:shadow-lg transition-all duration-300 animate-fade-in-up"
-          style={`animation-delay: ${(index + 2) * 100}ms`}
-        >
+        <div class={`service-card card-glass p-6 rounded-xl animate-on-scroll delay-${(index + 2) * 100}`}>
+
           <!-- Icon -->
           <div class="w-14 h-14 mb-4 rounded-lg bg-color-primary/10 flex items-center justify-center">
             <svg
@@ -91,11 +90,11 @@ const { lang, content } = Astro.props;
       ))}
     </div>
 
-    <!-- CTA Button -->
-    <div class="text-center">
+    <!-- CTA Button con animación -->
+    <div class="text-center animate-on-scroll delay-600">
       <a
         href={lang === 'en' ? '/en/services' : '/es/services'}
-        class="inline-flex items-center gap-2 px-8 py-4 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-all hover:scale-105"
+        class="btn btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-xl"
       >
         {content.cta}
         <svg
@@ -116,15 +115,3 @@ const { lang, content } = Astro.props;
     </div>
   </div>
 </section>
-
-<style>
-  .stagger-1 { animation-delay: 100ms; }
-
-  .service-card {
-    transform: translateY(0);
-  }
-
-  .service-card:hover {
-    transform: translateY(-4px);
-  }
-</style>

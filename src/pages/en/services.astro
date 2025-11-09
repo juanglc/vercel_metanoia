@@ -3,6 +3,7 @@
  * Services Page - English
  * Complete services offering with process, testimonials, and FAQ
  */
+export const prerender = true;
 import PageLayout from '@/layouts/PageLayout.astro';
 import ServiceCard from '@/components/services/ServiceCard.astro';
 import { getContent } from '@/utils/i18n';
@@ -169,7 +170,7 @@ const content = await getContent(lang, 'services');
 
     <a
       href="/en/contact"
-      class="inline-block px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105 animate-fade-in-up stagger-2"
+      class="btn btn-primary"
     >
       {content.cta.button}
     </a>

@@ -2,6 +2,7 @@
 /**
  * Footer Component - Site footer with navigation, social links, and copyright
  */
+import { Image } from 'astro:assets';
 export interface Props {
   lang: 'en' | 'es';
 }
@@ -63,18 +64,20 @@ const socialLinks = [
       <!-- Brand -->
       <div class="space-y-4">
         <a href={`/${lang}/`} class="inline-block">
-          <img
+          <Image
             src="/logos/logo-light.png"
             alt="Cuarteto Metanoia"
-            width="150"
-            height="50"
+            width={150}
+            height={50}
+            loading="lazy"
             class="h-10 w-auto dark:hidden"
           />
-          <img
+          <Image
             src="/logos/logo-dark.png"
             alt="Cuarteto Metanoia"
-            width="150"
-            height="50"
+            width={150}
+            height={50}
+            loading="lazy"
             class="h-10 w-auto hidden dark:block"
           />
         </a>
@@ -196,7 +199,7 @@ const socialLinks = [
 
   .footer-link:hover,
   .footer-link:focus {
-    color: var(--color-primary);
+    color: #8B4513; /* Forzar marrón siempre */
   }
 
   .social-link {
@@ -213,8 +216,15 @@ const socialLinks = [
 
   .social-link:hover,
   .social-link:focus {
-    background: var(--color-primary);
-    color: var(--color-btn-primary-text, white);
+    background: #8B4513; /* Forzar marrón siempre */
+    color: white; /* Texto blanco en hover */
     transform: translateY(-2px);
   }
+
+  .social-link:active {
+    background: #6D3410; /* Marrón más oscuro al presionar */
+    color: white;
+    transform: translateY(0);
+  }
 </style>
+

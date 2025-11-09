@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "title": "Cuarteto Metanoia | Chamber Music Excellence",
+    "description": "Professional string quartet based in Colombia. Memorable performances of classical and contemporary repertoire."
+  },
+  "hero": {
+    "title": "Cuarteto Metanoia",
+    "subtitle": "Excellence in Chamber Music",
+    "description": "A string quartet dedicated to delivering emotionally compelling and technically exquisite performances.",
+    "cta": {
+      "primary": "Explore Repertoire",
+      "secondary": "View Concerts"
+    }
+  },
+  "about": {
+    "heading": "About Us",
+    "subheading": "Passion for musical excellence",
+    "text": "Cuarteto Metanoia is dedicated to delivering performances of the highest quality, combining technical virtuosity with emotional depth.",
+    "highlights": [
+      {
+        "icon": "music",
+        "title": "Diverse Repertoire",
+        "description": "From classics by Haydn and Mozart to contemporary works by Latin American composers."
+      },
+      {
+        "icon": "award",
+        "title": "International Recognition",
+        "description": "Award winners at multiple chamber music competitions and festivals around the world."
+      },
+      {
+        "icon": "globe",
+        "title": "Global Presence",
+        "description": "Performances in the most prestigious concert halls across America, Europe, and Asia."
+      }
+    ],
+    "cta": "Learn More"
+  },
+  "concerts": {
+    "heading": "Upcoming Concerts",
+    "subheading": "Join us for our next performances",
+    "cta": "View All Concerts",
+    "empty": "No upcoming concerts scheduled at this time."
+  },
+  "services": {
+    "heading": "Our Services",
+    "subheading": "Professional music for your special event",
+    "items": [
+      {
+        "icon": "music",
+        "title": "Private Concerts",
+        "description": "Intimate performances for corporate and private events.",
+        "features": [
+          "Custom repertoire",
+          "Flexible duration",
+          "Musical consultation"
+        ]
+      },
+      {
+        "icon": "wedding",
+        "title": "Weddings & Ceremonies",
+        "description": "Elegant music for your special day.",
+        "features": [
+          "Ceremonial music",
+          "Cocktail & reception",
+          "Special requests"
+        ]
+      },
+      {
+        "icon": "education",
+        "title": "Masterclasses",
+        "description": "Master classes and educational workshops.",
+        "features": [
+          "Advanced technique",
+          "Interpretation",
+          "Chamber music"
+        ]
+      },
+      {
+        "icon": "recording",
+        "title": "Recording Services",
+        "description": "Professional studio recording services.",
+        "features": [
+          "High quality",
+          "Professional editing",
+          "Mixing & mastering"
+        ]
+      }
+    ],
+    "cta": "View Full Services"
+  },
+  "cta": {
+    "heading": "Ready to Work Together?",
+    "subheading": "Contact us today to discuss your next event or musical project.",
+    "buttons": {
+      "primary": "Contact Us",
+      "secondary": "View Concerts"
+    }
+  }
+}

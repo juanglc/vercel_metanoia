@@ -1,7 +1,6 @@
 ---
 /**
- * PageLayout - Layout para páginas de contenido
- * Incluye container, breadcrumbs, y estructura típica de página
+ * PageLayout - Layout para páginas internas con breadcrumb y hero
  */
 import BaseLayout from '@/layouts/BaseLayout.astro';
 
@@ -9,89 +8,64 @@ export interface Props {
   title: string;
   description: string;
   lang?: 'en' | 'es';
-  image?: string;
-  noIndex?: boolean;
-  breadcrumbs?: Array<{ label: string; href: string }>;
+  breadcrumbs?: Array<{
+    label: string;
+    href: string;
+  }>;
+  heading?: string;
+  subheading?: string;
   showTitle?: boolean;
 }
 
 const {
   title,
   description,
-  lang = 'en',
-  image,
-  noIndex = false,
+  lang,
   breadcrumbs,
-  showTitle = true,
+  heading,
+  subheading,
+  showTitle = true
 } = Astro.props;
 ---
 
-<BaseLayout
-  title={title}
-  description={description}
-  lang={lang}
-  image={image}
-  noIndex={noIndex}
->
-  <div class="page-layout">
-    <!-- Breadcrumbs (optional) -->
-    {breadcrumbs && breadcrumbs.length > 0 && (
-      <nav aria-label={lang === 'en' ? 'Breadcrumb' : 'Ruta de navegación'} class="breadcrumbs">
-        <div class="container py-4">
-          <ol class="flex items-center gap-2 text-sm text-text-secondary">
-            {breadcrumbs.map((crumb, index) => (
-              <li class="flex items-center gap-2">
-                {index > 0 && (
-                  <span aria-hidden="true" class="text-border-medium">/</span>
-                )}
-                {index === breadcrumbs.length - 1 ? (
-                  <span class="text-text-primary font-medium" aria-current="page">
-                    {crumb.label}
-                  </span>
-                ) : (
-                  <a
-                    href={crumb.href}
-                    class="hover:text-text-primary transition-colors"
-                  >
-                    {crumb.label}
-                  </a>
-                )}
-              </li>
-            ))}
-          </ol>
-        </div>
-      </nav>
-    )}
+<BaseLayout title={title} description={description} lang={lang}>
+  <!-- Breadcrumb con espaciado balanceado mobile/desktop -->
+  {breadcrumbs && breadcrumbs.length > 0 && (
+    <nav aria-label="Breadcrumb" class="container pt-4 md:pt-6 pb-3 md:pb-4">
+      <ol class="flex flex-wrap items-center gap-2 text-sm text-text-secondary">
+        {breadcrumbs.map((crumb, index) => (
+          <li class="flex items-center gap-2">
+            {index > 0 && <span>/</span>}
+            <a
+              href={crumb.href}
+              class="hover:text-color-primary transition-colors"
+            >
+              {crumb.label}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  )}
 
-    <!-- Page Header -->
-    {showTitle && (
-      <header class="page-header py-16 md:py-24">
-        <div class="container">
-          <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-center mb-6 animate-fade-in-up">
-            {title}
-          </h1>
-          <p class="text-lg md:text-xl text-text-secondary text-center max-w-3xl mx-auto animate-fade-in-up stagger-1">
-            {description}
+  <!-- Page Header -->
+  {showTitle && heading && (
+    <section class="py-8 md:py-12 bg-bg-secondary">
+      <div class="container text-center">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold mb-3 md:mb-4">
+          {heading}
+        </h1>
+        {subheading && (
+          <p class="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto">
+            {subheading}
           </p>
-        </div>
-      </header>
-    )}
-
-    <!-- Page Content -->
-    <div class="page-content pb-24">
-      <div class="container">
-        <slot />
+        )}
       </div>
-    </div>
+    </section>
+  )}
+
+  <!-- Content -->
+  <div class="container py-8 md:py-12 lg:py-16">
+    <slot />
   </div>
 </BaseLayout>
-
-<style>
-  .page-layout {
-    min-height: calc(100vh - 200px); /* Adjust based on header/footer height */
-  }
-
-  .breadcrumbs {
-    border-bottom: 1px solid var(--divider);
-  }
-</style>

@@ -3,6 +3,7 @@
  * Gallery Page - English
  * Photo and video gallery with tabs and filtering
  */
+export const prerender = true;
 import PageLayout from '@/layouts/PageLayout.astro';
 import PhotoGrid from '@/components/gallery/PhotoGrid.astro';
 import VideoGrid from '@/components/gallery/VideoGrid.astro';
@@ -52,7 +53,7 @@ const videos = galleryData.videos.map(video => ({
   </section>
 
   <!-- Tabs Navigation -->
-  <div class="flex justify-center mb-12">
+  <div class="flex justify-center mb-12 animate-on-scroll delay-100">
     <div class="inline-flex bg-bg-secondary rounded-lg p-1" role="tablist">
       <button
         role="tab"
@@ -106,8 +107,8 @@ const videos = galleryData.videos.map(video => ({
   }
 
   .tab-button.active {
-    background: var(--color-primary);
-    color: var(--color-btn-primary-text, white);
+    background: #8B4513; /* Forzar marrón siempre */
+    color: white;
   }
 
   .tab-button:hover:not(.active) {

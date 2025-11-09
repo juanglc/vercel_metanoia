@@ -3,6 +3,7 @@
  * Concerts Page - English
  * List of all concerts with filters and calendar functionality
  */
+export const prerender = true;
 import PageLayout from '@/layouts/PageLayout.astro';
 import ConcertCard from '@/components/concerts/ConcertCard.astro';
 import { getContent } from '@/utils/i18n';
@@ -43,19 +44,19 @@ pastConcerts.sort((a, b) => b.date.localeCompare(a.date));
   ]}
   showTitle={false}
 >
-  <!-- Hero Section -->
+  <!-- Hero Section con animaciones -->
   <section class="mb-16 text-center">
-    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 animate-fade-in-up">
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif font-bold mb-4 animate-on-scroll">
       {content.hero.title}
     </h1>
-    <p class="text-xl text-text-secondary animate-fade-in-up stagger-1">
+    <p class="text-xl text-text-secondary animate-on-scroll delay-100">
       {content.hero.subtitle}
     </p>
   </section>
 
-  <!-- Filters -->
-  <div class="flex justify-center mb-12">
-    <div class="inline-flex bg-bg-secondary rounded-lg p-1" role="tablist">
+  <!-- Filters con glassmorphism -->
+  <div class="flex justify-center mb-12 animate-on-scroll delay-200">
+    <div class="inline-flex card-glass rounded-lg p-1" role="tablist">
       <button
         role="tab"
         aria-selected="true"
@@ -109,16 +110,18 @@ pastConcerts.sort((a, b) => b.date.localeCompare(a.date));
     {upcomingConcerts.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {upcomingConcerts.map((concert, index) => (
-          <ConcertCard
-            concert={concert}
-            content={content}
-            lang={lang}
-            index={index}
-          />
+          <div class={`animate-on-scroll delay-${(index + 3) * 100}`}>
+            <ConcertCard
+              concert={concert}
+              content={content}
+              lang={lang}
+              index={index}
+            />
+          </div>
         ))}
       </div>
     ) : (
-      <div class="text-center py-20">
+      <div class="text-center py-20 animate-on-scroll delay-300">
         <p class="text-xl text-text-secondary mb-8">
           {content.empty.upcoming}
         </p>
@@ -136,16 +139,18 @@ pastConcerts.sort((a, b) => b.date.localeCompare(a.date));
     {pastConcerts.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {pastConcerts.map((concert, index) => (
-          <ConcertCard
-            concert={concert}
-            content={content}
-            lang={lang}
-            index={index}
-          />
+          <div class={`animate-on-scroll delay-${(index + 3) * 100}`}>
+            <ConcertCard
+              concert={concert}
+              content={content}
+              lang={lang}
+              index={index}
+            />
+          </div>
         ))}
       </div>
     ) : (
-      <div class="text-center py-20">
+      <div class="text-center py-20 animate-on-scroll delay-300">
         <p class="text-xl text-text-secondary">
           {content.empty.past}
         </p>
@@ -163,16 +168,18 @@ pastConcerts.sort((a, b) => b.date.localeCompare(a.date));
     {concerts.length > 0 ? (
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         {[...upcomingConcerts, ...pastConcerts].map((concert, index) => (
-          <ConcertCard
-            concert={concert}
-            content={content}
-            lang={lang}
-            index={index}
-          />
+          <div class={`animate-on-scroll delay-${(index + 3) * 100}`}>
+            <ConcertCard
+              concert={concert}
+              content={content}
+              lang={lang}
+              index={index}
+            />
+          </div>
         ))}
       </div>
     ) : (
-      <div class="text-center py-20">
+      <div class="text-center py-20 animate-on-scroll delay-300">
         <p class="text-xl text-text-secondary">
           {content.empty.all}
         </p>
@@ -180,35 +187,35 @@ pastConcerts.sort((a, b) => b.date.localeCompare(a.date));
     )}
   </div>
 
-  <!-- CTA Section -->
-  <section class="mt-20 text-center bg-gradient-to-br from-color-primary to-color-secondary text-white -mx-4 md:-mx-8 lg:-mx-12 px-4 md:px-8 lg:px-12 py-16 rounded-lg">
-    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4 animate-fade-in-up">
+  <!-- CTA Section con animaciones -->
+  <section class="mt-20 text-center card-glass -mx-4 md:-mx-8 lg:-mx-12 px-4 md:px-8 lg:px-12 py-16 rounded-lg animate-on-scroll delay-600">
+    <h2 class="text-3xl md:text-4xl font-serif font-bold mb-4">
       {content.cta.heading}
     </h2>
-    <p class="text-lg mb-8 opacity-90 max-w-2xl mx-auto animate-fade-in-up stagger-1">
+    <p class="text-lg mb-8 text-text-secondary max-w-2xl mx-auto">
       {content.cta.text}
     </p>
 
     <a
       href="/en/contact"
-      class="inline-block px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105 animate-fade-in-up stagger-2"
+      class="btn btn-primary inline-flex items-center gap-2 px-8 py-4 rounded-lg text-lg font-medium transition-all hover:shadow-xl"
     >
       {content.cta.button}
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+      </svg>
     </a>
   </section>
 </PageLayout>
 
 <style>
-  .stagger-1 { animation-delay: 100ms; }
-  .stagger-2 { animation-delay: 200ms; }
-
   .filter-button {
     color: var(--text-secondary);
   }
 
   .filter-button.active {
     background: var(--color-primary);
-    color: var(--color-btn-primary-text, white);
+    color: var(--color-btn-primary-text);
   }
 
   .filter-button:hover:not(.active) {

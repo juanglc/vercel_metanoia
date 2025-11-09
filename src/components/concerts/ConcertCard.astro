@@ -146,25 +146,11 @@ const isUpcoming = concert.status === 'available';
           href={concert.ticketsUrl}
           target="_blank"
           rel="noopener noreferrer"
-          class="flex-1 px-6 py-3 bg-color-primary text-white font-semibold rounded-lg hover:bg-color-primary-hover transition-colors text-center"
+          class="btn btn-primary text-center"
         >
           {content.labels.tickets}
         </a>
-      )}
 
-      {isUpcoming && !isPast && (
-        <button
-          class="add-to-calendar-btn flex-1 px-6 py-3 bg-transparent border-2 border-color-primary text-color-primary font-semibold rounded-lg hover:bg-color-primary hover:text-white transition-all text-center"
-          data-concert-id={concert.id}
-          data-concert-title={`${concert.venue} - ${concert.city}`}
-          data-concert-description={concert.description}
-          data-concert-location={`${concert.venue}, ${concert.address}, ${concert.city}, ${concert.country}`}
-          data-concert-date={concert.date}
-          data-concert-time={concert.time}
-          data-concert-duration={concert.duration}
-        >
-          {content.labels.addToCalendar}
-        </button>
       )}
     </div>
   </div>

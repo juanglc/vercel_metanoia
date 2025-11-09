@@ -7,10 +7,11 @@ import LanguageSwitch from '@/components/common/LanguageSwitch.astro';
 
 export interface Props {
   lang: 'en' | 'es';
-  currentPath: string;
+  currentPath?: string;
 }
 
-const { lang, currentPath } = Astro.props;
+const { lang, currentPath: providedPath } = Astro.props;
+const currentPath = providedPath || Astro.url.pathname;
 
 // Navigation items
 const navItems = {
@@ -34,8 +35,8 @@ const navItems = {
 
 const items = navItems[lang];
 
-// Check if link is active
 const isActive = (href: string) => {
+  if (!currentPath) return false;
   if (href === `/${lang}/` || href === `/${lang}`) {
     return currentPath === `/${lang}/` || currentPath === `/${lang}`;
   }
@@ -43,12 +44,11 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="header sticky top-0 z-50 bg-bg-primary/95 backdrop-blur-sm border-b border-divider">
+<header class="header sticky top-0 z-50 bg-bg-primary/95 backdrop-blur-md border-b border-divider shadow-sm">
   <div class="container">
     <nav class="flex items-center justify-between py-4" aria-label={lang === 'en' ? 'Main navigation' : 'Navegación principal'}>
       <!-- Logo -->
       <a href={`/${lang}/`} class="logo flex items-center gap-3 group" aria-label={lang === 'en' ? 'Home' : 'Inicio'}>
-        <!-- Logo adaptivo: cambia en dark/light mode -->
         <img
           src="/logos/logo-light.png"
           alt="Cuarteto Metanoia"
@@ -82,7 +82,7 @@ const isActive = (href: string) => {
         ))}
       </ul>
 
-      <!-- Actions: Theme Toggle + Language Switch + Mobile Menu -->
+      <!-- Actions -->
       <div class="flex items-center gap-4">
         <ThemeToggle lang={lang} />
         <LanguageSwitch lang={lang} currentPath={currentPath} />
@@ -121,13 +121,14 @@ const isActive = (href: string) => {
       </div>
     </nav>
 
-    <!-- Mobile Navigation -->
+    <!-- Mobile Navigation con transición -->
     <div
       id="mobile-menu"
-      class="lg:hidden hidden pb-4"
+      class="mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
+      style="max-height: 0; opacity: 0;"
       aria-label={lang === 'en' ? 'Mobile navigation' : 'Navegación móvil'}
     >
-      <ul class="flex flex-col gap-2">
+      <ul class="flex flex-col gap-2 pb-4">
         {items.map((item) => (
           <li>
             <a
@@ -145,6 +146,7 @@ const isActive = (href: string) => {
 </header>
 
 <style>
+  /* Desktop Navigation Links */
   .nav-link {
     position: relative;
     font-size: var(--font-size-base);
@@ -167,7 +169,7 @@ const isActive = (href: string) => {
 
   .nav-link:hover,
   .nav-link:focus {
-    color: var(--text-primary);
+    color: var(--color-primary);
   }
 
   .nav-link:hover::after,
@@ -184,6 +186,7 @@ const isActive = (href: string) => {
     width: 100%;
   }
 
+  /* Mobile Navigation Links */
   .mobile-nav-link {
     display: block;
     padding: var(--space-3) var(--space-4);
@@ -195,19 +198,28 @@ const isActive = (href: string) => {
 
   .mobile-nav-link:hover,
   .mobile-nav-link:focus {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: rgba(var(--color-primary-rgb), 0.1);
+    color: var(--color-primary);
   }
 
   .mobile-nav-link.active {
-    background: var(--color-secondary);
+    background: rgba(var(--color-primary-rgb), 0.15);
     color: var(--color-primary);
     font-weight: 600;
+  }
+
+  /* Transición del menú mobile */
+  .mobile-menu {
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  .mobile-menu.open {
+    max-height: 500px !important;
+    opacity: 1 !important;
   }
 </style>
 
 <script>
-  // Mobile menu toggle
   const menuButton = document.getElementById('mobile-menu-button');
   const mobileMenu = document.getElementById('mobile-menu');
   const menuIcon = menuButton?.querySelector('.menu-icon');
@@ -215,28 +227,45 @@ const isActive = (href: string) => {
 
   menuButton?.addEventListener('click', () => {
     const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+    const newState = !isExpanded;
 
-    menuButton.setAttribute('aria-expanded', String(!isExpanded));
-    mobileMenu?.classList.toggle('hidden');
+    menuButton.setAttribute('aria-expanded', String(newState));
+
+    if (newState) {
+      // Abrir menú
+      mobileMenu?.classList.add('open');
+      mobileMenu?.style.setProperty('max-height', '500px');
+      mobileMenu?.style.setProperty('opacity', '1');
+    } else {
+      // Cerrar menú
+      mobileMenu?.classList.remove('open');
+      mobileMenu?.style.setProperty('max-height', '0');
+      mobileMenu?.style.setProperty('opacity', '0');
+    }
+
     menuIcon?.classList.toggle('hidden');
     closeIcon?.classList.toggle('hidden');
   });
 
-  // Close mobile menu when clicking outside
+  // Cerrar al hacer click fuera
   document.addEventListener('click', (e) => {
     const target = e.target as HTMLElement;
     if (!target.closest('header')) {
-      mobileMenu?.classList.add('hidden');
+      mobileMenu?.classList.remove('open');
+      mobileMenu?.style.setProperty('max-height', '0');
+      mobileMenu?.style.setProperty('opacity', '0');
       menuButton?.setAttribute('aria-expanded', 'false');
       menuIcon?.classList.remove('hidden');
       closeIcon?.classList.add('hidden');
     }
   });
 
-  // Close mobile menu on escape key
+  // Cerrar con tecla Escape
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      mobileMenu?.classList.add('hidden');
+      mobileMenu?.classList.remove('open');
+      mobileMenu?.style.setProperty('max-height', '0');
+      mobileMenu?.style.setProperty('opacity', '0');
       menuButton?.setAttribute('aria-expanded', 'false');
       menuIcon?.classList.remove('hidden');
       closeIcon?.classList.add('hidden');

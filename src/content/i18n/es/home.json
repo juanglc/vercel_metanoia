@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "title": "Cuarteto Metanoia | Música de Cámara de Excelencia",
+    "description": "Cuarteto de cuerdas profesional con sede en Colombia."
+  },
+  "hero": {
+    "title": "Cuarteto Metanoia",
+    "subtitle": "Excelencia en Música de Cámara",
+    "description": "Un cuarteto de cuerdas dedicado a ofrecer interpretaciones emotivas.",
+    "cta": {
+      "primary": "Explorar Repertorio",
+      "secondary": "Ver Conciertos"
+    }
+  },
+  "about": {
+    "heading": "Sobre Nosotros",
+    "subheading": "Pasión por la excelencia musical",
+    "text": "El Cuarteto Metanoia se dedica a ofrecer interpretaciones de la más alta calidad.",
+    "highlights": [
+      {
+        "icon": "music",
+        "title": "Repertorio Diverso",
+        "description": "Desde clásicos hasta obras contemporáneas."
+      },
+      {
+        "icon": "award",
+        "title": "Reconocimiento Internacional",
+        "description": "Premiados en múltiples competencias."
+      },
+      {
+        "icon": "globe",
+        "title": "Presencia Global",
+        "description": "Presentaciones en las salas más prestigiosas."
+      }
+    ],
+    "cta": "Conocer Más"
+  },
+  "concerts": {
+    "heading": "Próximos Conciertos",
+    "subheading": "Únete a nosotros en nuestras próximas presentaciones",
+    "cta": "Ver Todos los Conciertos",
+    "empty": "No hay conciertos programados en este momento."
+  },
+  "services": {
+    "heading": "Nuestros Servicios",
+    "subheading": "Música profesional para tu evento especial",
+    "items": [
+      {
+        "icon": "music",
+        "title": "Conciertos Privados",
+        "description": "Presentaciones para eventos corporativos.",
+        "features": [
+          "Repertorio personalizado",
+          "Duración flexible",
+          "Asesoría musical"
+        ]
+      },
+      {
+        "icon": "wedding",
+        "title": "Bodas y Ceremonias",
+        "description": "Música elegante para tu día especial.",
+        "features": [
+          "Música ceremonial",
+          "Cóctel y recepción",
+          "Solicitudes especiales"
+        ]
+      },
+      {
+        "icon": "education",
+        "title": "Masterclasses",
+        "description": "Clases magistrales y talleres.",
+        "features": [
+          "Técnica avanzada",
+          "Interpretación",
+          "Música de cámara"
+        ]
+      },
+      {
+        "icon": "recording",
+        "title": "Grabaciones",
+        "description": "Servicios profesionales de grabación.",
+        "features": [
+          "Alta calidad",
+          "Edición profesional",
+          "Mezcla y masterización"
+        ]
+      }
+    ],
+    "cta": "Ver Servicios Completos"
+  },
+  "cta": {
+    "heading": "¿Listo para Trabajar Juntos?",
+    "subheading": "Contáctanos hoy para discutir tu próximo evento.",
+    "buttons": {
+      "primary": "Contactar",
+      "secondary": "Ver Conciertos"
+    }
+  }
+}

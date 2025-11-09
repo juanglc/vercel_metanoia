@@ -47,3 +47,6 @@ coverage/
 # Scripts output
 scripts/output/
 optimized-images/
+
+# Local Netlify folder
+.netlify

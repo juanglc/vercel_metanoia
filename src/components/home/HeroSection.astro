@@ -1,7 +1,7 @@
 ---
 /**
  * Hero Section Component
- * Full viewport hero with dynamic background image from R2
+ * Full viewport hero with optimized background loading
  */
 import { getRandomR2Image, getRandomFallbackImage } from '@/utils/r2';
 
@@ -20,65 +20,51 @@ interface Props {
 
 const { lang, content } = Astro.props;
 
-// Fetch random image from R2 'tutti/' directory
-const heroImage = await getRandomR2Image('tutti/');
-const backgroundImageUrl = heroImage?.url || getRandomFallbackImage();
+// Fetch random image from R2 'tutti/' directory (pero NO bloquear render)
+let heroImage: { url: string } | null = null;
+try {
+  heroImage = await getRandomR2Image('tutti/');
+} catch (error) {
+  console.error('Failed to load R2 image:', error);
+}
 
-// Preload the image for better LCP
-const preloadLink = heroImage ? heroImage.url : null;
+const backgroundImageUrl = heroImage?.url || null;
 ---
 
-{preloadLink && (
-  <link rel="preload" as="image" href={preloadLink} />
-)}
-
 <section class="hero relative min-h-screen flex items-center justify-center overflow-hidden">
-  <!-- Background Image with overlay -->
+  <!-- Background con placeholder instantáneo -->
   <div class="absolute inset-0 z-0">
+    <!-- Overlay -->
     <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/70 z-10"></div>
 
-    {heroImage ? (
+    <!-- Placeholder gradient (carga instantánea) -->
+    <div class="hero-placeholder absolute inset-0 bg-gradient-to-br from-[#8B4513] via-[#6D3410] to-[#5E3A10]"></div>
+
+    <!-- Imagen real (lazy load progresivo) -->
+    {backgroundImageUrl && (
       <img
         src={backgroundImageUrl}
         alt="Cuarteto Metanoia"
-        class="w-full h-full object-cover"
-        loading="eager"
-        fetchpriority="high"
+        class="hero-image absolute inset-0 w-full h-full object-cover opacity-0"
+        loading="lazy"
+        decoding="async"
       />
-    ) : (
-      <!-- Fallback gradient if no R2 image available -->
-      <div class="w-full h-full bg-gradient-to-br from-accent-brown-light to-accent-gold-light dark:from-bg-secondary dark:to-bg-tertiary"></div>
     )}
   </div>
 
   <!-- Content -->
   <div class="container relative z-20 text-center text-white py-20">
-    <h1 class="hero-title font-serif font-bold mb-6 animate-fade-in">
+    <h1 class="hero-title font-serif font-bold mb-6 animate-fade-in drop-shadow-lg !text-white">
       {content.title}
     </h1>
 
-    <p class="hero-subtitle text-2xl md:text-3xl font-light mb-6 animate-fade-in-up stagger-1">
+    <p class="hero-subtitle text-2xl md:text-3xl font-light mb-6 animate-fade-in-up stagger-1 drop-shadow-md !text-white">
       {content.subtitle}
     </p>
 
-    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 opacity-90 animate-fade-in-up stagger-2">
+    <p class="text-lg md:text-xl max-w-3xl mx-auto mb-10 opacity-90 animate-fade-in-up stagger-2 drop-shadow-md !text-white">
       {content.description}
     </p>
-
-    <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up stagger-3">
-      <a
-        href={lang === 'en' ? '/en/gallery' : '/es/gallery'}
-        class="btn-primary px-8 py-4 bg-white text-color-primary font-semibold rounded-lg hover:bg-opacity-90 transition-all hover:scale-105 inline-block"
-      >
-        {content.cta.primary}
-      </a>
-      <a
-        href={lang === 'en' ? '/en/concerts' : '/es/concerts'}
-        class="btn-secondary px-8 py-4 bg-transparent border-2 border-white font-semibold rounded-lg hover:bg-white hover:text-color-primary transition-all inline-block"
-      >
-        {content.cta.secondary}
-      </a>
-    </div>
 
     <!-- Scroll indicator -->
     <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
@@ -113,10 +99,32 @@ const preloadLink = heroImage ? heroImage.url : null;
     text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
   }
 
+  /* Placeholder gradient (carga instantánea) */
+  .hero-placeholder {
+    animation: pulse-gradient 8s ease-in-out infinite;
+  }
+
+  @keyframes pulse-gradient {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.9;
+    }
+  }
+
+  /* Fade-in progresivo de la imagen real */
+  .hero-image {
+    transition: opacity 1s ease-in-out;
+  }
+
+  .hero-image.loaded {
+    opacity: 1 !important;
+  }
+
   /* Stagger delays */
   .stagger-1 { animation-delay: 200ms; }
   .stagger-2 { animation-delay: 400ms; }
-  .stagger-3 { animation-delay: 600ms; }
 
   /* Button hover effects */
   .btn-primary,
@@ -128,15 +136,28 @@ const preloadLink = heroImage ? heroImage.url : null;
   .btn-secondary:hover {
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
   }
+</style>
 
-  /* Parallax effect on scroll (optional enhancement) */
-  @media (prefers-reduced-motion: no-preference) {
-    .hero {
-      perspective: 1px;
-    }
+<script>
+  // Progressive image loading
+  const heroImage = document.querySelector('.hero-image') as HTMLImageElement;
 
-    .hero > div:first-child {
-      transform: translateZ(-1px) scale(2);
+  if (heroImage) {
+    // Si la imagen ya está en caché, mostrar inmediatamente
+    if (heroImage.complete) {
+      heroImage.classList.add('loaded');
+    } else {
+      // Esperar a que cargue y hacer fade-in
+      heroImage.addEventListener('load', () => {
+        heroImage.classList.add('loaded');
+      });
+
+      // Timeout de seguridad: si tarda más de 3s, mostrar el placeholder
+      setTimeout(() => {
+        if (!heroImage.classList.contains('loaded')) {
+          console.warn('Hero image taking too long, using placeholder');
+        }
+      }, 3000);
     }
   }
-</style>
+</script>

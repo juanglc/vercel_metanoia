@@ -28,44 +28,77 @@ export const LOCALE_PATHS: Record<string, { en: string; es: string }> = {
   contact: { en: '/contact', es: '/contact' },
 };
 
+// ============================================
+// ✅ VERSIÓN CORREGIDA - Import.meta.glob
+// ============================================
+
+/**
+ * Load all JSON files at build time (eager)
+ */
+const contentModules = import.meta.glob<Record<string, any>>(
+  '/src/content/i18n/**/*.json',
+  { eager: true, import: 'default' }
+);
+
 /**
  * Get content from JSON files
  * @param locale - Current locale (en/es)
  * @param section - Section name (landing, about, concerts, etc.)
  * @returns Content object for the specified section
  */
-export async function getContent<T = any>(
+export function getContent<T = any>(
   locale: Locale,
   section: string
-): Promise<T> {
-  try {
-    // Dynamic import with explicit path construction
-    const contentModule = await import(
-      /* @vite-ignore */
-      `../content/i18n/${locale}/${section}.json`
-    );
-    return contentModule.default || contentModule;
-  } catch (error) {
-    console.error(`Failed to load content: ${locale}/${section}.json`, error);
+): T {
+  const key = `/src/content/i18n/${locale}/${section}.json`;
 
-    // Fallback to default locale if current locale fails
+  // Try to get content for requested locale
+  let content = contentModules[key];
+
+  if (!content) {
+    console.error(`Content not found: ${key}`);
+
+    // Fallback to default locale
     if (locale !== DEFAULT_LOCALE) {
-      try {
-        const fallbackModule = await import(
-          /* @vite-ignore */
-          `../content/i18n/${DEFAULT_LOCALE}/${section}.json`
-        );
-        return fallbackModule.default || fallbackModule;
-      } catch (fallbackError) {
-        console.error(`Fallback content also failed`, fallbackError);
+      const fallbackKey = `/src/content/i18n/${DEFAULT_LOCALE}/${section}.json`;
+      content = contentModules[fallbackKey];
+
+      if (content) {
+        console.warn(`Using fallback content: ${fallbackKey}`);
+      } else {
+        console.error(`Fallback content also not found: ${fallbackKey}`);
       }
     }
-
-    // Return empty object instead of throwing to avoid build failures
-    console.warn(`Returning empty object for ${locale}/${section}.json`);
-    return {} as T;
   }
+
+  // Return content or empty object
+  return (content || {}) as T;
 }
+
+/**
+ * Check if content exists for a locale/section
+ */
+export function hasContent(locale: Locale, section: string): boolean {
+  const key = `/src/content/i18n/${locale}/${section}.json`;
+  return key in contentModules;
+}
+
+/**
+ * Get all available sections for a locale
+ */
+export function getAvailableSections(locale: Locale): string[] {
+  const prefix = `/src/content/i18n/${locale}/`;
+  return Object.keys(contentModules)
+    .filter(key => key.startsWith(prefix))
+    .map(key => {
+      const filename = key.replace(prefix, '').replace('.json', '');
+      return filename;
+    });
+}
+
+// ============================================
+// El resto de las funciones permanecen igual
+// ============================================
 
 /**
  * Get browser language preference

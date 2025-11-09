@@ -3,6 +3,7 @@
  * Contact Page - Spanish
  * Contact form and information
  */
+export const prerender = true;
 import PageLayout from '@/layouts/PageLayout.astro';
 import ContactForm from '@/components/contact/ContactForm.astro';
 import ContactInfo from '@/components/contact/ContactInfo.astro';
@@ -42,7 +43,7 @@ const content = await getContent(lang, 'contact');
   <!-- Two Column Layout: Form + Info -->
   <section class="grid grid-cols-1 lg:grid-cols-3 gap-12 mb-20">
     <!-- Contact Form (2/3 width) -->
-    <div class="lg:col-span-2">
+    <div class="lg:col-span-2 animate-on-scroll delay-300"> <!-- ✅ Agregado -->
       <div class="bg-bg-secondary rounded-lg p-8 shadow-soft">
         <h2 class="text-2xl font-serif font-bold mb-6">
           {content.form.heading}
@@ -52,17 +53,19 @@ const content = await getContent(lang, 'contact');
     </div>
 
     <!-- Contact Info (1/3 width) -->
-    <div class="lg:col-span-1">
-      <ContactInfo content={content.info} />
+    <div class="lg:col-span-1 animate-on-scroll delay-400">
+      <div class="sticky-sidebar"> <!-- ✅ Wrapper sticky -->
+        <ContactInfo content={content.info} />
 
-      <!-- Response Time Card -->
-      <div class="mt-6 bg-bg-secondary rounded-lg p-6 shadow-soft">
-        <h3 class="text-lg font-bold mb-3">
-          {content.responseTime.heading}
-        </h3>
-        <p class="text-sm text-text-secondary leading-relaxed">
-          {content.responseTime.text}
-        </p>
+        <!-- Response Time Card -->
+        <div class="mt-6 bg-bg-secondary rounded-lg p-6 shadow-soft">
+          <h3 class="text-lg font-bold mb-3">
+            {content.responseTime.heading}
+          </h3>
+          <p class="text-sm text-text-secondary leading-relaxed">
+            {content.responseTime.text}
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -71,4 +74,17 @@ const content = await getContent(lang, 'contact');
 <style>
   .stagger-1 { animation-delay: 100ms; }
   .stagger-2 { animation-delay: 200ms; }
+
+  /* ✅ Sticky wrapper con offset correcto */
+  .sticky-sidebar {
+    position: relative; /* Default en móvil */
+  }
+
+  @media (min-width: 1024px) {
+    .sticky-sidebar {
+      position: sticky;
+      top: 7rem; /* ✅ 112px = altura del header (~80px) + padding (32px) */
+      /* Ajusta según la altura real de tu header */
+    }
+  }
 </style>

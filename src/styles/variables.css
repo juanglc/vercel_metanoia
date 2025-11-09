@@ -1,50 +1,88 @@
 /**
  * CSS Variables para Dark/Light Mode
  * Sistema de diseño de Cuarteto Metanoia
+ * Organized, deduplicated, OKLCH colors
  */
 
 /* ============================================
    LIGHT MODE (Default)
    ============================================ */
+
 :root {
-  /* Background Colors */
+  /* ===== COLOR SYSTEM - OKLCH ===== */
+
+  /* Marrón (base) - Paleta completa */
+  --color-brown-50: oklch(96% 0.01 60);
+  --color-brown-100: oklch(92% 0.02 60);
+  --color-brown-200: oklch(85% 0.04 60);
+  --color-brown-300: oklch(75% 0.06 60);
+  --color-brown-400: oklch(65% 0.08 60);
+  --color-brown-500: oklch(50% 0.10 60);  /* #8b4513 */
+  --color-brown-600: oklch(40% 0.10 60);
+  --color-brown-700: oklch(30% 0.09 60);
+  --color-brown-800: oklch(20% 0.07 60);
+  --color-brown-900: oklch(15% 0.05 60);
+
+  /* Dorado (acento) - Paleta completa */
+  --color-gold-50: oklch(96% 0.02 85);
+  --color-gold-100: oklch(92% 0.04 85);
+  --color-gold-200: oklch(85% 0.08 85);
+  --color-gold-300: oklch(78% 0.12 85);
+  --color-gold-400: oklch(70% 0.14 85);
+  --color-gold-500: oklch(65% 0.15 85);  /* #d4af37 */
+  --color-gold-600: oklch(55% 0.13 85);
+  --color-gold-700: oklch(45% 0.11 85);
+  --color-gold-800: oklch(35% 0.09 85);
+  --color-gold-900: oklch(25% 0.07 85);
+
+  /* ===== BRAND COLORS (mapped from OKLCH) ===== */
+
+  /* Primary (Brown) */
+  --color-primary: var(--color-brown-500);
+  --color-primary-rgb: 139, 69, 19;
+  --color-primary-hover: var(--color-brown-600);
+  --color-primary-active: var(--color-brown-700);
+
+  /* Secondary (Gold) */
+  --color-secondary: var(--color-gold-500);
+  --color-secondary-hover: var(--color-gold-600);
+  --color-secondary-active: var(--color-gold-700);
+
+  /* Accent Colors */
+  --accent-brown-light: var(--color-brown-200);
+  --accent-cream: #fff8dc;
+  --accent-gold-light: var(--color-gold-200);
+
+  /* ===== BACKGROUND COLORS ===== */
+
   --bg-primary: #ffffff;
   --bg-secondary: #f9f7f4;
   --bg-tertiary: #f5f1eb;
   --bg-accent: #fff8dc;
 
-  /* Text Colors */
+  /* ===== TEXT COLORS ===== */
+
   --text-primary: #1a1a1a;
   --text-secondary: #4a4a4a;
   --text-tertiary: #6b6b6b;
   --text-muted: #999999;
 
-  /* Brand Colors */
-  --color-primary: #8b4513;      /* Marrón cálido */
-  --color-primary-hover: #70370f;
-  --color-primary-active: #5c2d0c;
-  --color-secondary: #d4af37;     /* Dorado */
-  --color-secondary-hover: #b8960f;
-  --color-secondary-active: #967a0b;
+  /* ===== BORDER & DIVIDERS ===== */
 
-  /* Accent Colors */
-  --accent-brown-light: #d4c4b0;
-  --accent-cream: #fff8dc;
-  --accent-gold-light: #f9e79f;
-
-  /* Border & Dividers */
   --border-light: rgba(139, 69, 19, 0.1);
   --border-medium: rgba(139, 69, 19, 0.2);
   --border-strong: rgba(139, 69, 19, 0.3);
   --divider: rgba(139, 69, 19, 0.15);
 
-  /* Status Colors */
+  /* ===== STATUS COLORS ===== */
+
   --color-success: #22c55e;
   --color-error: #ef4444;
   --color-warning: #f59e0b;
   --color-info: #3b82f6;
 
-  /* Shadows */
+  /* ===== SHADOWS ===== */
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -52,12 +90,21 @@
   --shadow-soft: 0 2px 15px -3px rgba(139, 69, 19, 0.07), 0 10px 20px -2px rgba(139, 69, 19, 0.04);
   --shadow-glow: 0 0 15px rgba(212, 175, 55, 0.3);
 
-  /* Overlay */
+  /* ===== OVERLAY ===== */
+
   --overlay-light: rgba(0, 0, 0, 0.3);
   --overlay-medium: rgba(0, 0, 0, 0.5);
   --overlay-strong: rgba(0, 0, 0, 0.7);
 
-  /* Z-Index Scale */
+  /* ===== TRANSITIONS ===== */
+
+  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-base: 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-theme: 600ms ease-in-out;
+
+  /* ===== Z-INDEX SCALE ===== */
+
   --z-base: 1;
   --z-dropdown: 1000;
   --z-sticky: 1020;
@@ -67,95 +114,8 @@
   --z-popover: 1060;
   --z-tooltip: 1070;
 
-  /* Transitions */
-  --transition-fast: 150ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-base: 250ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
-  --transition-theme: 300ms ease-in-out;
-}
+  /* ===== SPACING SCALE (Base - Fixed) ===== */
 
-/* ============================================
-   DARK MODE
-   ============================================ */
-[data-theme='dark'] {
-  /* Background Colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #2d2d2d;
-  --bg-tertiary: #3a3a3a;
-  --bg-accent: #4a3c06;
-
-  /* Text Colors */
-  --text-primary: #f5f5f5;
-  --text-secondary: #cccccc;
-  --text-tertiary: #b3b3b3;
-  --text-muted: #808080;
-
-  /* Brand Colors (invertidos) */
-  --color-primary: #d4af37;      /* Dorado */
-  --color-primary-hover: #f4d03f;
-  --color-primary-active: #fcf0c3;
-  --color-secondary: #8b4513;     /* Marrón */
-  --color-secondary-hover: #b8a28a;
-  --color-secondary-active: #d4c4b0;
-
-  /* Accent Colors */
-  --accent-brown-light: #5c2d0c;
-  --accent-cream: #4a3c06;
-  --accent-gold-light: #6b5709;
-
-  /* Border & Dividers */
-  --border-light: rgba(212, 175, 55, 0.1);
-  --border-medium: rgba(212, 175, 55, 0.2);
-  --border-strong: rgba(212, 175, 55, 0.3);
-  --divider: rgba(212, 175, 55, 0.15);
-
-  /* Status Colors (ajustados para dark) */
-  --color-success: #10b981;
-  --color-error: #f87171;
-  --color-warning: #fbbf24;
-  --color-info: #60a5fa;
-
-  /* Shadows (más sutiles en dark) */
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
-  --shadow-soft: 0 2px 15px -3px rgba(212, 175, 55, 0.1), 0 10px 20px -2px rgba(212, 175, 55, 0.05);
-  --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.4);
-
-  /* Overlay */
-  --overlay-light: rgba(0, 0, 0, 0.5);
-  --overlay-medium: rgba(0, 0, 0, 0.7);
-  --overlay-strong: rgba(0, 0, 0, 0.85);
-}
-
-/* ============================================
-   RESPONSIVE BREAKPOINTS
-   ============================================ */
-:root {
-  --breakpoint-sm: 640px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-}
-
-/* ============================================
-   CONTAINER WIDTHS
-   ============================================ */
-:root {
-  --container-sm: 640px;
-  --container-md: 768px;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-  --container-2xl: 1536px;
-  --container-padding: 1.5rem;
-}
-
-/* ============================================
-   SPACING SCALE
-   ============================================ */
-:root {
   --space-0: 0;
   --space-1: 0.25rem;   /* 4px */
   --space-2: 0.5rem;    /* 8px */
@@ -170,12 +130,21 @@
   --space-20: 5rem;     /* 80px */
   --space-24: 6rem;     /* 96px */
   --space-32: 8rem;     /* 128px */
-}
 
-/* ============================================
-   BORDER RADIUS SCALE
-   ============================================ */
-:root {
+  /* ===== SPACING PROGRESIVO (Fluid & Responsive) ===== */
+
+  /* Espaciado de secciones con ritmo visual */
+  --section-spacing-tight: clamp(3rem, 8vw, 5rem);    /* 48-80px */
+  --section-spacing-normal: clamp(5rem, 10vw, 8rem);  /* 80-128px */
+  --section-spacing-loose: clamp(8rem, 15vw, 12rem);  /* 128-192px */
+
+  /* Espaciado interno de componentes */
+  --component-spacing-sm: clamp(2rem, 4vw, 3rem);     /* 32-48px */
+  --component-spacing-md: clamp(3rem, 6vw, 5rem);     /* 48-80px */
+  --component-spacing-lg: clamp(4rem, 8vw, 6rem);     /* 64-96px */
+
+  /* ===== BORDER RADIUS SCALE ===== */
+
   --radius-none: 0;
   --radius-sm: 0.375rem;   /* 6px */
   --radius-base: 0.5rem;   /* 8px */
@@ -185,25 +154,100 @@
   --radius-2xl: 1.5rem;    /* 24px */
   --radius-3xl: 2rem;      /* 32px */
   --radius-full: 9999px;
+
+  /* ===== RESPONSIVE BREAKPOINTS ===== */
+
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* ===== CONTAINER WIDTHS ===== */
+
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1280px;
+  --container-2xl: 1536px;
+  --container-padding: 1.5rem;
+}
+
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+[data-theme='dark'] {
+  /* ===== BACKGROUND COLORS ===== */
+
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --bg-tertiary: #3a3a3a;
+  --bg-accent: #4a3c06;
+
+  /* ===== TEXT COLORS ===== */
+
+  --text-primary: #f5f5f5;
+  --text-secondary: #cccccc;
+  --text-tertiary: #b3b3b3;
+  --text-muted: #808080;
+
+  /* ===== BRAND COLORS (inverted) ===== */
+
+  /* Primary (Gold in dark mode) */
+  --color-primary: var(--color-gold-500);
+  --color-primary-hover: var(--color-gold-400);
+  --color-primary-active: var(--color-gold-300);
+
+  /* Secondary (Brown in dark mode) */
+  --color-secondary: var(--color-brown-500);
+  --color-secondary-hover: var(--color-brown-400);
+  --color-secondary-active: var(--color-brown-300);
+
+  /* Accent Colors */
+  --accent-brown-light: var(--color-brown-800);
+  --accent-cream: #4a3c06;
+  --accent-gold-light: var(--color-gold-800);
+
+  /* ===== BORDER & DIVIDERS ===== */
+
+  --border-light: rgba(212, 175, 55, 0.1);
+  --border-medium: rgba(212, 175, 55, 0.2);
+  --border-strong: rgba(212, 175, 55, 0.3);
+  --divider: rgba(212, 175, 55, 0.15);
+
+  /* ===== STATUS COLORS (adjusted for dark) ===== */
+
+  --color-success: #10b981;
+  --color-error: #f87171;
+  --color-warning: #fbbf24;
+  --color-info: #60a5fa;
+
+  /* ===== SHADOWS (more subtle in dark) ===== */
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.4);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6), 0 10px 10px -5px rgba(0, 0, 0, 0.5);
+  --shadow-soft: 0 2px 15px -3px rgba(212, 175, 55, 0.1), 0 10px 20px -2px rgba(212, 175, 55, 0.05);
+  --shadow-glow: 0 0 20px rgba(212, 175, 55, 0.4);
+
+  /* ===== OVERLAY ===== */
+
+  --overlay-light: rgba(0, 0, 0, 0.5);
+  --overlay-medium: rgba(0, 0, 0, 0.7);
+  --overlay-strong: rgba(0, 0, 0, 0.85);
 }
 
 /* ============================================
    PREFERS REDUCED MOTION
    ============================================ */
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --transition-fast: 0ms;
     --transition-base: 0ms;
     --transition-slow: 0ms;
     --transition-theme: 0ms;
-  }
-
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

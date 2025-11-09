@@ -1,12 +1,12 @@
 import { defineConfig } from 'astro/config';
+import cloudflare from '@astrojs/cloudflare';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
-// https://astro.build/config
 export default defineConfig({
-    site: 'https://cuartetometanoia.com',
-    output: 'hybrid',
-
+  site: 'https://cuartetometanoia.com',
+  output: 'server',
+  adapter: cloudflare(),
     integrations: [
         tailwind({
             config: {
