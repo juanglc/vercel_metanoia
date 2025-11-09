@@ -3,7 +3,8 @@
  * Hero Section Component
  * Full viewport hero with optimized background loading
  */
-import { getRandomR2Image, getRandomFallbackImage } from '@/utils/r2';
+import { Image } from 'astro:assets';
+import { getRandomR2Image } from '@/utils/r2';
 
 interface Props {
   lang: 'en' | 'es';
@@ -20,7 +21,7 @@ interface Props {
 
 const { lang, content } = Astro.props;
 
-// Fetch random image from R2 'tutti/' directory (pero NO bloquear render)
+// Fetch random image from R2 'tutti/' directory
 let heroImage: { url: string } | null = null;
 try {
   heroImage = await getRandomR2Image('tutti/');
@@ -40,13 +41,14 @@ const backgroundImageUrl = heroImage?.url || null;
     <!-- Placeholder gradient (carga instantánea) -->
     <div class="hero-placeholder absolute inset-0 bg-gradient-to-br from-[#8B4513] via-[#6D3410] to-[#5E3A10]"></div>
 
-    <!-- Imagen real (lazy load progresivo) -->
+    <!-- Imagen real (EAGER load para LCP) -->
     {backgroundImageUrl && (
       <img
         src={backgroundImageUrl}
         alt="Cuarteto Metanoia"
         class="hero-image absolute inset-0 w-full h-full object-cover opacity-0"
-        loading="lazy"
+        loading="eager"
+        fetchpriority="high"
         decoding="async"
       />
     )}

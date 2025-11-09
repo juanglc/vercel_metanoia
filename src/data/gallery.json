@@ -15,76 +15,202 @@
       }
     },
     {
-      "id": "concert-teatro-colon-1",
-      "key": "concerts/teatro-colon-2024.jpg",
-      "category": "concerts",
-      "date": "2024-10-15",
+      "id": "joaquin-vertical",
+      "key": "personal/Joaquin Vertical.jpg",
+      "category": "press",
+      "date": "2024-11-01",
       "alt": {
-        "en": "Performing at Teatro Colón, Bogotá",
-        "es": "Presentación en el Teatro Colón, Bogotá"
+        "en": "Joaquín López - First Violin",
+        "es": "Joaquín López - Primer Violín"
       },
       "caption": {
-        "en": "Live performance - Teatro Colón, October 2024",
-        "es": "Presentación en vivo - Teatro Colón, octubre 2024"
+        "en": "Joaquín López, First Violin",
+        "es": "Joaquín López, Primer Violín"
       }
     },
     {
-      "id": "rehearsal-1",
-      "key": "rehearsals/ensayo-2024.jpg",
-      "category": "rehearsals",
-      "date": "2024-09-20",
+      "id": "david-vertical",
+      "key": "personal/David Vertical.jpg",
+      "category": "press",
+      "date": "2024-11-01",
       "alt": {
-        "en": "Quartet rehearsal session",
-        "es": "Sesión de ensayo del cuarteto"
+        "en": "David Salazar - Second Violin",
+        "es": "David Salazar - Segundo Violín"
       },
       "caption": {
-        "en": "Preparing new repertoire - September 2024",
-        "es": "Preparando nuevo repertorio - septiembre 2024"
+        "en": "David Salazar, Second Violin",
+        "es": "David Salazar, Segundo Violín"
+      }
+    },
+    {
+      "id": "luis-vertical",
+      "key": "personal/Luis Vertical.jpg",
+      "category": "press",
+      "date": "2024-11-01",
+      "alt": {
+        "en": "Luis Rojas - Viola",
+        "es": "Luis Rojas - Viola"
+      },
+      "caption": {
+        "en": "Luis Rojas, Viola",
+        "es": "Luis Rojas, Viola"
+      }
+    },
+    {
+      "id": "luis-horizontal",
+      "key": "personal/Luis Horizontal.jpg",
+      "category": "press",
+      "date": "2024-11-01",
+      "alt": {
+        "en": "Luis Rojas - Viola",
+        "es": "Luis Rojas - Viola"
+      },
+      "caption": {
+        "en": "Luis Rojas, Viola",
+        "es": "Luis Rojas, Viola"
+      }
+    },
+    {
+      "id": "carlos-vertical",
+      "key": "personal/Carlos Vertical.jpg",
+      "category": "press",
+      "date": "2024-11-01",
+      "alt": {
+        "en": "Carlos Escalona - Cello",
+        "es": "Carlos Escalona - Violonchelo"
+      },
+      "caption": {
+        "en": "Carlos Escalona, Cello",
+        "es": "Carlos Escalona, Violonchelo"
+      }
+    },
+    {
+      "id": "carlos-horizontal",
+      "key": "personal/Carlos Horizontal.jpg",
+      "category": "press",
+      "date": "2024-11-01",
+      "alt": {
+        "en": "Carlos Escalona - Cello",
+        "es": "Carlos Escalona - Violonchelo"
+      },
+      "caption": {
+        "en": "Carlos Escalona, Cello",
+        "es": "Carlos Escalona, Violonchelo"
       }
     }
   ],
   "videos": [
     {
-      "id": "beethoven-op18-no1",
-      "youtubeId": "dQw4w9WgXcQ",
+      "id": "alborada-esperanza",
+      "youtubeId": "IvLz5w7vPz0",
       "title": {
-        "en": "Beethoven - String Quartet Op. 18 No. 1",
-        "es": "Beethoven - Cuarteto de Cuerdas Op. 18 No. 1"
+        "en": "Alborada de la Esperanza - José Elizondo",
+        "es": "Alborada de la Esperanza - José Elizondo"
       },
       "description": {
-        "en": "Live performance at Teatro Colón, Bogotá. October 15, 2024.",
-        "es": "Presentación en vivo en el Teatro Colón, Bogotá. 15 de octubre, 2024."
+        "en": "Performance of **'Alborada de la Esperanza'** by **José Elizondo**.",
+        "es": "Interpretación de **'Alborada de la Esperanza'** de **José Elizondo**."
       },
-      "date": "2024-10-15",
-      "duration": "28:45"
+      "date": "2024-12-02",
+      "duration": "04:25"
     },
     {
-      "id": "shostakovich-quartet-8",
-      "youtubeId": "abc123xyz789",
+      "id": "sanctus-concone",
+      "youtubeId": "7gDTV5kqyuo",
       "title": {
-        "en": "Shostakovich - String Quartet No. 8",
-        "es": "Shostakovich - Cuarteto de Cuerdas No. 8"
+        "en": "Sanctus - Concone",
+        "es": "Sanctus - Concone"
       },
       "description": {
-        "en": "Recorded at Sala de Conciertos Luis Ángel Arango. September 2024.",
-        "es": "Grabado en la Sala de Conciertos Luis Ángel Arango. Septiembre 2024."
+        "en": "Performance of *'Sanctus'* by **Concone**. *Soprano: Mónica Rodríguez.*",
+        "es": "Interpretación de *'Sanctus'* de **Concone**. *Soprano: Mónica Rodríguez.*"
       },
-      "date": "2024-09-08",
-      "duration": "21:30"
+      "date": "2024-12-01",
+      "duration": "01:50"
     },
     {
-      "id": "mozart-quartet-19",
-      "youtubeId": "def456uvw012",
+      "id": "mendelssohn-string-quartet-op13",
+      "youtubeId": "6TcSBTvVtF4",
       "title": {
-        "en": "Mozart - String Quartet No. 19 'Dissonance'",
-        "es": "Mozart - Cuarteto de Cuerdas No. 19 'Disonancias'"
+        "en": "String Quartet No. 2 in A minor, Op.13 – I. Allegro vivace (Felix Mendelssohn)",
+        "es": "Cuarteto de Cuerdas No. 2 en La menor, Op.13 – I. Allegro vivace (Felix Mendelssohn)"
       },
       "description": {
-        "en": "Performance at Festival Internacional de Música de Cartagena. July 2024.",
-        "es": "Presentación en el Festival Internacional de Música de Cartagena. Julio 2024."
+        "en": "Live audition recording for the **Chamber Music Diploma – Cartagena Music Festival 2025**. Video recorded during the **International String Quartet Festival FestiQartetos 2024**, at the *Luis Ángel Arango Concert Hall (Bogotá, Colombia).*",
+        "es": "Grabación en vivo para el **Diplomado en Música de Cámara – Festival de Música de Cartagena 2025**. Video registrado en el **Festival Internacional de Cuartetos de Cuerda FestiQartetos 2024**, en la *Sala de Conciertos Luis Ángel Arango (Bogotá, Colombia).*"
       },
-      "date": "2024-07-22",
-      "duration": "30:12"
+      "date": "2024-10-18",
+      "duration": "07:44"
+    },
+    {
+      "id": "otono-buenos-aires",
+      "youtubeId": "hnQXqTNvZVY",
+      "title": {
+        "en": "Otoño en Buenos Aires - José Elizondo",
+        "es": "Otoño en Buenos Aires - José Elizondo"
+      },
+      "description": {
+        "en": "Performance on *September 26, 2024* during the **International String Quartet Festival FestiQ-artetos**. We thank **Cuarteto Q-Arte** for creating this space and our partners for supporting the spread of our work.",
+        "es": "Interpretación realizada el *26 de septiembre de 2024* durante el **Festival Internacional de Cuartetos de Cuerdas FestiQ-artetos**. Agradecemos al **Cuarteto Q-Arte** por crear este espacio y a nuestros aliados por apoyar la difusión de nuestro trabajo."
+      },
+      "date": "2024-09-29",
+      "duration": "05:02"
+    },
+    {
+      "id": "cuarteto-metanoia-festiqartetos-2024-otono",
+      "youtubeId": "V-t6O_R9Q_4",
+      "title": {
+        "en": "FestiQartetos 2024 Audition - Cuarteto Metanoia | Otoño en Buenos Aires - José Elizondo",
+        "es": "Audición FestiCuartetos 2024 - Ensamble Metanoia | Otoño en Buenos Aires - José Elizondo"
+      },
+      "description": {
+        "en": "In this video, we present our audition for **FestiQartetos 2024**. We performed *'Otoño en Buenos Aires'* by **José Elizondo**, showcasing our interpretation and musicality.",
+        "es": "En este video presentamos nuestra audición para **FestiQartetos 2024**. Interpretamos *'Otoño en Buenos Aires'* de **José Elizondo**, mostrando nuestra interpretación y musicalidad."
+      },
+      "date": "2024-08-15",
+      "duration": "04:56"
+    },
+    {
+      "id": "memorias-concierto-parte-2",
+      "youtubeId": "0CM8QUXs5J0",
+      "title": {
+        "en": "Concert Memories – Part 2 – Music by Adolfo Mejía – String Quartet",
+        "es": "Memorias de concierto - Parte 2 - Música de Adolfo Mejía - Cuarteto de cuerdas"
+      },
+      "description": {
+        "es": "Segunda parte de nuestra serie de memorias del concierto realizado el *24 de febrero*. Presentamos arreglos para cuarteto de cuerdas de tres piezas del compositor **Adolfo Mejía**: *'Cándida'*, *'Bambuco en Mi'* y *'Trini'*, arreglo de **Fernando León R.** Ensamble Metanoia impulsa la difusión de la música latinoamericana.",
+        "en": "Second part of our concert memories recorded on *February 24*. We present string quartet arrangements of three pieces by **Adolfo Mejía**: *'Cándida'*, *'Bambuco in E'*, and *'Trini'*, arranged by **Fernando León R.**"
+      },
+      "date": "2024-03-13",
+      "duration": "04:36"
+    },
+    {
+      "id": "trini-danza",
+      "youtubeId": "P2XEz2jbEM4",
+      "title": {
+        "en": "Cuarteto Metanoia - Trini (Danza) - Adolfo Mejía | Arr. Fernando León",
+        "es": "Cuarteto Metanoia - Trini (Danza) - Adolfo Mejía | Arr. Fernando León"
+      },
+      "description": {
+        "en": "**Arr. Fernando León.** Performed by *Ensamble Metanoia.*",
+        "es": "**Arr. Fernando León.** Interpretado por *Ensamble Metanoia.*"
+      },
+      "date": "2024-01-30",
+      "duration": "02:59"
+    },
+    {
+      "id": "candita",
+      "youtubeId": "Q5WHJk2SyJY",
+      "title": {
+        "en": "Cuarteto Metanoia - Candita (Pasillo) - Adolfo Mejía | Arr. Fernando León",
+        "es": "Cuarteto Metanoia - Candita (Pasillo) - Adolfo Mejía | Arr. Fernando León"
+      },
+      "description": {
+        "en": "**Arr. Fernando León.** Performed by *Ensamble Metanoia.*",
+        "es": "**Arr. Fernando León.** Interpretado por *Ensamble Metanoia.*"
+      },
+      "date": "2024-01-30",
+      "duration": "03:58"
     }
   ]
 }

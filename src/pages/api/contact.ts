@@ -114,7 +114,7 @@ function generateEmailHTML(data: ContactFormData): string {
                   <!-- Header with Gradient -->
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
-                      <td style="background: linear-gradient(135deg, var(--color-primary) 0%, #6D3410 100%); padding: 48px 40px; text-align: center;">
+                      <td style="background: linear-gradient(135deg, #8c541f 0%, #6D3410 100%); padding: 48px 40px; text-align: center;">
                         
                         <img src="https://pub-0be16fcc10ef45d98540e0495dcdb86e.r2.dev/logos/Metanoia-10-BLANCO.png" alt="Cuarteto Metanoia" style="display: block; margin: 0 auto 20px; max-width: 220px; height: auto;" />
 
@@ -127,7 +127,7 @@ function generateEmailHTML(data: ContactFormData): string {
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="padding: 32px 0 0 0; text-align: center;">
-                        <span style="display: inline-block; background: #ffffff; color: var(--color-primary); padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15); border: 1px solid rgba(139, 69, 19, 0.1); font-family: 'Playfair Display', Georgia, serif;">
+                        <span style="display: inline-block; background: #ffffff; color: #8c541f; padding: 8px 20px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; box-shadow: 0 4px 12px rgba(139, 69, 19, 0.15); border: 1px solid rgba(139, 69, 19, 0.1); font-family: 'Playfair Display', Georgia, serif;">
                           ${subjectLabels[data.subject] || data.subject}
                         </span>
                       </td>
@@ -161,7 +161,7 @@ function generateEmailHTML(data: ContactFormData): string {
                           <tr>
                             <td style="padding: 0 0 20px 0;">
                               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Email</p>
-                              <p style="margin: 0;"><a href="mailto:${data.email}" style="font-size: 16px; font-weight: 500; color: var(--color-primary); text-decoration: none; font-family: 'Inter', sans-serif;">${data.email}</a></p>
+                              <p style="margin: 0;"><a href="mailto:${data.email}" style="font-size: 16px; font-weight: 500; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.email}</a></p>
                             </td>
                           </tr>
 
@@ -177,7 +177,7 @@ function generateEmailHTML(data: ContactFormData): string {
                           <tr>
                             <td style="padding: 0 0 20px 0;">
                               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Teléfono</p>
-                              <p style="margin: 0;"><a href="tel:${data.phone}" style="font-size: 16px; font-weight: 500; color: var(--color-primary); text-decoration: none; font-family: 'Inter', sans-serif;">${data.phone}</a></p>
+                              <p style="margin: 0;"><a href="tel:${data.phone}" style="font-size: 16px; font-weight: 500; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.phone}</a></p>
                             </td>
                           </tr>
                           ` : ''}
@@ -225,7 +225,7 @@ function generateEmailHTML(data: ContactFormData): string {
                     <tr>
                       <td style="background: #fafafa; padding: 28px 40px; text-align: center; border-top: 1px solid #e8e8e8;">
                         <p style="margin: 0 0 4px 0; font-size: 12px; color: #666; font-family: 'Inter', sans-serif;">
-                          <strong style="color: var(--color-primary); font-weight: 600;">cuartetometanoia.com</strong>
+                          <strong style="color: #8c541f; font-weight: 600;">cuartetometanoia.com</strong>
                         </p>
                         <p style="margin: 0; font-size: 11px; color: #999; font-family: 'Inter', sans-serif;">
                           Recibido el ${new Date().toLocaleString('es-ES', { 

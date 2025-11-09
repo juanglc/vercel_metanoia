@@ -43,9 +43,11 @@ const { photos, content, lang } = Astro.props;
               alt={photo.alt}
               width={800}
               height={600}
-              loading="lazy"
+              priority={index < 6}
+              loading={index >= 6 ? "lazy" : undefined}
               class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
+
 
             <!-- Overlay on hover -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

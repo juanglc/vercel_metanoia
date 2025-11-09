@@ -1,8 +1,10 @@
 ---
 /**
  * Video Grid Component
- * Grid of YouTube video embeds with lazy loading
+ * Grid of YouTube video embeds with lazy loading and Instagram-style modal
  */
+import { marked } from 'marked';
+
 interface Video {
   id: string;
   youtubeId: string;
@@ -19,79 +21,147 @@ interface Props {
 }
 
 const { videos, content, lang } = Astro.props;
+
+// Configurar marked para que sea más seguro y sin párrafos adicionales
+marked.setOptions({
+  breaks: true,
+  gfm: true,
+});
+
+// Función para parsear markdown inline (sin <p> tags)
+function parseMarkdownInline(text: string): string {
+  const html = marked.parseInline(text);
+  return html;
+}
 ---
 
 {videos.length > 0 ? (
-  <div class="video-grid grid grid-cols-1 md:grid-cols-2 gap-8">
-    {videos.map((video, index) => (
-      <article
-        class="video-card bg-bg-secondary rounded-lg overflow-hidden shadow-soft hover:shadow-lg transition-all duration-300 animate-fade-in-up"
-        style={`animation-delay: ${index * 100}ms`}
-      >
-        <!-- Video Embed Container -->
-        <div class="video-container relative aspect-video bg-black">
-          <div
-            class="youtube-player"
-            data-id={video.youtubeId}
-            data-title={video.title}
+  <>
+    <div class="video-grid grid grid-cols-1 md:grid-cols-2 gap-8">
+  {videos.map((video, index) => (
+    <article
+      class="video-card bg-bg-secondary rounded-lg overflow-hidden shadow-soft hover:shadow-lg transition-all duration-300 animate-fade-in-up cursor-pointer"
+      style={`animation-delay: ${index * 100}ms`}
+      data-video-id={video.id}
+      data-youtube-id={video.youtubeId}
+      data-video-title={video.title}
+      data-video-description={video.description}
+      data-video-date={video.date}
+      data-video-duration={video.duration}
+    >
+      <!-- Video Embed Container -->
+      <div class="video-container relative aspect-video bg-black">
+        <div
+          class="youtube-player"
+          data-id={video.youtubeId}
+          data-title={video.title}
+          data-description={video.description}
+          data-date={video.date}
+          data-duration={video.duration}
+        >
+          <!-- Thumbnail with play button -->
+          <img
+            src={`https://i.ytimg.com/vi/${video.youtubeId}/maxresdefault.jpg`}
+            alt={video.title}
+            class="youtube-thumbnail absolute inset-0 w-full h-full object-cover cursor-pointer transition-opacity duration-300 hover:opacity-80"
+            loading="lazy"
+            onerror="this.onerror=null; this.src='https://i.ytimg.com/vi/' + this.closest('.youtube-player').dataset.id + '/hqdefault.jpg';"
+          />
+
+          <!-- Play button overlay -->
+          <button
+            class="play-button absolute inset-0 flex items-center justify-center group"
+            aria-label={`${content.watch}: ${video.title}`}
           >
-            <!-- Thumbnail with play button -->
-            <img
-              src={`https://i.ytimg.com/vi/${video.youtubeId}/maxresdefault.jpg`}
-              alt={video.title}
-              class="absolute inset-0 w-full h-full object-cover cursor-pointer transition-opacity duration-300 hover:opacity-80"
-              loading="lazy"
-            />
-
-            <!-- Play button overlay -->
-            <button
-              class="play-button absolute inset-0 flex items-center justify-center group"
-              aria-label={`${content.watch}: ${video.title}`}
-            >
-              <div class="bg-red-600 rounded-full p-4 group-hover:bg-red-700 transition-all group-hover:scale-110">
-                <svg
-                  class="w-12 h-12 text-white"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  aria-hidden="true"
-                >
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </div>
-            </button>
-          </div>
+            <div class="bg-red-600 rounded-full p-4 group-hover:bg-red-700 transition-all group-hover:scale-110">
+              <svg
+                class="w-12 h-12 text-white"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M8 5v14l11-7z"/>
+              </svg>
+            </div>
+          </button>
         </div>
+      </div>
 
-        <!-- Video Info -->
-        <div class="p-6">
-          <h3 class="text-xl font-bold mb-2">
-            {video.title}
-          </h3>
+      <!-- Video Info -->
+      <div class="p-6">
+        <h3 class="text-xl font-bold mb-2">
+          {video.title}
+        </h3>
 
-          <p class="text-text-secondary text-sm mb-4">
-            {video.description}
-          </p>
+        <p class="text-text-secondary text-sm mb-4 line-clamp-2" set:html={parseMarkdownInline(video.description)} />
 
-          <div class="flex items-center justify-between text-sm text-text-secondary">
-            <span>
-              {new Date(video.date).toLocaleDateString(
-                lang === 'en' ? 'en-US' : 'es-CO',
-                { year: 'numeric', month: 'long', day: 'numeric' }
-              )}
-            </span>
-            {video.duration && (
-              <span class="flex items-center gap-1">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
-                {video.duration}
-              </span>
+        <div class="flex items-center justify-between text-sm text-text-secondary">
+          <span>
+            {new Date(video.date).toLocaleDateString(
+              lang === 'en' ? 'en-US' : 'es-CO',
+              { year: 'numeric', month: 'long', day: 'numeric' }
             )}
+          </span>
+          {video.duration && (
+            <span class="flex items-center gap-1">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              {video.duration}
+            </span>
+          )}
+        </div>
+      </div>
+    </article>
+  ))}
+</div>
+
+
+    <!-- Modal estilo Instagram -->
+    <div id="video-modal" class="video-modal" aria-hidden="true">
+      <div class="modal-backdrop" aria-label="Close modal"></div>
+
+      <div class="modal-container">
+        <!-- Modal content -->
+        <div class="modal-content">
+          <!-- Video column -->
+          <div class="modal-video-column">
+            <div class="modal-video-container" id="modal-video-player">
+              <!-- El iframe se insertará aquí -->
+            </div>
+          </div>
+
+          <!-- Info column -->
+          <div class="modal-info-column">
+            <!-- Close button DENTRO de la columna de info -->
+            <button class="modal-close" aria-label="Close">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+
+            <div class="modal-header">
+              <h2 id="modal-title" class="text-2xl font-bold"></h2>
+            </div>
+
+            <div class="modal-body">
+              <p id="modal-description" class="text-text-secondary mb-6"></p>
+
+              <div class="flex items-center justify-between text-sm text-text-secondary pt-4 border-t border-border">
+                <span id="modal-date"></span>
+                <span id="modal-duration" class="flex items-center gap-1">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                  <span id="modal-duration-text"></span>
+                </span>
+              </div>
+            </div>
           </div>
         </div>
-      </article>
-    ))}
-  </div>
+      </div>
+    </div>
+  </>
 ) : (
   <div class="text-center py-20">
     <p class="text-xl text-text-secondary">
@@ -112,6 +182,10 @@ const { videos, content, lang } = Astro.props;
     height: 100%;
   }
 
+  .youtube-thumbnail {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  }
+
   .play-button {
     background: transparent;
     border: none;
@@ -119,74 +193,452 @@ const { videos, content, lang } = Astro.props;
     transition: all 0.3s ease;
   }
 
-  /* Hide thumbnail after iframe loads */
-  .youtube-player.playing img,
-  .youtube-player.playing .play-button {
-    display: none;
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
+
+  /* Estilos para elementos markdown en descripción */
+  .video-card p :global(strong) {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .video-card p :global(em) {
+    font-style: italic;
+  }
+
+  .video-card p :global(a) {
+    color: var(--color-primary);
+    text-decoration: underline;
+  }
+
+  /* Modal styles - Instagram-like */
+  .video-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .video-modal.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+
+  .modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+  }
+
+  .modal-container {
+    position: relative;
+    width: 95vw;
+    max-width: 1600px;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: modalZoomIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform-origin: center;
+  }
+
+  @keyframes modalZoomIn {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  .modal-content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-primary);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Video column */
+  .modal-video-column {
+    flex: 1;
+    background: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    min-width: 0;
+  }
+
+  .modal-video-container {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 16 / 9;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+  }
+
+  .modal-video-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* Fallback para navegadores sin aspect-ratio */
+  @supports not (aspect-ratio: 16 / 9) {
+    .modal-video-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%;
+    }
+
+    .modal-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  /* Info column */
+  .modal-info-column {
+    width: 420px;
+    min-width: 420px;
+    max-width: 420px;
+    background: var(--bg-secondary);
+    display: flex;
+    flex-direction: column;
+    border-left: 1px solid var(--border-medium);
+    height: 100%;
+    flex-shrink: 0;
+    position: relative; /* Para posicionar el botón close */
+  }
+
+  /* ⭐ NUEVO: Botón close en la columna de info (Opción 1) */
+  .modal-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 8px;
+    transition: all 0.2s ease;
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    pointer-events: auto;
+    touch-action: manipulation;
+  }
+
+  .modal-close:hover {
+    background: var(--bg-tertiary);
+    transform: rotate(90deg);
+  }
+
+  .modal-close:active {
+    background: var(--color-secondary);
+    transform: rotate(90deg) scale(0.95);
+  }
+
+  .modal-header {
+    padding: 24px;
+    padding-top: 64px; /* Espacio para el botón close */
+    border-bottom: 1px solid var(--border-medium);
+    flex-shrink: 0;
+  }
+
+  .modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal-body p :global(strong) {
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .modal-content {
+      flex-direction: column;
+    }
+
+    .modal-video-column {
+      height: 60%;
+      width: 100%;
+      flex: none;
+    }
+
+    .modal-info-column {
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      height: 40%;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .modal-container {
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .modal-content {
+      border-radius: 0;
+    }
+
+    .modal-close {
+      top: 16px;
+      right: 16px;
+      background: rgba(var(--text-primary), 0.1);
+      backdrop-filter: blur(4px);
+      width: 44px;
+      height: 44px;
+    }
+
+    .modal-close svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .modal-header {
+      padding-top: 70px; /* Más espacio en móvil */
+    }
+
+    .modal-video-column {
+      height: 50%;
+    }
+
+    .modal-info-column {
+      height: 50%;
+    }
+  }
+  .video-card {
+  cursor: pointer;
+  user-select: none;
+}
+
+.video-card:active {
+  transform: scale(0.98);
+}
+
 </style>
 
-<script>
-  // YouTube iframe API lazy loading
-  class YouTubePlayer {
-    constructor(element: HTMLElement) {
-      this.element = element;
-      this.videoId = element.dataset.id || '';
-      this.title = element.dataset.title || 'YouTube video';
-      this.isLoaded = false;
-
+<script is:inline>
+  // YouTube Modal Player
+  class YouTubeModalPlayer {
+    constructor() {
+      this.modal = null;
+      this.currentVideoId = '';
+      this.lang = 'en';
       this.init();
     }
 
-    element: HTMLElement;
-    videoId: string;
-    title: string;
-    isLoaded: boolean;
-
     init() {
-      const playButton = this.element.querySelector('.play-button');
-      if (playButton) {
-        playButton.addEventListener('click', () => this.loadVideo());
+      this.modal = document.getElementById('video-modal');
+      this.setupEventListeners();
+    }
+
+    setupEventListeners() {
+  // Click on play buttons OR entire video card
+  document.addEventListener('click', (e) => {
+    // Si se clickeó el botón de play
+    const playButton = e.target.closest('.play-button');
+    if (playButton) {
+      e.preventDefault();
+      e.stopPropagation();
+      const player = playButton.closest('.youtube-player');
+      if (player) {
+        this.openModal(player);
+      }
+      return;
+    }
+
+    // Si se clickeó cualquier parte de la video-card
+    const videoCard = e.target.closest('.video-card');
+    if (videoCard) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Crear un objeto temporal con los datos del video
+      const videoData = {
+        dataset: {
+          id: videoCard.dataset.youtubeId,
+          title: videoCard.dataset.videoTitle,
+          description: videoCard.dataset.videoDescription,
+          date: videoCard.dataset.videoDate,
+          duration: videoCard.dataset.videoDuration
+        }
+      };
+
+      this.openModal(videoData);
+    }
+  });
+
+  // Close modal - MEJORADO para móvil
+  const closeBtn = this.modal?.querySelector('.modal-close');
+  const backdrop = this.modal?.querySelector('.modal-backdrop');
+
+  // Agregar ambos eventos: click y touchend
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.closeModal();
+    });
+
+    closeBtn.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      this.closeModal();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', () => this.closeModal());
+    backdrop.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      this.closeModal();
+    });
+  }
+
+  // ESC key to close
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && this.modal?.classList.contains('active')) {
+      this.closeModal();
+    }
+  });
+}
+
+    openModal(playerElement) {
+      const videoId = playerElement.dataset.id;
+      const title = playerElement.dataset.title;
+      const description = playerElement.dataset.description;
+      const date = playerElement.dataset.date;
+      const duration = playerElement.dataset.duration;
+
+      this.currentVideoId = videoId;
+
+      // Detect language from page
+      this.lang = document.documentElement.lang || 'en';
+
+      // Update modal content
+      document.getElementById('modal-title').textContent = title;
+      document.getElementById('modal-description').innerHTML = this.parseMarkdown(description);
+
+      // Format date
+      const dateObj = new Date(date);
+      const formattedDate = dateObj.toLocaleDateString(
+        this.lang === 'en' ? 'en-US' : 'es-CO',
+        { year: 'numeric', month: 'long', day: 'numeric' }
+      );
+      document.getElementById('modal-date').textContent = formattedDate;
+
+      if (duration) {
+        document.getElementById('modal-duration-text').textContent = duration;
+      }
+
+      // Load video iframe
+      this.loadVideoIframe(videoId, title);
+
+      // Show modal
+      this.modal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    closeModal() {
+      this.modal.classList.remove('active');
+      document.body.style.overflow = '';
+
+      // Remove iframe to stop video
+      const videoContainer = document.getElementById('modal-video-player');
+      if (videoContainer) {
+        videoContainer.innerHTML = '';
       }
     }
 
-    loadVideo() {
-      if (this.isLoaded) return;
+    loadVideoIframe(videoId, title) {
+      const container = document.getElementById('modal-video-player');
+      if (!container) return;
 
+      // Limpiar contenedor
+      container.innerHTML = '';
+
+      // Crear iframe
       const iframe = document.createElement('iframe');
-      iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${this.videoId}?autoplay=1&rel=0`);
+      iframe.setAttribute('src', `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`);
       iframe.setAttribute('frameborder', '0');
       iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
       iframe.setAttribute('allowfullscreen', '');
-      iframe.setAttribute('title', this.title);
-      iframe.style.position = 'absolute';
-      iframe.style.top = '0';
-      iframe.style.left = '0';
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
+      iframe.setAttribute('title', title);
 
-      this.element.appendChild(iframe);
-      this.element.classList.add('playing');
-      this.isLoaded = true;
+      // Aplicar estilos directamente
+      iframe.style.cssText = `
+        width: 100% !important;
+        height: 100% !important;
+        border: none !important;
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+      `;
+
+      container.appendChild(iframe);
+
+      // Forzar redimensionamiento después de cargar
+      iframe.addEventListener('load', () => {
+        const rect = container.getBoundingClientRect();
+        iframe.width = rect.width;
+        iframe.height = rect.height;
+      });
+    }
+
+    parseMarkdown(text) {
+      // Simple markdown parser for bold
+      return text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
     }
   }
 
-  // Initialize all YouTube players
-  document.addEventListener('DOMContentLoaded', () => {
-    const players = document.querySelectorAll('.youtube-player');
-    players.forEach((player) => {
-      new YouTubePlayer(player as HTMLElement);
+  // Initialize on page load
+  if (typeof window !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', () => {
+      new YouTubeModalPlayer();
     });
-  });
 
-  // Handle dynamic content (if using view transitions)
-  document.addEventListener('astro:page-load', () => {
-    const players = document.querySelectorAll('.youtube-player');
-    players.forEach((player) => {
-      if (!(player as any).youtubePlayerInitialized) {
-        new YouTubePlayer(player as HTMLElement);
-        (player as any).youtubePlayerInitialized = true;
-      }
+    // Handle Astro view transitions
+    document.addEventListener('astro:page-load', () => {
+      new YouTubeModalPlayer();
     });
-  });
+  }
 </script>
