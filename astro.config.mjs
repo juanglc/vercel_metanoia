@@ -4,7 +4,7 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://cuartetometanoia.com',
+  site: 'https://vercel-metanoia.vercel.app',
   output: 'server',
   adapter: vercel(),
     integrations: [

@@ -44,7 +44,7 @@ const isActive = (href: string) => {
 };
 ---
 
-<header class="header sticky top-0 z-50 bg-bg-primary/95 backdrop-blur-md border-b border-divider shadow-sm">
+<header class="header sticky top-0 z-50 bg-bg-primary/98 backdrop-blur-md border-b border-divider shadow-sm">
   <div class="container">
     <nav class="flex items-center justify-between py-4" aria-label={lang === 'en' ? 'Main navigation' : 'Navegación principal'}>
       <!-- Logo -->
@@ -121,14 +121,14 @@ const isActive = (href: string) => {
       </div>
     </nav>
 
-    <!-- Mobile Navigation con transición -->
+    <!-- Mobile Navigation -->
     <div
       id="mobile-menu"
       class="mobile-menu lg:hidden overflow-hidden transition-all duration-300 ease-in-out"
       style="max-height: 0; opacity: 0;"
       aria-label={lang === 'en' ? 'Mobile navigation' : 'Navegación móvil'}
     >
-      <ul class="flex flex-col gap-2 pb-4">
+      <ul class="flex flex-col gap-2 pb-6 pt-2">
         {items.map((item) => (
           <li>
             <a
@@ -186,36 +186,52 @@ const isActive = (href: string) => {
     width: 100%;
   }
 
-  /* Mobile Navigation Links */
+  /* Mobile Navigation Links - MEJORADO */
   .mobile-nav-link {
     display: block;
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-4) var(--space-4);
     border-radius: var(--radius-base);
     font-weight: 500;
-    color: var(--text-secondary);
+    font-size: var(--font-size-lg); /* ✅ Más grande */
+    color: var(--text-primary); /* ✅ Color primario (más oscuro/claro) */
     transition: all var(--transition-base);
+    border: 1px solid transparent; /* ✅ Para mejor feedback */
   }
 
   .mobile-nav-link:hover,
   .mobile-nav-link:focus {
     background: rgba(var(--color-primary-rgb), 0.1);
     color: var(--color-primary);
+    border-color: rgba(var(--color-primary-rgb), 0.2);
   }
 
   .mobile-nav-link.active {
     background: rgba(var(--color-primary-rgb), 0.15);
     color: var(--color-primary);
     font-weight: 600;
+    border-color: rgba(var(--color-primary-rgb), 0.3);
   }
 
   /* Transición del menú mobile */
   .mobile-menu {
     transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    background-color: var(--bg-primary); /* ✅ Fondo sólido */
+    border-bottom: 1px solid var(--border-light); /* ✅ Separador visual */
   }
 
   .mobile-menu.open {
     max-height: 500px !important;
     opacity: 1 !important;
+  }
+
+  /* Fix para backdrop blur en header */
+  .header {
+    background-color: var(--bg-primary);
+    background-image: linear-gradient(
+      to bottom,
+      var(--bg-primary),
+      var(--bg-primary)
+    );
   }
 </style>
 
@@ -245,6 +261,19 @@ const isActive = (href: string) => {
 
     menuIcon?.classList.toggle('hidden');
     closeIcon?.classList.toggle('hidden');
+  });
+
+  // Cerrar al hacer click en un link
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+  mobileLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      mobileMenu?.classList.remove('open');
+      mobileMenu?.style.setProperty('max-height', '0');
+      mobileMenu?.style.setProperty('opacity', '0');
+      menuButton?.setAttribute('aria-expanded', 'false');
+      menuIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+    });
   });
 
   // Cerrar al hacer click fuera
