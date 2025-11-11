@@ -7,7 +7,7 @@ export default defineConfig({
   site: 'https://vercel-metanoia.vercel.app',
 
   // ✅ CRITICAL: Hybrid mode for SSR + static pages
-  output: 'hybrid',
+  output: 'static',
 
   // ✅ Vercel serverless adapter
   adapter: vercel({
