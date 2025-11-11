@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow"><title>Cuarteto Metanoia</title><script>
+    // Detectar idioma y redirigir inmediatamente
+    (function() {
+      // Check saved preference first
+      const savedLocale = localStorage.getItem('cuarteto-metanoia-locale');
+
+      if (savedLocale === 'en' || savedLocale === 'es') {
+        window.location.href = `/${savedLocale}/`;
+        return;
+      }
+
+      // Check browser language
+      const browserLang = navigator.language.toLowerCase();
+      const locale = browserLang.startsWith('es') ? 'es' : 'en';
+
+      // Redirect
+      window.location.href = `/${locale}/`;
+    })();
+  </script><link rel="stylesheet" href="/_assets/about.Cng4Ae3m.css"></head> <body> <!-- Fallback content for users with JavaScript disabled --> <div style="
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: system-ui, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  "> <h1 style="margin-bottom: 2rem;">Cuarteto Metanoia</h1> <p style="margin-bottom: 2rem;">Please select your language / Por favor selecciona tu idioma:</p> <div style="display: flex; gap: 1rem;"> <a href="/en/" style="
+          padding: 0.75rem 2rem;
+          background: var(--color-primary);
+          color: white;
+          text-decoration: none;
+          border-radius: 0.5rem;
+          font-weight: 600;
+        ">
+English
+</a> <a href="/es/" style="
+          padding: 0.75rem 2rem;
+          background: var(--color-primary);
+          color: white;
+          text-decoration: none;
+          border-radius: 0.5rem;
+          font-weight: 600;
+        ">
+Español
+</a> </div> </div> </body></html>

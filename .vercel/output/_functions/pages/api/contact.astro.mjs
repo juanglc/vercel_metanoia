@@ -1,89 +1,38 @@
-/**
- * Contact Form API Endpoint
- * Handles form submissions and sends emails via Resend
- *
- * Features:
- * - Robust JSON parsing with error handling
- * - Field validation (name, email, phone, subject, message)
- * - Dynamic Resend module loading
- * - Beautiful HTML email template
- * - Comprehensive error logging
- * - Always returns valid JSON (never HTML)
- */
+export { renderers } from '../../renderers.mjs';
 
-import type { APIRoute } from 'astro';
-
-// ===================================
-// VALIDATION REGEXES
-// ===================================
-
+const prerender = false;
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
-
-// ===================================
-// INTERFACES
-// ===================================
-
-interface ContactFormData {
-  name: string;
-  email: string;
-  phone?: string;
-  subject: string;
-  eventDate?: string;
-  message: string;
-}
-
-// ===================================
-// VALIDATION FUNCTION
-// ===================================
-
-function validateFormData(data: ContactFormData): { valid: boolean; errors: string[] } {
-  const errors: string[] = [];
-
-  // Name validation
+function validateFormData(data) {
+  const errors = [];
   if (!data.name || data.name.trim().length < 2) {
-    errors.push('Name is required (minimum 2 characters)');
+    errors.push("Name is required (minimum 2 characters)");
   }
-
-  // Email validation
   if (!data.email || !emailRegex.test(data.email)) {
-    errors.push('Valid email is required');
+    errors.push("Valid email is required");
   }
-
-  // Phone validation (optional but if provided, must be valid)
   if (data.phone && data.phone.trim().length > 0 && !phoneRegex.test(data.phone)) {
-    errors.push('Invalid phone number format');
+    errors.push("Invalid phone number format");
   }
-
-  // Subject validation
   if (!data.subject || data.subject.trim().length === 0) {
-    errors.push('Subject is required');
+    errors.push("Subject is required");
   }
-
-  // Message validation
   if (!data.message || data.message.trim().length < 20) {
-    errors.push('Message is required (minimum 20 characters)');
+    errors.push("Message is required (minimum 20 characters)");
   }
-
   return {
     valid: errors.length === 0,
-    errors,
+    errors
   };
 }
-
-// ===================================
-// EMAIL HTML GENERATOR
-// ===================================
-
-function generateEmailHTML(data: ContactFormData): string {
-  const subjectLabels: Record<string, string> = {
-    booking: 'Contratación',
-    collaboration: 'Colaboración',
-    press: 'Prensa y Medios',
-    general: 'Consulta General',
-    other: 'Otro',
+function generateEmailHTML(data) {
+  const subjectLabels = {
+    booking: "Contratación",
+    collaboration: "Colaboración",
+    press: "Prensa y Medios",
+    general: "Consulta General",
+    other: "Otro"
   };
-
   return `
     <!DOCTYPE html>
     <html lang="es">
@@ -157,17 +106,17 @@ function generateEmailHTML(data: ContactFormData): string {
                               <p style="margin: 0;"><a href="tel:${data.phone}" style="font-size: 16px; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.phone}</a></p>
                             </td>
                           </tr>
-                          ` : ''}
+                          ` : ""}
 
                           ${data.eventDate ? `
                           <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
                           <tr>
                             <td style="padding: 0 0 20px 0;">
                               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Fecha Evento</p>
-                              <p style="margin: 0; font-size: 16px; color: #1a1a1a; font-family: 'Inter', sans-serif;">${new Date(data.eventDate).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                              <p style="margin: 0; font-size: 16px; color: #1a1a1a; font-family: 'Inter', sans-serif;">${new Date(data.eventDate).toLocaleDateString("es-ES", { weekday: "long", day: "numeric", month: "long", year: "numeric" })}</p>
                             </td>
                           </tr>
-                          ` : ''}
+                          ` : ""}
 
                           <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
 
@@ -192,13 +141,13 @@ function generateEmailHTML(data: ContactFormData): string {
                           <strong style="color: #8c541f;">cuartetometanoia.com</strong>
                         </p>
                         <p style="margin: 0; font-size: 11px; color: #999; font-family: 'Inter', sans-serif;">
-                          Recibido el ${new Date().toLocaleString('es-ES', { 
-                            day: 'numeric',
-                            month: 'long', 
-                            year: 'numeric',
-                            hour: '2-digit',
-                            minute: '2-digit'
-                          })}
+                          Recibido el ${(/* @__PURE__ */ new Date()).toLocaleString("es-ES", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  })}
                         </p>
                       </td>
                     </tr>
@@ -215,26 +164,18 @@ function generateEmailHTML(data: ContactFormData): string {
     </html>
   `;
 }
-
-// ===================================
-// API ROUTE HANDLER
-// ===================================
-
-export const POST: APIRoute = async ({ request }) => {
+const POST = async ({ request }) => {
   try {
-    console.log('=== Contact API Called ===');
-    console.log('Timestamp:', new Date().toISOString());
-
-    // ✅ STEP 1: Parse JSON with error handling
-    let data: ContactFormData;
+    console.log("=== Contact API Called ===");
+    console.log("Timestamp:", (/* @__PURE__ */ new Date()).toISOString());
+    let data;
     try {
       const rawBody = await request.text();
-      console.log('Raw body length:', rawBody.length);
-      console.log('Raw body preview:', rawBody.substring(0, 200));
-
+      console.log("Raw body length:", rawBody.length);
+      console.log("Raw body preview:", rawBody.substring(0, 200));
       data = JSON.parse(rawBody);
-      console.log('✅ JSON parsed successfully');
-      console.log('Data received:', {
+      console.log("✅ JSON parsed successfully");
+      console.log("Data received:", {
         name: data.name,
         email: data.email,
         subject: data.subject,
@@ -243,150 +184,124 @@ export const POST: APIRoute = async ({ request }) => {
         messageLength: data.message?.length || 0
       });
     } catch (parseError) {
-      console.error('❌ JSON parse error:', parseError);
+      console.error("❌ JSON parse error:", parseError);
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Invalid JSON data received',
+          error: "Invalid JSON data received"
         }),
         {
           status: 400,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" }
         }
       );
     }
-
-    // ✅ STEP 2: Validate form data
     const validation = validateFormData(data);
     if (!validation.valid) {
-      console.log('❌ Validation failed:', validation.errors);
+      console.log("❌ Validation failed:", validation.errors);
       return new Response(
         JSON.stringify({
           success: false,
-          errors: validation.errors,
+          errors: validation.errors
         }),
         {
           status: 400,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" }
         }
       );
     }
-    console.log('✅ Validation passed');
-
-    // ✅ STEP 3: Check API key
-    const apiKey = import.meta.env.RESEND_API_KEY;
-    console.log('API Key configured:', apiKey ? `${apiKey.substring(0, 10)}...` : '❌ NOT CONFIGURED');
-
-    if (!apiKey) {
-      console.error('❌ RESEND_API_KEY not configured');
-      return new Response(
-        JSON.stringify({
-          success: false,
-          error: 'Email service not configured. Please contact support.',
-        }),
-        {
-          status: 500,
-          headers: { 'Content-Type': 'application/json' },
-        }
-      );
-    }
-
-    // ✅ STEP 4: Import Resend dynamically
-    console.log('Importing Resend module...');
-    let Resend: any;
+    console.log("✅ Validation passed");
+    const apiKey = "re_H1dqu3tu_6yDWJdDPCMeBcCf289tX13Ku";
+    console.log("API Key configured:", apiKey ? `${apiKey.substring(0, 10)}...` : "❌ NOT CONFIGURED");
+    if (!apiKey) ;
+    console.log("Importing Resend module...");
+    let Resend;
     try {
       const resendModule = await import('resend');
       Resend = resendModule.Resend;
-      console.log('✅ Resend module loaded successfully');
+      console.log("✅ Resend module loaded successfully");
     } catch (importError) {
-      console.error('❌ Failed to import Resend:', importError);
+      console.error("❌ Failed to import Resend:", importError);
       return new Response(
         JSON.stringify({
           success: false,
-          error: 'Email service unavailable. Please try again later.',
+          error: "Email service unavailable. Please try again later."
         }),
         {
           status: 500,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" }
         }
       );
     }
-
-    // ✅ STEP 5: Initialize Resend client
     const resend = new Resend(apiKey);
-
-    // Subject labels for Spanish
-    const subjectLabels: Record<string, string> = {
-      booking: 'Contratación',
-      collaboration: 'Colaboración',
-      press: 'Prensa y Medios',
-      general: 'Consulta General',
-      other: 'Otro',
+    const subjectLabels = {
+      booking: "Contratación",
+      collaboration: "Colaboración",
+      press: "Prensa y Medios",
+      general: "Consulta General",
+      other: "Otro"
     };
-
-    // ✅ STEP 6: Send email
-    console.log('Sending email to: juanguiloco3@gmail.com');
+    console.log("Sending email to: juanguiloco3@gmail.com");
     const result = await resend.emails.send({
-      from: 'Cuarteto Metanoia <onboarding@resend.dev>',
-      to: ['juanguiloco3@gmail.com'],
+      from: "Cuarteto Metanoia <onboarding@resend.dev>",
+      to: ["juanguiloco3@gmail.com"],
       replyTo: data.email,
       subject: `${subjectLabels[data.subject] || data.subject} - ${data.name}`,
-      html: generateEmailHTML(data),
+      html: generateEmailHTML(data)
     });
-
-    console.log('Resend API response:', result);
-
-    // ✅ STEP 7: Check result
+    console.log("Resend API response:", result);
     if (result.error) {
-      console.error('❌ Resend API error:', result.error);
+      console.error("❌ Resend API error:", result.error);
       return new Response(
         JSON.stringify({
           success: false,
-          error: `Email service error: ${result.error.message || 'Unknown error'}`,
+          error: `Email service error: ${result.error.message || "Unknown error"}`
         }),
         {
           status: 500,
-          headers: { 'Content-Type': 'application/json' },
+          headers: { "Content-Type": "application/json" }
         }
       );
     }
-
-    console.log('✅ Email sent successfully!');
-    console.log('Email ID:', result.data?.id);
-
-    // ✅ STEP 8: Return success response
+    console.log("✅ Email sent successfully!");
+    console.log("Email ID:", result.data?.id);
     return new Response(
       JSON.stringify({
         success: true,
-        message: 'Email sent successfully',
+        message: "Email sent successfully"
       }),
       {
         status: 200,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" }
       }
     );
-
   } catch (error) {
-    // ✅ GLOBAL ERROR HANDLER
-    console.error('=== UNEXPECTED ERROR ===');
-    console.error('Error:', error);
-
+    console.error("=== UNEXPECTED ERROR ===");
+    console.error("Error:", error);
     if (error instanceof Error) {
-      console.error('Message:', error.message);
-      console.error('Stack:', error.stack);
+      console.error("Message:", error.message);
+      console.error("Stack:", error.stack);
     }
-
-    // ✅ ALWAYS return valid JSON
     return new Response(
       JSON.stringify({
         success: false,
-        error: 'An unexpected error occurred. Please try again later.',
-        details: error instanceof Error ? error.message : 'Unknown error',
+        error: "An unexpected error occurred. Please try again later.",
+        details: error instanceof Error ? error.message : "Unknown error"
       }),
       {
         status: 500,
-        headers: { 'Content-Type': 'application/json' },
+        headers: { "Content-Type": "application/json" }
       }
     );
   }
 };
+
+const _page = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  POST,
+  prerender
+}, Symbol.toStringTag, { value: 'Module' }));
+
+const page = () => _page;
+
+export { page };
