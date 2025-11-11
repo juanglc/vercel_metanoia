@@ -1,12 +1,12 @@
 import { defineConfig } from 'astro/config';
-import cloudflare from '@astrojs/cloudflare';
+import vercel from '@astrojs/vercel';
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://cuartetometanoia.com',
   output: 'server',
-  adapter: cloudflare(),
+  adapter: vercel(),
     integrations: [
         tailwind({
             config: {
