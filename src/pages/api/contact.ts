@@ -33,43 +33,19 @@ function validateFormData(data: ContactFormData): { valid: boolean; errors: stri
     errors.push('Valid email is required');
   }
 
-  // Phone validation (optional but if provided, must be valid)
+  // Phone validation (optional)
   if (data.phone && !phoneRegex.test(data.phone)) {
     errors.push('Invalid phone number format');
   }
 
   // Subject validation
-  if (!data.subject) {
+  if (!data.subject || data.subject.trim().length === 0) {
     errors.push('Subject is required');
   }
 
-  // Message validation
+  // Message validation (solo longitud mínima)
   if (!data.message || data.message.trim().length < 20) {
     errors.push('Message is required (minimum 20 characters)');
-  } else {
-    // Validar que el mensaje tenga contenido real (no solo letras repetidas)
-    const cleanMessage = data.message.trim().toLowerCase();
-
-    // Detectar mensajes con solo letras/números repetidos (ej: "aaaaaaa", "111111")
-    const hasRepeatedChars = /^(.)\1{15,}$/;
-
-    // Detectar patrones repetitivos (ej: "asdasdasd", "123123123")
-    const hasRepeatedPattern = /^(.{1,5})\1{4,}$/;
-
-    // Contar palabras únicas
-    const words = cleanMessage.split(/\s+/).filter(w => w.length > 0);
-    const uniqueWords = new Set(words);
-    const wordDiversity = uniqueWords.size / words.length;
-
-    if (hasRepeatedChars.test(cleanMessage)) {
-      errors.push('Please write a meaningful message (repeated characters not allowed)');
-    } else if (hasRepeatedPattern.test(cleanMessage)) {
-      errors.push('Please write a meaningful message (repeated patterns not allowed)');
-    } else if (words.length < 1) {
-      errors.push('Please write at least one word in your message');
-    } else if (wordDiversity < 0.4) {
-      errors.push('Please write a meaningful message with varied content');
-    }
   }
 
   return {
