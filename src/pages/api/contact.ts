@@ -234,6 +234,7 @@ export const POST: APIRoute = async ({ request }) => {
   try {
     // Parse request body
     const data: ContactFormData = await request.json();
+    console.log('Received contact form data:', data);
 
     // Validate form data
     const validation = validateFormData(data);

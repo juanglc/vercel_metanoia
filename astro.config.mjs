@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://vercel-metanoia.vercel.app',
-  output: 'server',
+  // output: 'server',
   adapter: vercel(),
     integrations: [
         tailwind({
