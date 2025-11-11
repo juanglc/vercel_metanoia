@@ -1,12 +1,30 @@
+/**
+ * Contact Form API Endpoint
+ * Handles form submissions and sends emails via Resend
+ *
+ * Features:
+ * - Robust JSON parsing with error handling
+ * - Field validation (name, email, phone, subject, message)
+ * - Dynamic Resend module loading
+ * - Beautiful HTML email template
+ * - Comprehensive error logging
+ * - Always returns valid JSON (never HTML)
+ */
+
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
 
-// Email validation regex
-const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// ===================================
+// VALIDATION REGEXES
+// ===================================
 
-// Phone validation regex
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phoneRegex = /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/;
+
+// ===================================
+// INTERFACES
+// ===================================
 
 interface ContactFormData {
   name: string;
@@ -16,6 +34,10 @@ interface ContactFormData {
   eventDate?: string;
   message: string;
 }
+
+// ===================================
+// VALIDATION FUNCTION
+// ===================================
 
 function validateFormData(data: ContactFormData): { valid: boolean; errors: string[] } {
   const errors: string[] = [];
@@ -30,7 +52,7 @@ function validateFormData(data: ContactFormData): { valid: boolean; errors: stri
     errors.push('Valid email is required');
   }
 
-  // Phone validation (optional)
+  // Phone validation (optional but if provided, must be valid)
   if (data.phone && data.phone.trim().length > 0 && !phoneRegex.test(data.phone)) {
     errors.push('Invalid phone number format');
   }
@@ -50,6 +72,10 @@ function validateFormData(data: ContactFormData): { valid: boolean; errors: stri
     errors,
   };
 }
+
+// ===================================
+// EMAIL HTML GENERATOR
+// ===================================
 
 function generateEmailHTML(data: ContactFormData): string {
   const subjectLabels: Record<string, string> = {
@@ -80,7 +106,7 @@ function generateEmailHTML(data: ContactFormData): string {
               <tr>
                 <td style="background: #ffffff; border-radius: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden;">
                   
-                  <!-- Header -->
+                  <!-- Header with Logo -->
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="background: linear-gradient(135deg, #8c541f 0%, #6D3410 100%); padding: 48px 40px; text-align: center;">
@@ -101,13 +127,13 @@ function generateEmailHTML(data: ContactFormData): string {
                     </tr>
                   </table>
 
-                  <!-- Content -->
+                  <!-- Content Section -->
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="padding: 32px 40px 40px;">
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                           
-                          <!-- Name -->
+                          <!-- Name Field -->
                           <tr>
                             <td style="padding: 0 0 20px 0;">
                               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Nombre</p>
@@ -117,7 +143,7 @@ function generateEmailHTML(data: ContactFormData): string {
 
                           <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
 
-                          <!-- Email -->
+                          <!-- Email Field -->
                           <tr>
                             <td style="padding: 0 0 20px 0;">
                               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Email</p>
@@ -147,7 +173,7 @@ function generateEmailHTML(data: ContactFormData): string {
 
                           <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
 
-                          <!-- Message -->
+                          <!-- Message Field -->
                           <tr>
                             <td style="padding: 0;">
                               <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Mensaje</p>
@@ -192,23 +218,31 @@ function generateEmailHTML(data: ContactFormData): string {
   `;
 }
 
+// ===================================
+// API ROUTE HANDLER
+// ===================================
+
 export const POST: APIRoute = async ({ request }) => {
   try {
     console.log('=== Contact API Called ===');
+    console.log('Timestamp:', new Date().toISOString());
 
-    // ✅ VALIDAR JSON PARSING
+    // ✅ STEP 1: Parse JSON with error handling
     let data: ContactFormData;
     try {
       const rawBody = await request.text();
-      console.log('Raw body received:', rawBody.substring(0, 200));
+      console.log('Raw body length:', rawBody.length);
+      console.log('Raw body preview:', rawBody.substring(0, 200));
 
       data = JSON.parse(rawBody);
-      console.log('Parsed data:', {
+      console.log('✅ JSON parsed successfully');
+      console.log('Data received:', {
         name: data.name,
         email: data.email,
         subject: data.subject,
         hasPhone: !!data.phone,
-        hasEventDate: !!data.eventDate
+        hasEventDate: !!data.eventDate,
+        messageLength: data.message?.length || 0
       });
     } catch (parseError) {
       console.error('❌ JSON parse error:', parseError);
@@ -224,7 +258,7 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // ✅ VALIDAR DATOS
+    // ✅ STEP 2: Validate form data
     const validation = validateFormData(data);
     if (!validation.valid) {
       console.log('❌ Validation failed:', validation.errors);
@@ -239,8 +273,9 @@ export const POST: APIRoute = async ({ request }) => {
         }
       );
     }
+    console.log('✅ Validation passed');
 
-    // ✅ VERIFICAR API KEY
+    // ✅ STEP 3: Check API key
     const apiKey = import.meta.env.RESEND_API_KEY;
     console.log('API Key configured:', apiKey ? `${apiKey.substring(0, 10)}...` : '❌ NOT CONFIGURED');
 
@@ -258,13 +293,13 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // ✅ IMPORTAR RESEND DINÁMICAMENTE
+    // ✅ STEP 4: Import Resend dynamically
     console.log('Importing Resend module...');
-    let Resend;
+    let Resend: any;
     try {
       const resendModule = await import('resend');
       Resend = resendModule.Resend;
-      console.log('✅ Resend module loaded');
+      console.log('✅ Resend module loaded successfully');
     } catch (importError) {
       console.error('❌ Failed to import Resend:', importError);
       return new Response(
@@ -279,10 +314,10 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    // ✅ INICIALIZAR RESEND
+    // ✅ STEP 5: Initialize Resend client
     const resend = new Resend(apiKey);
 
-    // Subject labels
+    // Subject labels for Spanish
     const subjectLabels: Record<string, string> = {
       booking: 'Contratación',
       collaboration: 'Colaboración',
@@ -291,7 +326,7 @@ export const POST: APIRoute = async ({ request }) => {
       other: 'Otro',
     };
 
-    // ✅ ENVIAR EMAIL
+    // ✅ STEP 6: Send email
     console.log('Sending email to: juanguiloco3@gmail.com');
     const result = await resend.emails.send({
       from: 'Cuarteto Metanoia <onboarding@resend.dev>',
@@ -301,11 +336,11 @@ export const POST: APIRoute = async ({ request }) => {
       html: generateEmailHTML(data),
     });
 
-    console.log('Resend result:', result);
+    console.log('Resend API response:', result);
 
-    // ✅ VERIFICAR RESULTADO
+    // ✅ STEP 7: Check result
     if (result.error) {
-      console.error('❌ Resend error:', result.error);
+      console.error('❌ Resend API error:', result.error);
       return new Response(
         JSON.stringify({
           success: false,
@@ -318,9 +353,10 @@ export const POST: APIRoute = async ({ request }) => {
       );
     }
 
-    console.log('✅ Email sent successfully:', result.data);
+    console.log('✅ Email sent successfully!');
+    console.log('Email ID:', result.data?.id);
 
-    // ✅ RESPUESTA EXITOSA
+    // ✅ STEP 8: Return success response
     return new Response(
       JSON.stringify({
         success: true,
@@ -331,8 +367,9 @@ export const POST: APIRoute = async ({ request }) => {
         headers: { 'Content-Type': 'application/json' },
       }
     );
+
   } catch (error) {
-    // ✅ CAPTURA GLOBAL DE ERRORES
+    // ✅ GLOBAL ERROR HANDLER
     console.error('=== UNEXPECTED ERROR ===');
     console.error('Error:', error);
 
@@ -341,7 +378,7 @@ export const POST: APIRoute = async ({ request }) => {
       console.error('Stack:', error.stack);
     }
 
-    // ✅ SIEMPRE DEVOLVER JSON VÁLIDO
+    // ✅ ALWAYS return valid JSON
     return new Response(
       JSON.stringify({
         success: false,
