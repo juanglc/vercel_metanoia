@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import vercel from '@astrojs/vercel';
+import vercel from '@astrojs/vercel'; // <-- ESTA ES LA CORRECTA
 import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 
@@ -7,62 +7,60 @@ export default defineConfig({
   site: 'https://vercel-metanoia.vercel.app',
   output: 'server',
   adapter: vercel(),
-    integrations: [
-        tailwind({
-            config: {
-                applyBaseStyles: false // Usaremos nuestros estilos base custom
-            },
-        }),
-        sitemap({
-            i18n: {
-                defaultLocale: 'en',
-                locales: {
-                    en: 'en-US',
-                    es: 'es-CO',
-                },
-            },
-            // Filtrar páginas que no queremos en el sitemap
-            filter: (page) => !page.includes('/api/'),
-        }),
-    ],
 
-    // Optimizaciones de build
-    build: {
-        inlineStylesheets: 'auto', // Inline CSS crítico automáticamente
-        assets: '_assets', // Carpeta para assets optimizados
+  integrations: [
+    tailwind({
+      config: {
+        applyBaseStyles: false,
+      },
+    }),
+    sitemap({
+      i18n: {
+        defaultLocale: 'en',
+        locales: {
+          en: 'en-US',
+          es: 'es-CO',
+        },
+      },
+      filter: (page) => !page.includes('/api/'),
+    }),
+  ],
+
+  build: {
+    inlineStylesheets: 'auto',
+    assets: '_assets',
+  },
+
+  vite: {
+      build: {
+        cssMinify: 'lightningcss',
+        rollupOptions: {
+          output: {
+            assetFileNames: '_assets/[name].[hash][extname]',
+            chunkFileNames: '_assets/[name].[hash].js',
+            entryFileNames: '_assets/[name].[hash].js',
+          },
+        },
+      },
+      optimizeDeps: {
+        exclude: ['@aws-sdk/client-s3'],
+      },
+      ssr: {
+        noExternal: ['@astrojs/vercel'],
+      },
     },
 
-    // Configuración de Vite
-    vite: {
-        build: {
-            cssMinify: 'lightningcss', // Minificación CSS más rápida
-            rollupOptions: {
-                output: {
-                    // Mejores nombres de chunks para caching
-                    assetFileNames: '_assets/[name].[hash][extname]',
-                    chunkFileNames: '_assets/[name].[hash].js',
-                    entryFileNames: '_assets/[name].[hash].js',
-                },
-            },
-        },
-        // Optimizar dependencias
-        optimizeDeps: {
-            exclude: ['@aws-sdk/client-s3'],
-        },
-    },
 
-    // Configuración de imágenes
-    image: {
-        service: {
-            entrypoint: 'astro/assets/services/sharp', // Usar Sharp para optimización
-        },
+  image: {
+    service: {
+      entrypoint: 'astro/assets/services/sharp',
     },
+  },
 
-    // Configuración de Markdown (por si añadimos blog)
-    markdown: {
-        shikiConfig: {
-            theme: 'github-dark',
-            wrap: true,
-        },
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+      wrap: true,
     },
+  },
 });
