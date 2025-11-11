@@ -1,9 +1,6 @@
 export const prerender = false;
 
 import type { APIRoute } from 'astro';
-import { Resend } from 'resend';
-
-const resend = new Resend(import.meta.env.RESEND_API_KEY);
 
 // Email validation regex
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -34,7 +31,7 @@ function validateFormData(data: ContactFormData): { valid: boolean; errors: stri
   }
 
   // Phone validation (optional)
-  if (data.phone && !phoneRegex.test(data.phone)) {
+  if (data.phone && data.phone.trim().length > 0 && !phoneRegex.test(data.phone)) {
     errors.push('Invalid phone number format');
   }
 
@@ -43,7 +40,7 @@ function validateFormData(data: ContactFormData): { valid: boolean; errors: stri
     errors.push('Subject is required');
   }
 
-  // Message validation (solo longitud mínima)
+  // Message validation
   if (!data.message || data.message.trim().length < 20) {
     errors.push('Message is required (minimum 20 characters)');
   }
@@ -74,27 +71,21 @@ function generateEmailHTML(data: ContactFormData): string {
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
     </head>
-    <body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #fafafa; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;">
+    <body style="margin: 0; padding: 0; font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: #fafafa;">
       
       <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background: #fafafa;">
         <tr>
           <td style="padding: 40px 20px;">
-            
-            <!-- Main Container -->
             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto;">
-              
-              <!-- Card -->
               <tr>
                 <td style="background: #ffffff; border-radius: 16px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); overflow: hidden;">
                   
-                  <!-- Header with Gradient -->
+                  <!-- Header -->
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="background: linear-gradient(135deg, #8c541f 0%, #6D3410 100%); padding: 48px 40px; text-align: center;">
-                        
                         <img src="https://pub-0be16fcc10ef45d98540e0495dcdb86e.r2.dev/logos/Metanoia-10-BLANCO.png" alt="Cuarteto Metanoia" style="display: block; margin: 0 auto 20px; max-width: 220px; height: auto;" />
-
-                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #ffffff; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Nueva Consulta</h1>
+                        <h1 style="margin: 0; font-size: 28px; font-weight: 700; color: #ffffff; font-family: 'Playfair Display', Georgia, serif;">Nueva Consulta</h1>
                       </td>
                     </tr>
                   </table>
@@ -110,88 +101,61 @@ function generateEmailHTML(data: ContactFormData): string {
                     </tr>
                   </table>
 
-                  <!-- Content Section -->
+                  <!-- Content -->
                   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                     <tr>
                       <td style="padding: 32px 40px 40px;">
-                        
-                        <!-- Fields Container -->
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                           
-                          <!-- Name Field -->
+                          <!-- Name -->
                           <tr>
                             <td style="padding: 0 0 20px 0;">
-                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Nombre</p>
-                              <p style="margin: 0; font-size: 16px; font-weight: 500; color: #1a1a1a; font-family: 'Inter', sans-serif;">${data.name}</p>
+                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Nombre</p>
+                              <p style="margin: 0; font-size: 16px; color: #1a1a1a; font-family: 'Inter', sans-serif;">${data.name}</p>
                             </td>
                           </tr>
 
-                          <!-- Divider -->
-                          <tr>
-                            <td style="padding: 0 0 20px 0;">
-                              <div style="height: 1px; background: #e8e8e8;"></div>
-                            </td>
-                          </tr>
+                          <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
 
-                          <!-- Email Field -->
+                          <!-- Email -->
                           <tr>
                             <td style="padding: 0 0 20px 0;">
-                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Email</p>
-                              <p style="margin: 0;"><a href="mailto:${data.email}" style="font-size: 16px; font-weight: 500; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.email}</a></p>
+                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Email</p>
+                              <p style="margin: 0;"><a href="mailto:${data.email}" style="font-size: 16px; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.email}</a></p>
                             </td>
                           </tr>
 
                           ${data.phone ? `
-                          <!-- Divider -->
+                          <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
                           <tr>
                             <td style="padding: 0 0 20px 0;">
-                              <div style="height: 1px; background: #e8e8e8;"></div>
-                            </td>
-                          </tr>
-
-                          <!-- Phone Field -->
-                          <tr>
-                            <td style="padding: 0 0 20px 0;">
-                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Teléfono</p>
-                              <p style="margin: 0;"><a href="tel:${data.phone}" style="font-size: 16px; font-weight: 500; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.phone}</a></p>
+                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Teléfono</p>
+                              <p style="margin: 0;"><a href="tel:${data.phone}" style="font-size: 16px; color: #8c541f; text-decoration: none; font-family: 'Inter', sans-serif;">${data.phone}</a></p>
                             </td>
                           </tr>
                           ` : ''}
 
                           ${data.eventDate ? `
-                          <!-- Divider -->
+                          <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
                           <tr>
                             <td style="padding: 0 0 20px 0;">
-                              <div style="height: 1px; background: #e8e8e8;"></div>
-                            </td>
-                          </tr>
-
-                          <!-- Event Date Field -->
-                          <tr>
-                            <td style="padding: 0 0 20px 0;">
-                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Fecha Evento</p>
-                              <p style="margin: 0; font-size: 16px; font-weight: 500; color: #1a1a1a; font-family: 'Inter', sans-serif;">${new Date(data.eventDate).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Fecha Evento</p>
+                              <p style="margin: 0; font-size: 16px; color: #1a1a1a; font-family: 'Inter', sans-serif;">${new Date(data.eventDate).toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</p>
                             </td>
                           </tr>
                           ` : ''}
 
-                          <!-- Divider -->
-                          <tr>
-                            <td style="padding: 0 0 20px 0;">
-                              <div style="height: 1px; background: #e8e8e8;"></div>
-                            </td>
-                          </tr>
+                          <tr><td style="padding: 0 0 20px 0;"><div style="height: 1px; background: #e8e8e8;"></div></td></tr>
 
-                          <!-- Message Field -->
+                          <!-- Message -->
                           <tr>
                             <td style="padding: 0;">
-                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; letter-spacing: 1px; font-family: 'Playfair Display', Georgia, serif;">Mensaje</p>
-                              <p style="margin: 0; font-size: 16px; font-weight: 400; color: #1a1a1a; line-height: 1.6; white-space: pre-wrap; font-family: 'Inter', sans-serif;">${data.message}</p>
+                              <p style="margin: 0 0 6px 0; font-size: 12px; font-weight: 700; color: #999; text-transform: uppercase; font-family: 'Playfair Display', Georgia, serif;">Mensaje</p>
+                              <p style="margin: 0; font-size: 16px; color: #1a1a1a; line-height: 1.6; white-space: pre-wrap; font-family: 'Inter', sans-serif;">${data.message}</p>
                             </td>
                           </tr>
 
                         </table>
-
                       </td>
                     </tr>
                   </table>
@@ -201,7 +165,7 @@ function generateEmailHTML(data: ContactFormData): string {
                     <tr>
                       <td style="background: #fafafa; padding: 28px 40px; text-align: center; border-top: 1px solid #e8e8e8;">
                         <p style="margin: 0 0 4px 0; font-size: 12px; color: #666; font-family: 'Inter', sans-serif;">
-                          <strong style="color: #8c541f; font-weight: 600;">cuartetometanoia.com</strong>
+                          <strong style="color: #8c541f;">cuartetometanoia.com</strong>
                         </p>
                         <p style="margin: 0; font-size: 11px; color: #999; font-family: 'Inter', sans-serif;">
                           Recibido el ${new Date().toLocaleString('es-ES', { 
@@ -218,9 +182,7 @@ function generateEmailHTML(data: ContactFormData): string {
 
                 </td>
               </tr>
-
             </table>
-
           </td>
         </tr>
       </table>
@@ -232,13 +194,40 @@ function generateEmailHTML(data: ContactFormData): string {
 
 export const POST: APIRoute = async ({ request }) => {
   try {
-    // Parse request body
-    const data: ContactFormData = await request.json();
-    console.log('Received contact form data:', data);
+    console.log('=== Contact API Called ===');
 
-    // Validate form data
+    // ✅ VALIDAR JSON PARSING
+    let data: ContactFormData;
+    try {
+      const rawBody = await request.text();
+      console.log('Raw body received:', rawBody.substring(0, 200));
+
+      data = JSON.parse(rawBody);
+      console.log('Parsed data:', {
+        name: data.name,
+        email: data.email,
+        subject: data.subject,
+        hasPhone: !!data.phone,
+        hasEventDate: !!data.eventDate
+      });
+    } catch (parseError) {
+      console.error('❌ JSON parse error:', parseError);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Invalid JSON data received',
+        }),
+        {
+          status: 400,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
+
+    // ✅ VALIDAR DATOS
     const validation = validateFormData(data);
     if (!validation.valid) {
+      console.log('❌ Validation failed:', validation.errors);
       return new Response(
         JSON.stringify({
           success: false,
@@ -246,19 +235,17 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         {
           status: 400,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         }
       );
     }
 
-    // Log API key status
+    // ✅ VERIFICAR API KEY
     const apiKey = import.meta.env.RESEND_API_KEY;
-    console.log('Resend API Key configured:', apiKey ? `${apiKey.substring(0, 10)}...` : 'NOT CONFIGURED');
+    console.log('API Key configured:', apiKey ? `${apiKey.substring(0, 10)}...` : '❌ NOT CONFIGURED');
 
     if (!apiKey) {
-      console.error('RESEND_API_KEY is not configured');
+      console.error('❌ RESEND_API_KEY not configured');
       return new Response(
         JSON.stringify({
           success: false,
@@ -266,17 +253,36 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         {
           status: 500,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         }
       );
     }
 
-    // Send email via Resend
-    console.log('Attempting to send email to:', 'juanguiloco3@gmail.com');
+    // ✅ IMPORTAR RESEND DINÁMICAMENTE
+    console.log('Importing Resend module...');
+    let Resend;
+    try {
+      const resendModule = await import('resend');
+      Resend = resendModule.Resend;
+      console.log('✅ Resend module loaded');
+    } catch (importError) {
+      console.error('❌ Failed to import Resend:', importError);
+      return new Response(
+        JSON.stringify({
+          success: false,
+          error: 'Email service unavailable. Please try again later.',
+        }),
+        {
+          status: 500,
+          headers: { 'Content-Type': 'application/json' },
+        }
+      );
+    }
 
-    // Mapeo de subject keys a etiquetas en español
+    // ✅ INICIALIZAR RESEND
+    const resend = new Resend(apiKey);
+
+    // Subject labels
     const subjectLabels: Record<string, string> = {
       booking: 'Contratación',
       collaboration: 'Colaboración',
@@ -285,6 +291,8 @@ export const POST: APIRoute = async ({ request }) => {
       other: 'Otro',
     };
 
+    // ✅ ENVIAR EMAIL
+    console.log('Sending email to: juanguiloco3@gmail.com');
     const result = await resend.emails.send({
       from: 'Cuarteto Metanoia <onboarding@resend.dev>',
       to: ['juanguiloco3@gmail.com'],
@@ -293,11 +301,11 @@ export const POST: APIRoute = async ({ request }) => {
       html: generateEmailHTML(data),
     });
 
-    console.log('Resend API response:', result);
+    console.log('Resend result:', result);
 
-    // Check if email was sent successfully
+    // ✅ VERIFICAR RESULTADO
     if (result.error) {
-      console.error('Resend API error:', result.error);
+      console.error('❌ Resend error:', result.error);
       return new Response(
         JSON.stringify({
           success: false,
@@ -305,16 +313,14 @@ export const POST: APIRoute = async ({ request }) => {
         }),
         {
           status: 500,
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
         }
       );
     }
 
-    console.log('Email sent successfully:', result.data);
+    console.log('✅ Email sent successfully:', result.data);
 
-    // Return success response
+    // ✅ RESPUESTA EXITOSA
     return new Response(
       JSON.stringify({
         success: true,
@@ -322,30 +328,29 @@ export const POST: APIRoute = async ({ request }) => {
       }),
       {
         status: 200,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
       }
     );
   } catch (error) {
-    console.error('Contact form error:', error);
+    // ✅ CAPTURA GLOBAL DE ERRORES
+    console.error('=== UNEXPECTED ERROR ===');
+    console.error('Error:', error);
 
-    // Log más detalles del error
     if (error instanceof Error) {
-      console.error('Error message:', error.message);
-      console.error('Error stack:', error.stack);
+      console.error('Message:', error.message);
+      console.error('Stack:', error.stack);
     }
 
+    // ✅ SIEMPRE DEVOLVER JSON VÁLIDO
     return new Response(
       JSON.stringify({
         success: false,
         error: 'An unexpected error occurred. Please try again later.',
+        details: error instanceof Error ? error.message : 'Unknown error',
       }),
       {
         status: 500,
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
       }
     );
   }
