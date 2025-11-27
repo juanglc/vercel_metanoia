@@ -189,7 +189,7 @@ function generateEmailHTML(data: ContactFormData): string {
                     <tr>
                       <td style="background: #fafafa; padding: 28px 40px; text-align: center; border-top: 1px solid #e8e8e8;">
                         <p style="margin: 0 0 4px 0; font-size: 12px; color: #666; font-family: 'Inter', sans-serif;">
-                          <strong style="color: #8c541f;">cuartetometanoia.com</strong>
+                          <strong style="color: #8c541f;">vercel-metanoia.vercel.app</strong>
                         </p>
                         <p style="margin: 0; font-size: 11px; color: #999; font-family: 'Inter', sans-serif;">
                           Recibido el ${new Date().toLocaleString('es-ES', { 
