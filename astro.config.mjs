@@ -28,28 +28,19 @@ export default defineConfig({
 
   build: {
     inlineStylesheets: 'auto',
-    assets: '_assets',
   },
 
   vite: {
-      build: {
-        cssMinify: 'lightningcss',
-        rollupOptions: {
-          output: {
-            assetFileNames: '_assets/[name].[hash][extname]',
-            chunkFileNames: '_assets/[name].[hash].js',
-            entryFileNames: '_assets/[name].[hash].js',
-          },
-        },
-      },
-      optimizeDeps: {
-        exclude: ['@aws-sdk/client-s3'],
-      },
-      ssr: {
-        noExternal: ['@astrojs/vercel'],
-      },
+    build: {
+      cssMinify: 'lightningcss',
     },
-
+    optimizeDeps: {
+      exclude: ['@aws-sdk/client-s3'],
+    },
+    ssr: {
+      noExternal: ['@astrojs/vercel'],
+    },
+  },
 
   image: {
     service: {
